@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoPymes Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sidebar-bg': '#1a2233',
+                        'sidebar-hover': '#252f45',
+                        'content-bg': '#e8ecef',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+        }
+
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="font-roboto bg-content-bg h-screen flex overflow-hidden">
+
+
+    <aside class="w-64 bg-sidebar-bg text-gray-300 flex flex-col flex-shrink-0 transition-all duration-300"
+        id="sidebar">
+        <div class="h-16 flex items-center justify-center px-4 border-b border-gray-700 bg-[#161d2b]">
+            <h1 class="text-xl md:text-2xl font-bold text-white tracking-wider"
+                style="font-family: 'Poppins', sans-serif;">
+                TECNOPYMES</h1>
+        </div>
+
+
+        <nav class="flex-1 overflow-y-auto py-4 no-scrollbar">
+            <ul class="space-y-1">
+
+                <li>
+                    <a href="#" id="nav-dashboard" onclick="showView('dashboard')"
+                        class="nav-link active-nav flex items-center px-4 py-3 text-sm font-medium bg-sidebar-hover text-white border-l-4 border-blue-500 transition-all duration-200 hover:pl-5 group">
+                        <i class='bx bx-tachometer text-xl mr-3 group-hover:text-blue-400 transition-colors'></i>
+                        Dashboard
+                    </a>
+                </li>
+
+
+                <li>
+                    <div class="group">
+                        <button id="crm-btn" onclick="toggleMenu('crm-submenu', 'crm-arrow')"
+                            class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium hover:bg-sidebar-hover text-gray-400 hover:text-white border-l-4 border-transparent hover:border-blue-500 transition-colors cursor-pointer">
+                            <div class="flex items-center">
+                                <i class='bx bx-briefcase text-xl mr-3'></i>
+                                CRM
+                            </div>
+                            <i id="crm-arrow" class='bx bx-chevron-down text-xl transition-transform duration-200'></i>
+                        </button>
+                        <ul id="crm-submenu" class="bg-[#131926] py-2 pl-12 pr-4 space-y-1 hidden">
+                            <li><a href="#" onclick="showView('crm-clientes')"
+                                    class="block py-2 text-sm text-gray-400 hover:text-white">Gestión de
+                                    Clientes</a></li>
+                            <li><a href="#" onclick="showView('crm-oportunidades')"
+                                    class="block py-2 text-sm text-gray-400 hover:text-white">Gestión de
+                                    Oportunidades</a></li>
+                            <li><a href="#" onclick="showView('crm-comisiones')"
+                                    class="block py-2 text-sm text-gray-400 hover:text-white">Gestión de
+                                    Comisiones</a></li>
+                            <li><a href="#" onclick="showView('crm-lineas')"
+                                    class="block py-2 text-sm text-gray-400 hover:text-white">Lineas de
+                                    Negocios</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+
+                <li>
+                    <button
+                        class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium hover:bg-sidebar-hover text-gray-400 hover:text-white border-l-4 border-transparent hover:border-blue-500 transition-colors">
+                        <div class="flex items-center">
+                            <i class='bx bx-group text-xl mr-3'></i>
+                            Recursos Humanos
+                        </div>
+                        <i class='bx bx-chevron-down text-xl'></i>
+                    </button>
+                </li>
+            </ul>
+            </li>
+
+            <li>
+                <a href="#" id="nav-calculator" onclick="showView('calculator')"
+                    class="nav-link flex items-center px-4 py-3 text-sm font-medium hover:bg-sidebar-hover text-gray-400 hover:text-white border-l-4 border-transparent hover:border-blue-500 transition-all duration-200 hover:pl-5 group">
+                    <i class='bx bx-calculator text-xl mr-3 group-hover:text-blue-400 transition-colors'></i>
+                    Calculadora de Progreso
+                </a>
+            </li>
+
+            <li>
+                <a href="#" id="nav-catalog" onclick="showView('catalog')"
+                    class="nav-link flex items-center px-4 py-3 text-sm font-medium hover:bg-sidebar-hover text-gray-400 hover:text-white border-l-4 border-transparent hover:border-blue-500 transition-all duration-200 hover:pl-5 group">
+                    <i class='bx bxs-store text-xl mr-3 group-hover:text-blue-400 transition-colors'></i>
+                    Catálogo de Módulos
+                </a>
+            </li>
+            </ul>
+        </nav>
+
+
+        <div class="p-4 border-t border-gray-700 bg-[#161d2b]">
+            <div class="flex items-center justify-between text-xs text-gray-500">
+                <span>Versión 1.0</span>
+                <button class="hover:text-white transition-colors">
+                    <i class='bx bx-log-out text-lg border border-gray-600 rounded p-1'></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col min-w-0">
+
+        <header class="bg-white h-16 shadow-sm flex items-center justify-between px-4 sticky top-0 z-50">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                    <i class='bx bx-menu text-2xl'></i>
+                </button>
+
+                <div class="hidden sm:flex flex-col bg-gray-200/50 px-4 py-1 rounded border border-gray-300">
+                    <div id="date-display" class="text-xs text-gray-500 font-medium">Martes, 9 De Diciembre De 2025
+                    </div>
+                    <div id="time-display" class="text-sm font-bold text-gray-800">10:31:00 p. m.</div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 text-gray-500">
+                <button class="hover:text-blue-600 hover:scale-110 transition-transform duration-200"><i
+                        class='bx bx-envelope text-xl'></i></button>
+                <button class="hover:text-blue-600 hover:scale-110 transition-transform duration-200 relative">
+                    <i class='bx bx-bell text-xl'></i>
+                    <span class="absolute top-0 right-0 block h-2 w-2 rounded-full ring-2 ring-white bg-red-500"></span>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto animate-fade-in-up relative" id="main-scroll-area">
+
+
+
+
+            <div id="dashboard-view">
+
+                <div id="info-capsule" class="hidden">
+                    <h3 id="capsule-title"></h3>
+                    <p id="capsule-desc"></p>
+                </div>
+
+
+                <div
+                    class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg shadow-sm mt-4 mb-8 block w-full animate-fade-in-up">
+                    <div class="inline-block align-middle p-3 bg-blue-100 rounded-full mr-4 text-blue-600">
+                        <i class='bx bxs-tachometer text-2xl'></i>
+                    </div>
+                    <div class="inline-block align-middle">
+                        <h2 class="text-xl font-bold text-gray-800">Dashboard General</h2>
+                        <p class="text-sm text-gray-600 mt-1">Resumen de tu actividad y métricas clave.</p>
+                        <button onclick="currentVideoTitle='Tutorial: Dashboard General'; openVideoModal()"
+                            class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                            <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 text-sm font-medium">Ingresos Totales</h3>
+                            <span class="p-2 bg-green-100 text-green-600 rounded-full"><i
+                                    class='bx bx-dollar'></i></span>
+                        </div>
+                        <div class="text-2xl font-bold text-gray-800">$45,231.89</div>
+                        <p class="text-xs text-green-500 mt-2 flex items-center"><i class='bx bx-up-arrow-alt mr-1'></i>
+                            +20.1% vs mes anterior</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 text-sm font-medium">Nuevos Clientes</h3>
+                            <span class="p-2 bg-blue-100 text-blue-600 rounded-full"><i class='bx bx-user'></i></span>
+                        </div>
+                        <div class="text-2xl font-bold text-gray-800">+2,350</div>
+                        <p class="text-xs text-blue-500 mt-2 flex items-center"><i class='bx bx-up-arrow-alt mr-1'></i>
+                            +180
+                            usuarios nuevos</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-gray-500 text-sm font-medium">Tareas Pendientes</h3>
+                            <span class="p-2 bg-purple-100 text-purple-600 rounded-full"><i
+                                    class='bx bx-task'></i></span>
+                        </div>
+                        <div class="text-2xl font-bold text-gray-800">12</div>
+                        <p class="text-xs text-red-500 mt-2 flex items-center"><i class='bx bx-time md-1'></i> 2
+                            urgentes
+                            para hoy</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="catalog-view" class="hidden">
+
+                <div
+                    class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg shadow-sm mb-8 block w-full animate-fade-in-up">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 bg-blue-100 rounded-full mr-4 text-blue-600">
+                            <i class='bx bxs-store text-2xl'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-800">Catálogo de Módulos</h2>
+                            <p class="text-sm text-gray-600 mt-1">Personaliza tu ecosistema empresarial.</p>
+                            <button onclick="currentVideoTitle='Tutorial: Catálogo de Módulos'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative w-full max-w-md">
+                        <i
+                            class='bx bx-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl'></i>
+                        <input type="text" id="module-search" placeholder="Buscar módulos..."
+                            class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white shadow-sm text-sm">
+                    </div>
+                </div>
+
+                <div id="modules-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+                </div>
+
+
+                <div
+                    class="bg-gradient-to-r from-[#1a2233] to-[#2a3650] rounded-2xl p-8 text-white relative overflow-hidden shadow-xl mb-24">
+                    <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 flex items-center"><i class='bx bx-hive mr-2'></i>
+                                ¿Necesitas algo
+                                específico?</h3>
+                            <p class="text-gray-300 mb-4 max-w-lg">Si no encuentras el módulo que buscas, nuestro equipo
+                                de
+                                ingeniería puede desarrollarlo a medida para tu plan Personalizado.</p>
+                            <button onclick="requestCustomModule()"
+                                class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-blue-500/30 flex items-center">
+                                <i class='bx bx-code-alt mr-2'></i> Solicitar Nuevo Módulo
+                            </button>
+                        </div>
+                    </div>
+                    <i
+                        class='bx bxs-component text-9xl absolute -right-6 -bottom-8 opacity-5 text-white transform rotate-12'></i>
+                </div>
+            </div>
+
+
+            <div id="calculator-view" class="hidden">
+
+                <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg shadow-sm mb-8 animate-fade-in-up">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-green-100 rounded-full mr-4 text-green-600">
+                            <i class='bx bx-calculator text-2xl'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-800">Calculadora de Progreso</h2>
+                            <p class="text-sm text-gray-600 mt-1">Proyecta el crecimiento de tu negocio con nuestras
+                                herramientas.</p>
+                            <button onclick="currentVideoTitle='Tutorial: Calculadora de Progreso'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-green-600 hover:text-green-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
+                            <i class='bx bx-edit mr-2 text-green-600'></i> Datos de tu Negocio
+                        </h3>
+
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Horas semanales en tareas
+                                    manuales</label>
+                                <input type="number" id="calc-hours" placeholder="Ej: 20" value="20"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Errores mensuales en
+                                    procesos</label>
+                                <input type="number" id="calc-errors" placeholder="Ej: 5" value="5"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ingresos mensuales actuales
+                                    ($)</label>
+                                <input type="number" id="calc-revenue" placeholder="Ej: 50000" value="50000"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Valor de inventario
+                                    ($)</label>
+                                <input type="number" id="calc-inventory" placeholder="Ej: 25000" value="25000"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            </div>
+
+                            <button onclick="calculateProjection()"
+                                class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors flex items-center justify-center">
+                                <i class='bx bx-chart mr-2'></i> Calcular Proyección
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 relative" id="results-panel">
+                        <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
+                            <i class='bx bx-line-chart mr-2 text-green-600'></i> Proyección de Crecimiento
+                        </h3>
+
+                        <div id="results-blur"
+                            class="absolute inset-0 bg-white/80 backdrop-blur-sm rounded-xl flex items-center justify-center z-10">
+                            <div class="text-center">
+                                <i class='bx bx-lock-alt text-4xl text-gray-400 mb-2'></i>
+                                <p class="text-gray-500 font-medium">Ingresa tus datos y calcula</p>
+                            </div>
+                        </div>
+
+                        <div class="h-64 flex items-end justify-around gap-4 mb-6 px-4">
+                            <div class="flex flex-col items-center flex-1">
+                                <div id="bar-current"
+                                    class="w-full bg-gray-300 rounded-t-lg transition-all duration-700"
+                                    style="height: 0%"></div>
+                                <span class="text-xs text-gray-500 mt-2 text-center">Actual</span>
+                                <span id="label-revenue-now" class="text-sm font-bold text-gray-700">$0</span>
+                            </div>
+                            <div class="flex flex-col items-center flex-1">
+                                <div id="bar-month1"
+                                    class="w-full bg-green-300 rounded-t-lg transition-all duration-700 delay-100"
+                                    style="height: 0%"></div>
+                                <span class="text-xs text-gray-500 mt-2 text-center">Mes 1</span>
+                            </div>
+                            <div class="flex flex-col items-center flex-1">
+                                <div id="bar-month2"
+                                    class="w-full bg-green-400 rounded-t-lg transition-all duration-700 delay-200"
+                                    style="height: 0%"></div>
+                                <span class="text-xs text-gray-500 mt-2 text-center">Mes 2</span>
+                            </div>
+                            <div class="flex flex-col items-center flex-1">
+                                <div id="bar-projected"
+                                    class="w-full bg-green-600 rounded-t-lg transition-all duration-700 delay-300"
+                                    style="height: 0%"></div>
+                                <span class="text-xs text-gray-500 mt-2 text-center">Proyectado</span>
+                                <span id="label-revenue-proj" class="text-sm font-bold text-green-600">$0</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            <div class="bg-green-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-gray-500 mb-1">Ahorro Estimado</p>
+                                <p id="estimated-savings" class="text-2xl font-bold text-green-600">$0</p>
+                                <p class="text-xs text-gray-400">mensuales</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-gray-500 mb-1">Crecimiento</p>
+                                <p id="growth-percentage" class="text-2xl font-bold text-blue-600">0%</p>
+                                <p class="text-xs text-gray-400">proyectado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="mt-8 bg-gradient-to-r from-[#1a2233] to-[#2a3650] rounded-2xl p-8 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i class='bx bx-book-open mr-2'></i> Recursos para Crecer
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <a href="#"
+                                class="bg-white/10 hover:bg-white/20 p-4 rounded-lg transition-colors flex items-center">
+                                <i class='bx bx-file text-2xl mr-3 text-green-400'></i>
+                                <div>
+                                    <p class="font-medium">Guía de Automatización</p>
+                                    <p class="text-xs text-gray-300">PDF • 15 páginas</p>
+                                </div>
+                            </a>
+                            <a href="#"
+                                class="bg-white/10 hover:bg-white/20 p-4 rounded-lg transition-colors flex items-center">
+                                <i class='bx bx-video text-2xl mr-3 text-blue-400'></i>
+                                <div>
+                                    <p class="font-medium">Tutorial ROI</p>
+                                    <p class="text-xs text-gray-300">Video • 12 min</p>
+                                </div>
+                            </a>
+                            <a href="#"
+                                class="bg-white/10 hover:bg-white/20 p-4 rounded-lg transition-colors flex items-center">
+                                <i class='bx bx-spreadsheet text-2xl mr-3 text-purple-400'></i>
+                                <div>
+                                    <p class="font-medium">Plantilla Presupuesto</p>
+                                    <p class="text-xs text-gray-300">Excel • Editable</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <i class='bx bxs-graduation text-9xl absolute -right-4 -bottom-4 opacity-5 text-white'></i>
+                </div>
+            </div>
+
+
+            <div id="crm-clientes-view" class="hidden">
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg shadow-sm mb-8 animate-fade-in-up">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-blue-100 rounded-full mr-4 text-blue-600">
+                            <i class='bx bx-user text-2xl'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-800">Gestión de Clientes</h2>
+                            <p class="text-sm text-gray-600 mt-1">Administra tu cartera de clientes y contactos.</p>
+                            <button onclick="currentVideoTitle='Tutorial: Gestión de Clientes'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-user-plus text-6xl text-gray-300 mb-4'></i>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Próximamente</h3>
+                    <p class="text-gray-500">Esta sección está en desarrollo. Pronto podrás gestionar todos tus clientes
+                        aquí.
+                    </p>
+                </div>
+            </div>
+
+
+            <div id="crm-oportunidades-view" class="hidden">
+                <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg shadow-sm mb-8 animate-fade-in-up">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-green-100 rounded-full mr-4 text-green-600">
+                            <i class='bx bx-target-lock text-2xl'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-800">Gestión de Oportunidades</h2>
+                            <p class="text-sm text-gray-600 mt-1">Seguimiento de ventas y pipeline comercial.</p>
+                            <button onclick="currentVideoTitle='Tutorial: Gestión de Oportunidades'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-green-600 hover:text-green-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-trending-up text-6xl text-gray-300 mb-4'></i>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Próximamente</h3>
+                    <p class="text-gray-500">Esta sección está en desarrollo. Pronto podrás gestionar oportunidades de
+                        venta
+                        aquí.</p>
+                </div>
+            </div>
+
+
+            <div id="crm-comisiones-view" class="hidden">
+                <div
+                    class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg shadow-sm mb-8 animate-fade-in-up">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-purple-100 rounded-full mr-4 text-purple-600">
+                            <i class='bx bx-money text-2xl'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-800">Gestión de Comisiones</h2>
+                            <p class="text-sm text-gray-600 mt-1">Control de comisiones y pagos a vendedores.</p>
+                            <button onclick="currentVideoTitle='Tutorial: Gestión de Comisiones'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-purple-600 hover:text-purple-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-dollar-circle text-6xl text-gray-300 mb-4'></i>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Próximamente</h3>
+                    <p class="text-gray-500">Esta sección está en desarrollo. Pronto podrás gestionar comisiones aquí.
+                    </p>
+                </div>
+            </div>
+
+
+            <div id="crm-lineas-view" class="hidden">
+                <div
+                    class="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-r-lg shadow-sm mb-8 animate-fade-in-up">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-orange-100 rounded-full mr-4 text-orange-600">
+                            <i class='bx bx-category text-2xl'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-800">Líneas de Negocios</h2>
+                            <p class="text-sm text-gray-600 mt-1">Organiza tus productos y servicios por categorías.</p>
+                            <button onclick="currentVideoTitle='Tutorial: Líneas de Negocios'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-orange-600 hover:text-orange-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-layer text-6xl text-gray-300 mb-4'></i>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Próximamente</h3>
+                    <p class="text-gray-500">Esta sección está en desarrollo. Pronto podrás gestionar líneas de negocio
+                        aquí.
+                    </p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <div class="fixed bottom-0 left-0 md:left-64 right-0 bg-white border-t border-gray-200 p-4 shadow-lg z-40 hidden"
+        id="plan-summary">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div>
+                <h4 class="text-sm font-bold text-gray-800 uppercase tracking-wide">Tu Plan TecnoPymes</h4>
+                <p class="text-xs text-gray-500"><span id="total-modules">0</span> módulos seleccionados</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="text-right">
+                    <p class="text-xs text-gray-500">Total Estimado</p>
+                    <p class="text-2xl font-bold text-blue-600" id="total-price">$0.00</p>
+                </div>
+                <button onclick="alert('Proceeding to checkout...')"
+                    class="bg-[#1a2233] hover:bg-[#252f45] text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                    Contratar Plan
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="module-request-modal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden transform transition-all">
+            <div class="bg-[#1a2233] p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <i class='bx bx-code-alt text-2xl mr-3'></i>
+                        <h3 class="text-lg font-bold">Solicitar Nuevo Módulo</h3>
+                    </div>
+                    <button onclick="closeModuleModal()" class="text-white hover:text-gray-300">
+                        <i class='bx bx-x text-2xl'></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <p class="text-gray-600 mb-4">Describe el módulo que necesitas y nuestro equipo de ingeniería te
+                    contactará.</p>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nombre del módulo</label>
+                        <input type="text" id="module-name" placeholder="Ej: Gestión de Inventario Avanzado"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+                        <textarea id="module-description" rows="3"
+                            placeholder="Describe las funcionalidades que necesitas..."
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tu email</label>
+                        <input type="email" id="module-email" placeholder="tu@empresa.com"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-6 py-4 flex justify-end gap-3">
+                <button onclick="closeModuleModal()" class="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium">
+                    Cancelar
+                </button>
+                <button onclick="submitModuleRequest()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                    Enviar Solicitud
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="toggleAssistant()"
+        class="fixed bottom-8 right-8 w-14 h-14 flex items-center justify-center bg-[#1a2233] hover:bg-[#252f45] text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 z-50 group">
+        <i class='bx bx-bot text-3xl'></i>
+        <span
+            class="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">
+            ¿Necesitas ayuda?
+        </span>
+    </button>
+
+    <div id="ai-chat"
+        class="fixed bottom-24 right-4 sm:right-8 w-[calc(100vw-2rem)] sm:w-80 bg-white rounded-xl shadow-2xl border border-gray-100 hidden flex-col overflow-hidden transition-all duration-300 transform scale-95 opacity-0 origin-bottom-right z-50">
+        <div class="bg-[#1a2233] p-4 text-white flex justify-between items-center">
+            <div class="flex items-center">
+                <i class='bx bx-bot text-2xl mr-2'></i>
+                <span class="font-bold">Asistente IA</span>
+            </div>
+            <button onclick="toggleAssistant()" class="text-white hover:text-gray-200"><i class='bx bx-x'></i></button>
+        </div>
+        <div class="p-4 h-64 overflow-y-auto bg-gray-50 text-sm space-y-3">
+            <div class="flex items-start">
+                <div class="bg-blue-50 text-gray-800 p-2 rounded-lg rounded-tl-none max-w-[80%] border border-blue-100">
+                    Hola María. Estoy aquí para guiarte. Selecciona cualquier opción del menú y te explicaré
+                    cómo funciona. ¿Tienes alguna duda específica?
+                </div>
+            </div>
+        </div>
+        <div class="p-3 border-t bg-white">
+            <div class="flex items-center bg-gray-100 rounded-full px-3 py-2">
+                <input type="text" placeholder="Escribe tu duda..."
+                    class="bg-transparent flex-1 outline-none text-sm text-gray-700">
+                <button class="text-[#1a2233] hover:text-blue-600 transition-colors"><i class='bx bx-send'></i></button>
+            </div>
+        </div>
+    </div>
+
+
+
+    </main>
+
+    </div>
+
+    <div id="video-modal" class="fixed inset-0 z-[60] hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity opacity-0" id="modal-backdrop">
+        </div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl scale-95 opacity-0"
+                    id="modal-panel">
+
+                    <div
+                        class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-between items-center border-b border-gray-100">
+                        <h3 class="text-lg font-semibold leading-6 text-gray-900" id="modal-title">
+                            Tutorial: Función Seleccionada</h3>
+                        <button type="button" onclick="closeVideoModal()"
+                            class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none hover:bg-gray-100 p-1 transition-colors">
+                            <span class="sr-only">Close</span>
+                            <i class='bx bx-x text-2xl'></i>
+                        </button>
+                    </div>
+
+                    <div class="px-4 py-4 sm:p-6">
+                        <div
+                            class="relative w-full aspect-video rounded-xl overflow-hidden bg-black group cursor-pointer shadow-inner">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-blue-900 to-gray-800 flex items-center justify-center">
+                                <i
+                                    class='bx bx-play-circle text-6xl text-white opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300'></i>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        function updateTags() {
+            const now = new Date();
+            const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            const dateString = now.toLocaleDateString('es-ES', dateOptions);
+            const formattedDate = dateString.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            document.getElementById('date-display').textContent = formattedDate;
+
+            const timeString = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+            document.getElementById('time-display').textContent = timeString;
+        }
+
+        setInterval(updateTags, 1000);
+        updateTags();
+
+        const sidebar = document.getElementById('sidebar');
+        function toggleSidebar() {
+            sidebar.classList.toggle('-ml-64');
+
+        }
+
+        function checkMobileAndCloseSidebar() {
+            if (window.innerWidth < 768) {
+                if (!sidebar.classList.contains('-ml-64')) {
+                    sidebar.classList.add('-ml-64');
+                }
+            }
+        }
+
+        function toggleMenu(menuId, arrowId) {
+            const menu = document.getElementById(menuId);
+            const arrow = document.getElementById(arrowId);
+
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('animate-slide-down');
+                arrow.classList.remove('bx-chevron-down');
+                arrow.classList.add('bx-chevron-up');
+
+
+
+            } else {
+                menu.classList.add('hidden');
+                arrow.classList.add('bx-chevron-down');
+                arrow.classList.remove('bx-chevron-up');
+            }
+        }
+
+
+
+        const capsule = document.getElementById('info-capsule');
+        const capsuleTitle = document.getElementById('capsule-title');
+        const capsuleDesc = document.getElementById('capsule-desc');
+        let currentVideoTitle = "Tutorial General";
+
+        function showCapsule(title, desc, videoTitle = null) {
+            capsuleTitle.textContent = title;
+            capsuleDesc.textContent = desc;
+            currentVideoTitle = videoTitle || `Tutorial: ${title}`;
+
+            capsule.classList.remove('hidden');
+            setTimeout(() => {
+                capsule.classList.remove('translate-y-[-10px]', 'opacity-0');
+            }, 10);
+        }
+
+        function closeCapsule() {
+            capsule.classList.add('translate-y-[-10px]', 'opacity-0');
+            setTimeout(() => {
+                capsule.classList.add('hidden');
+            }, 300);
+        }
+
+        const modal = document.getElementById('video-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalPanel = document.getElementById('modal-panel');
+        const modalTitle = document.getElementById('modal-title');
+
+        function openVideoModal() {
+            modalTitle.textContent = currentVideoTitle;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalBackdrop.classList.remove('opacity-0');
+                modalPanel.classList.remove('scale-95', 'opacity-0');
+                modalPanel.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeVideoModal() {
+            modalBackdrop.classList.add('opacity-0');
+            modalPanel.classList.remove('scale-100', 'opacity-100');
+            modalPanel.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        const sidebarLinks = document.querySelectorAll('nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const text = link.innerText.trim();
+
+
+                showCapsule(text, desc);
+                checkMobileAndCloseSidebar();
+            });
+        });
+
+        const chatWindow = document.getElementById('ai-chat');
+        function toggleAssistant() {
+            if (chatWindow.classList.contains('hidden')) {
+                chatWindow.classList.remove('hidden');
+                setTimeout(() => {
+                    chatWindow.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            } else {
+                chatWindow.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    chatWindow.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function showView(viewName) {
+            checkMobileAndCloseSidebar();
+            const dashboard = document.getElementById('dashboard-view');
+            const catalog = document.getElementById('catalog-view');
+            const calculator = document.getElementById('calculator-view');
+            const crmClientes = document.getElementById('crm-clientes-view');
+            const crmOportunidades = document.getElementById('crm-oportunidades-view');
+            const crmComisiones = document.getElementById('crm-comisiones-view');
+            const crmLineas = document.getElementById('crm-lineas-view');
+            const planSummary = document.getElementById('plan-summary');
+            const mainScrollArea = document.getElementById('main-scroll-area');
+
+            const resetAnim = (el) => {
+                if (!el) return;
+                el.classList.remove('animate-fade-in-up');
+                void el.offsetWidth;
+                el.classList.add('animate-fade-in-up');
+            };
+
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active-nav', 'bg-sidebar-hover', 'text-white', 'border-blue-500');
+                link.classList.add('text-gray-400', 'border-transparent');
+            });
+
+
+            const navMap = {
+                'dashboard': 'nav-dashboard',
+                'catalog': 'nav-catalog',
+                'calculator': 'nav-calculator'
+            };
+            if (navMap[viewName]) {
+                const activeNav = document.getElementById(navMap[viewName]);
+                if (activeNav) {
+                    activeNav.classList.add('active-nav', 'bg-sidebar-hover', 'text-white', 'border-blue-500');
+                    activeNav.classList.remove('text-gray-400', 'border-transparent');
+                }
+            }
+
+
+            if (mainScrollArea) {
+                mainScrollArea.scrollTop = 0;
+            }
+
+
+            dashboard.classList.add('hidden');
+            catalog.classList.add('hidden');
+            calculator.classList.add('hidden');
+            if (crmClientes) crmClientes.classList.add('hidden');
+            if (crmOportunidades) crmOportunidades.classList.add('hidden');
+            if (crmComisiones) crmComisiones.classList.add('hidden');
+            if (crmLineas) crmLineas.classList.add('hidden');
+            planSummary.classList.add('hidden');
+
+
+            if (viewName === 'catalog') {
+                catalog.classList.remove('hidden');
+                resetAnim(catalog);
+                renderModules();
+                planSummary.classList.remove('hidden');
+                updatePlanSummary();
+            } else if (viewName === 'calculator') {
+                calculator.classList.remove('hidden');
+                resetAnim(calculator);
+            } else if (viewName === 'crm-clientes') {
+                crmClientes.classList.remove('hidden');
+                resetAnim(crmClientes);
+            } else if (viewName === 'crm-oportunidades') {
+                crmOportunidades.classList.remove('hidden');
+                resetAnim(crmOportunidades);
+            } else if (viewName === 'crm-comisiones') {
+                crmComisiones.classList.remove('hidden');
+                resetAnim(crmComisiones);
+            } else if (viewName === 'crm-lineas') {
+                crmLineas.classList.remove('hidden');
+                resetAnim(crmLineas);
+            } else {
+                dashboard.classList.remove('hidden');
+                resetAnim(dashboard);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showView('dashboard');
+        });
+
+        const modules = [
+            { id: 1, name: 'CRM Pro', desc: 'Gestión avanzada de clientes, pipelines y analítica de ventas.', price: 0, active: true, icon: 'bx-briefcase' },
+            { id: 2, name: 'Recursos Humanos', desc: 'Gestión de nóminas, asistencia y portal del empleado.', price: 0, active: true, icon: 'bx-group' },
+            { id: 3, name: 'Módulo de Contabilidad', desc: 'Facturación electrónica, libros diarios y reportes fiscales.', price: 29.99, active: false, icon: 'bx-calculator' },
+            { id: 4, name: 'Inventario Inteligente', desc: 'Control de stock con IA y gestión de múltiples almacenes.', price: 19.99, active: false, icon: 'bx-box' },
+            { id: 5, name: 'Marketing Hub', desc: 'Automatización de emails y gestión de redes sociales.', price: 24.99, active: false, icon: 'bx-megaphone' },
+            { id: 6, name: 'Gestor de Proyectos', desc: 'Tableros Kanban, Gantt y seguimiento de tiempos.', price: 14.99, active: false, icon: 'bx-task' },
+            { id: 7, name: 'Soporte Ticket System', desc: 'Mesa de ayuda para atención al cliente integrada.', price: 12.50, active: false, icon: 'bx-support' },
+            { id: 8, name: 'Conector E-commerce', desc: 'Sincronización con Shopify, WooCommerce y más.', price: 35.00, active: false, icon: 'bx-cart' },
+        ];
+
+        function renderModules(filterText = "") {
+            const grid = document.getElementById('modules-grid');
+            if (!grid) return;
+
+            grid.innerHTML = "";
+            const filtered = modules.filter(m => m.name.toLowerCase().includes(filterText.toLowerCase()));
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-16 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                        <i class='bx bx-search-alt text-6xl text-gray-300 mb-4'></i>
+                        <p class="text-gray-500 text-lg font-medium">No encontramos el módulo "${filterText}"</p>
+                        <p class="text-gray-400 text-sm mb-6">Pero podemos crearlo para ti.</p>
+                        <button onclick="requestCustomModule('${filterText}')" class="text-blue-600 hover:text-blue-800 font-semibold underline">
+                            Solicitar creación de módulo "${filterText}"
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(m => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col";
+                card.innerHTML = `
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                            <i class='bx ${m.active ? 'bxs-check-shield' : m.icon}'></i>
+                        </div>
+                        ${m.active ? '<span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center"><i class="bx bx-check mr-1"></i>Activo</span>' : ''}
+                    </div>
+                    
+                    <h3 class="font-bold text-gray-800 text-lg mb-2">${m.name}</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow">${m.desc}</p>
+                    
+                    <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-xs text-gray-400">Precio mensual</span>
+                            <span class="font-bold text-gray-900 text-lg">${m.active ? 'Incluido' : `$${m.price}`}</span>
+                        </div>
+                        <button onclick="toggleModule(${m.id})" 
+                            class="${m.active ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white shadow-blue-200 hover:shadow-lg'} px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                            ${m.active ? 'Instalado' : 'Agregar +'}
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        function toggleModule(id) {
+            const module = modules.find(m => m.id === id);
+            if (module && !module.active) {
+                const btn = event.target;
+                btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i>";
+
+                setTimeout(() => {
+                    module.active = true;
+                    module.name += " (Nuevo)";
+                    renderModules(document.getElementById('module-search').value);
+                    updatePlanSummary();
+                    showCapsule('Módulo Agregado', `Has suscrito el módulo ${module.name} a tu plan por $${module.price}/mes.`, 'Configurar Ahora');
+                }, 800);
+            }
+        }
+
+        function toggleSummary(show) {
+            const summary = document.getElementById('plan-summary');
+            if (show) {
+                setTimeout(() => summary.classList.remove('translate-y-full'), 300);
+                updatePlanSummary();
+            } else {
+                summary.classList.add('translate-y-full');
+            }
+        }
+
+        function updatePlanSummary() {
+            const activeModules = modules.filter(m => m.active);
+            const total = activeModules.reduce((sum, m) => sum + m.price, 0);
+
+            document.getElementById('total-modules').textContent = activeModules.length;
+            document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+        }
+
+        function calculateProjection() {
+            const hours = parseFloat(document.getElementById('calc-hours').value) || 0;
+            const errors = parseFloat(document.getElementById('calc-errors').value) || 0;
+            const revenue = parseFloat(document.getElementById('calc-revenue').value) || 0;
+            const inventory = parseFloat(document.getElementById('calc-inventory').value) || 0;
+
+
+            const simulatedGrowth = 1.35;
+            const moneyLostPerHour = 25;
+            const moneyLostPerError = 50;
+
+            const currentLoss = (hours * 4 * moneyLostPerHour) + (errors * moneyLostPerError);
+            const projectedRevenue = (revenue * simulatedGrowth) + (currentLoss * 0.8);
+
+
+            document.getElementById('results-blur').classList.add('hidden');
+            document.getElementById('results-panel').classList.remove('opacity-50');
+
+            const growthPercent = ((projectedRevenue - revenue) / revenue * 100).toFixed(0);
+
+            document.getElementById('label-revenue-now').textContent = `$${revenue.toLocaleString()}`;
+            document.getElementById('label-revenue-proj').textContent = `$${projectedRevenue.toFixed(0).toLocaleString()}`;
+            document.getElementById('estimated-savings').textContent = `$${(currentLoss * 0.8).toFixed(0)}`;
+            document.getElementById('growth-percentage').textContent = `+${growthPercent}%`;
+
+
+            setTimeout(() => {
+                document.getElementById('bar-current').style.height = "40%";
+                document.getElementById('bar-month1').style.height = "55%";
+                document.getElementById('bar-month2').style.height = "70%";
+                document.getElementById('bar-projected').style.height = "85%";
+            }, 100);
+        }
+
+        function requestCustomModule(prefill = "") {
+            const modal = document.getElementById('module-request-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            if (prefill) {
+                document.getElementById('module-name').value = prefill;
+            }
+        }
+
+        function closeModuleModal() {
+            const modal = document.getElementById('module-request-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+
+            document.getElementById('module-name').value = '';
+            document.getElementById('module-description').value = '';
+            document.getElementById('module-email').value = '';
+        }
+
+        function submitModuleRequest() {
+            const name = document.getElementById('module-name').value;
+            const description = document.getElementById('module-description').value;
+            const email = document.getElementById('module-email').value;
+
+            if (!name || !email) {
+                alert('Por favor completa el nombre del módulo y tu email.');
+                return;
+            }
+
+
+            closeModuleModal();
+            alert('¡Solicitud enviada con éxito! Un especialista Enterprise te contactará pronto a ' + email);
+        }
+
+        document.querySelectorAll('nav a')[0].addEventListener('click', () => {
+            showView('dashboard');
+            checkMobileAndCloseSidebar();
+        });
+
+        document.getElementById('module-search').addEventListener('input', (e) => {
+            renderModules(e.target.value);
+        });
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+    </style>
+</body>
+
+
+</html>
