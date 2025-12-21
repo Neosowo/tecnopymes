@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecnoPymes Dashboard</title>
-
+    <title>TecnoPymes</title>
+    <!-- Dev Erick -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
@@ -14,7 +14,6 @@
     </style>
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -32,18 +31,15 @@
     </script>
     <style>
         :root {
-            /* Light Theme Colors */
+
             --bg-primary: #f0f4f8;
             --bg-secondary: #ffffff;
             --bg-card: #ffffff;
             --bg-hover: #f1f3f9;
 
-            /* Text Colors */
             --text-primary: #1a202c;
             --text-secondary: #4a5568;
             --text-muted: #718096;
-
-            /* Accent Colors */
             --accent-blue: #5b8def;
             --accent-green: #48bb78;
             --accent-red: #f56565;
@@ -51,13 +47,11 @@
             --accent-purple: #9f7aea;
             --accent-yellow: #ecc94b;
 
-            /* Shadows */
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
             --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
             --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
             --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
 
-            /* Border Radius */
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
@@ -95,12 +89,9 @@
             background: #cbd5e0;
         }
 
-        /* Smooth Transitions */
         * {
             transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
         }
-
-        /* Card Styles */
         .stat-card {
             background: var(--bg-card);
             border-radius: var(--radius-lg);
@@ -115,7 +106,6 @@
             box-shadow: var(--shadow-xl);
         }
 
-        /* Badge Styles */
         .badge {
             display: inline-flex;
             align-items: center;
@@ -157,9 +147,8 @@
         .badge-info {
             background: rgba(91, 141, 239, 0.15);
             color: var(--accent-blue);
-        }
+        }   
 
-        /* Button Styles */
         .btn {
             padding: 0.5rem 1rem;
             border-radius: var(--radius-md);
@@ -190,7 +179,6 @@
             background: #e2e8f0;
         }
 
-        /* Sidebar Styles */
         aside {
             background: var(--bg-secondary);
             border-right: 1px solid #e2e8f0;
@@ -210,14 +198,12 @@
             border-left-color: var(--accent-blue);
         }
 
-        /* Header Styles */
         header {
             background: var(--bg-secondary);
             border-bottom: 1px solid #e2e8f0;
             box-shadow: var(--shadow-sm);
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -286,7 +272,6 @@
             transform: scaleY(1.05);
         }
 
-        /* Input Styles */
         input,
         textarea,
         select {
@@ -311,7 +296,6 @@
             color: var(--text-muted);
         }
 
-        /* Modal Styles */
         .modal-backdrop {
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
@@ -2378,10 +2362,8 @@
                 return;
             }
 
-            // Obtener precio real o de referencia
             const actualPrice = module.price > 0 ? module.price : modulePrices[module.id] || 19.99;
 
-            // Simular fecha de activación (entre 1 y 6 días para que siempre esté en plazo)
             const daysAgo = Math.floor(Math.random() * 6) + 1;
             const activationDate = new Date();
             activationDate.setDate(activationDate.getDate() - daysAgo);
@@ -2574,7 +2556,6 @@
             document.getElementById('results-blur').classList.add('hidden');
             document.getElementById('results-panel').classList.remove('opacity-50');
 
-            // Mostrar resultados
             document.getElementById('label-revenue-now').textContent = `$${revenue.toLocaleString()}`;
             document.getElementById('label-revenue-proj').textContent = `$${projectedRevenue.toFixed(0).toLocaleString()}`;
             document.getElementById('estimated-savings').textContent = `$${expenses.toLocaleString()}`;
@@ -2645,7 +2626,6 @@
             });
         });
 
-        // Función para cerrar sesión
         function logout() {
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('userEmail');
