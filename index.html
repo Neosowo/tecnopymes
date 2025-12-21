@@ -9,7 +9,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    </style>
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
@@ -29,14 +31,364 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        :root {
+            /* Light Theme Colors */
+            --bg-primary: #f0f4f8;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-hover: #f1f3f9;
+
+            /* Text Colors */
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+
+            /* Accent Colors */
+            --accent-blue: #5b8def;
+            --accent-green: #48bb78;
+            --accent-red: #f56565;
+            --accent-orange: #ed8936;
+            --accent-purple: #9f7aea;
+            --accent-yellow: #ecc94b;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+        }
+
 
         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: "Poppins", sans-serif;
             font-weight: 500;
         }
 
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
 
+        .no-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .no-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 3px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e0;
+        }
+
+        /* Smooth Transitions */
+        * {
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        /* Card Styles */
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Badge Styles */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+
+        input {
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text-primary);
+
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .badge-success {
+            background: rgba(72, 187, 120, 0.15);
+            color: var(--accent-green);
+        }
+
+        .badge-danger {
+            background: rgba(245, 101, 101, 0.15);
+            color: var(--accent-red);
+        }
+
+        .badge-warning {
+            background: rgba(237, 137, 54, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .badge-info {
+            background: rgba(91, 141, 239, 0.15);
+            color: var(--accent-blue);
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4a7dd9;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        /* Sidebar Styles */
+        aside {
+            background: var(--bg-secondary);
+            border-right: 1px solid #e2e8f0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-link {
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-hover);
+        }
+
+        .nav-link.active-nav {
+            background: var(--bg-hover);
+            border-left-color: var(--accent-blue);
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.4s ease-out forwards;
+        }
+
+
+        .chart-bar {
+            background: var(--accent-blue);
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s ease;
+        }
+
+        .chart-bar:hover {
+            opacity: 0.8;
+            transform: scaleY(1.05);
+        }
+
+        /* Input Styles */
+        input,
+        textarea,
+        select {
+            background: var(--bg-secondary);
+            border: 1px solid #e2e8f0;
+            color: var(--text-primary);
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(91, 141, 239, 0.1);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Modal Styles */
+        .modal-backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Scrollbar for main content */
+        main::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        main::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        main::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 4px;
+        }
+
+        main::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e0;
+        }
+
+        /* Sidebar Icon Styles */
+        .sidebar-icon {
+            cursor: pointer;
+        }
+
+        .sidebar-icon:hover:not(.active-sidebar) {
+            background: var(--bg-hover) !important;
+            color: var(--text-primary) !important;
+        }
+
+        .active-sidebar {
+            background: var(--accent-blue) !important;
+            color: white !important;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Card hover effect */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Gradient backgrounds for special cards */
+        .gradient-purple {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .gradient-blue {
+            background: linear-gradient(135deg, #5b8def 0%, #0052d4 100%);
+        }
+
+        .gradient-green {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        }
+
+        /* Glass effect for chat */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hide scrollbar */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -48,102 +400,127 @@
     </style>
 </head>
 
-<body class="font-roboto bg-content-bg h-screen flex overflow-hidden">
+<body class="font-roboto h-screen flex overflow-hidden">
 
+    <!-- Verificación de sesión - Redirige al login si no está autenticado -->
+    <script>
+            (function () {
+                if (localStorage.getItem('isLoggedIn') !== 'true') {
+                    window.location.href = 'login.html';
+                }
+            })();
+    </script>
 
-    <aside class="w-64 bg-sidebar-bg text-gray-300 flex flex-col flex-shrink-0 transition-all duration-300"
-        id="sidebar">
-        <div class="h-16 flex items-center justify-center px-4 border-b border-gray-700 bg-[#161d2b]">
-            <h1 class="text-xl md:text-2xl font-bold text-white tracking-wider"
-                style="font-family: 'Poppins', sans-serif;">
-                TECNOPYMES</h1>
+    <!-- Sidebar con Estilo Claro y Nombres -->
+    <aside class="w-64 flex flex-col flex-shrink-0 transition-all duration-300"
+        style="background: var(--bg-secondary); border-right: 1px solid #e2e8f0;" id="sidebar">
+
+        <!-- Logo -->
+        <div class="h-16 flex items-center px-6 border-b" style="border-color: #e2e8f0;">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center mr-3"
+                style="background: var(--accent-blue);">
+                <i class='bx bx-layer text-xl text-white'></i>
+            </div>
+            <span class="text-lg font-bold" style="color: var(--text-primary);">TECNOPYMES</span>
         </div>
 
-
+        <!-- Navigation -->
         <nav class="flex-1 overflow-y-auto py-4 no-scrollbar">
-            <ul class="space-y-1">
-
+            <ul class="space-y-1 px-3">
+                <!-- Dashboard -->
                 <li>
                     <a href="#" id="nav-dashboard" onclick="showView('dashboard')"
-                        class="nav-link active-nav flex items-center px-4 py-3 text-sm font-medium bg-sidebar-hover text-white border-l-4 border-blue-500 transition-all duration-200 hover:pl-5 group">
-                        <i class='bx bx-tachometer text-xl mr-3 group-hover:text-blue-400 transition-colors'></i>
+                        class="sidebar-link active flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group"
+                        style="background: var(--accent-blue); color: white;">
+                        <i class='bx bx-home-alt text-xl mr-3'></i>
                         Dashboard
                     </a>
                 </li>
 
-
+                <!-- CRM con Submenu -->
                 <li>
-                    <div class="group">
-                        <button id="crm-btn" onclick="toggleMenu('crm-submenu', 'crm-arrow')"
-                            class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium hover:bg-sidebar-hover text-gray-400 hover:text-white border-l-4 border-transparent hover:border-blue-500 transition-colors cursor-pointer">
-                            <div class="flex items-center">
-                                <i class='bx bx-briefcase text-xl mr-3'></i>
-                                CRM
-                            </div>
-                            <i id="crm-arrow" class='bx bx-chevron-down text-xl transition-transform duration-200'></i>
-                        </button>
-                        <ul id="crm-submenu" class="bg-[#131926] py-2 pl-12 pr-4 space-y-1 hidden">
-                            <li><a href="#" onclick="showView('crm-clientes')"
-                                    class="block py-2 text-sm text-gray-400 hover:text-white">Gestión de
-                                    Clientes</a></li>
-                            <li><a href="#" onclick="showView('crm-oportunidades')"
-                                    class="block py-2 text-sm text-gray-400 hover:text-white">Gestión de
-                                    Oportunidades</a></li>
-                            <li><a href="#" onclick="showView('crm-comisiones')"
-                                    class="block py-2 text-sm text-gray-400 hover:text-white">Gestión de
-                                    Comisiones</a></li>
-                            <li><a href="#" onclick="showView('crm-lineas')"
-                                    class="block py-2 text-sm text-gray-400 hover:text-white">Lineas de
-                                    Negocios</a></li>
-                        </ul>
-                    </div>
-                </li>
-
-
-                <li>
-                    <button
-                        class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium hover:bg-sidebar-hover text-gray-400 hover:text-white border-l-4 border-transparent hover:border-blue-500 transition-colors">
+                    <button id="crm-btn" onclick="toggleMenu('crm-submenu', 'crm-arrow')"
+                        class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 cursor-pointer"
+                        style="color: var(--text-muted);">
                         <div class="flex items-center">
-                            <i class='bx bx-group text-xl mr-3'></i>
-                            Recursos Humanos
+                            <i class='bx bx-briefcase text-xl mr-3'></i>
+                            CRM
                         </div>
-                        <i class='bx bx-chevron-down text-xl'></i>
+                        <i id="crm-arrow" class='bx bx-chevron-down text-lg transition-transform duration-200'></i>
                     </button>
+                    <ul id="crm-submenu" class="ml-8 mt-1 space-y-1 hidden">
+                        <li><a href="#" onclick="showView('crm-clientes')"
+                                class="block px-4 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors"
+                                style="color: var(--text-muted);">Gestión de Clientes</a></li>
+                        <li><a href="#" onclick="showView('crm-oportunidades')"
+                                class="block px-4 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors"
+                                style="color: var(--text-muted);">Gestión de Oportunidades</a></li>
+                        <li><a href="#" onclick="showView('crm-comisiones')"
+                                class="block px-4 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors"
+                                style="color: var(--text-muted);">Gestión de Comisiones</a></li>
+                        <li><a href="#" onclick="showView('crm-lineas')"
+                                class="block px-4 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors"
+                                style="color: var(--text-muted);">Líneas de Negocios</a></li>
+                    </ul>
                 </li>
-            </ul>
-            </li>
 
-            <li>
-                <a href="#" id="nav-calculator" onclick="showView('calculator')"
-                    class="nav-link flex items-center px-4 py-3 text-sm font-medium hover:bg-sidebar-hover text-gray-400 hover:text-white border-l-4 border-transparent hover:border-blue-500 transition-all duration-200 hover:pl-5 group">
-                    <i class='bx bx-calculator text-xl mr-3 group-hover:text-blue-400 transition-colors'></i>
-                    Calculadora de Progreso
-                </a>
-            </li>
+                <!-- Recursos Humanos -->
+                <li>
+                    <a href="#"
+                        class="sidebar-link flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 group"
+                        style="color: var(--text-muted);">
+                        <i class='bx bx-group text-xl mr-3'></i>
+                        Recursos Humanos
+                    </a>
+                </li>
 
-            <li>
-                <a href="#" id="nav-catalog" onclick="showView('catalog')"
-                    class="nav-link flex items-center px-4 py-3 text-sm font-medium hover:bg-sidebar-hover text-gray-400 hover:text-white border-l-4 border-transparent hover:border-blue-500 transition-all duration-200 hover:pl-5 group">
-                    <i class='bx bxs-store text-xl mr-3 group-hover:text-blue-400 transition-colors'></i>
-                    Catálogo de Módulos
-                </a>
-            </li>
+                <!-- Calculadora -->
+                <li>
+                    <a href="#" id="nav-calculator" onclick="showView('calculator')"
+                        class="sidebar-link flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 group"
+                        style="color: var(--text-muted);">
+                        <i class='bx bx-calculator text-xl mr-3'></i>
+                        Calculadora
+                    </a>
+                </li>
+
+                <!-- Catálogo -->
+                <li>
+                    <a href="#" id="nav-catalog" onclick="showView('catalog')"
+                        class="sidebar-link flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 group"
+                        style="color: var(--text-muted);">
+                        <i class='bx bx-shopping-bag text-xl mr-3'></i>
+                        Catálogo
+                    </a>
             </ul>
         </nav>
 
-
-        <div class="p-4 border-t border-gray-700 bg-[#161d2b]">
-            <div class="flex items-center justify-between text-xs text-gray-500">
-                <span>Versión 1.0</span>
-                <button class="hover:text-white transition-colors">
-                    <i class='bx bx-log-out text-lg border border-gray-600 rounded p-1'></i>
+        <!-- Footer del Sidebar -->
+        <div class="p-4 border-t" style="border-color: #e2e8f0;">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-xl overflow-hidden mr-3">
+                        <img src="https://ui-avatars.com/api/?name=Barbara&background=667eea&color=fff" alt="User"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium" style="color: var(--text-primary);">Barbara</p>
+                        <p class="text-xs" style="color: var(--text-muted);">Admin</p>
+                    </div>
+                </div>
+                <button onclick="logout()"
+                    class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+                    style="color: var(--text-muted);">
+                    <i class='bx bx-log-out text-lg'></i>
                 </button>
             </div>
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col min-w-0">
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col overflow-hidden">
 
+        <!-- Top Header -->
         <header class="bg-white h-16 shadow-sm flex items-center justify-between px-4 sticky top-0 z-50">
             <div class="flex items-center gap-4">
                 <button onclick="toggleSidebar()" class="text-gray-600 hover:text-gray-900 focus:outline-none">
@@ -151,23 +528,227 @@
                 </button>
 
                 <div class="hidden sm:flex flex-col bg-gray-200/50 px-4 py-1 rounded border border-gray-300">
-                    <div id="date-display" class="text-xs text-gray-500 font-medium">Martes, 9 De Diciembre De 2025
+                    <div id="date-display" class="text-xs text-gray-500 font-medium">Cargando...
                     </div>
-                    <div id="time-display" class="text-sm font-bold text-gray-800">10:31:00 p. m.</div>
+                    <div id="time-display" class="text-sm font-bold text-gray-800">--:--:--</div>
                 </div>
             </div>
 
-            <div class="flex items-center gap-4 text-gray-500">
-                <button class="hover:text-blue-600 hover:scale-110 transition-transform duration-200"><i
-                        class='bx bx-envelope text-xl'></i></button>
-                <button class="hover:text-blue-600 hover:scale-110 transition-transform duration-200 relative">
-                    <i class='bx bx-bell text-xl'></i>
-                    <span class="absolute top-0 right-0 block h-2 w-2 rounded-full ring-2 ring-white bg-red-500"></span>
-                </button>
+            <div class="flex items-center gap-3 text-gray-500">
+                <!-- Correos Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleDropdown('emails-dropdown')"
+                        class="hover:text-blue-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100 relative">
+                        <i class='bx bx-envelope text-xl'></i>
+                        <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-blue-500"></span>
+                    </button>
+                    <!-- Emails Dropdown Panel -->
+                    <div id="emails-dropdown"
+                        class="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden transform transition-all duration-200 origin-top-right">
+                        <div class="p-4 border-b border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-gray-800">Correos</h3>
+                                <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full font-semibold">3
+                                    nuevos</span>
+                            </div>
+                        </div>
+                        <div class="max-h-72 overflow-y-auto">
+                            <div
+                                class="p-3 hover:bg-gray-50 cursor-pointer transition-colors border-l-4 border-blue-500 bg-blue-50/50">
+                                <div class="flex items-start gap-3">
+                                    <img src="https://ui-avatars.com/api/?name=Carlos+Lopez&background=5b8def&color=fff"
+                                        class="w-10 h-10 rounded-full" alt="">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-semibold text-sm text-gray-800 truncate">Carlos López</p>
+                                        <p class="text-xs text-gray-600 truncate">Propuesta comercial adjunta</p>
+                                        <p class="text-xs text-gray-400 mt-1">Hace 5 min</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="p-3 hover:bg-gray-50 cursor-pointer transition-colors border-l-4 border-blue-500 bg-blue-50/50">
+                                <div class="flex items-start gap-3">
+                                    <img src="https://ui-avatars.com/api/?name=Maria+Garcia&background=48bb78&color=fff"
+                                        class="w-10 h-10 rounded-full" alt="">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-semibold text-sm text-gray-800 truncate">María García</p>
+                                        <p class="text-xs text-gray-600 truncate">Actualización del proyecto Q4</p>
+                                        <p class="text-xs text-gray-400 mt-1">Hace 2 horas</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="p-3 hover:bg-gray-50 cursor-pointer transition-colors border-l-4 border-blue-500 bg-blue-50/50">
+                                <div class="flex items-start gap-3">
+                                    <img src="https://ui-avatars.com/api/?name=Tech+Support&background=ed8936&color=fff"
+                                        class="w-10 h-10 rounded-full" alt="">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-semibold text-sm text-gray-800 truncate">Soporte Técnico</p>
+                                        <p class="text-xs text-gray-600 truncate">Ticket #1234 resuelto</p>
+                                        <p class="text-xs text-gray-400 mt-1">Hace 1 día</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 border-t border-gray-100">
+                            <button
+                                class="w-full text-center text-sm font-semibold text-blue-600 hover:text-blue-700 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+                                Ver todos los correos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notificaciones Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleDropdown('notifications-dropdown')"
+                        class="hover:text-blue-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100 relative">
+                        <i class='bx bx-bell text-xl'></i>
+                        <span
+                            class="absolute top-1 right-1 block h-2 w-2 rounded-full ring-2 ring-white bg-red-500 animate-pulse"></span>
+                    </button>
+                    <!-- Notifications Dropdown Panel -->
+                    <div id="notifications-dropdown"
+                        class="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden transform transition-all duration-200 origin-top-right">
+                        <div class="p-4 border-b border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-gray-800">Notificaciones</h3>
+                                <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full font-semibold">5
+                                    nuevas</span>
+                            </div>
+                        </div>
+                        <div class="max-h-72 overflow-y-auto">
+                            <div class="p-3 hover:bg-gray-50 cursor-pointer transition-colors bg-red-50/30">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                        <i class='bx bx-check-circle text-green-600 text-xl'></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-sm text-gray-800">Venta completada</p>
+                                        <p class="text-xs text-gray-500">Nuevo pedido #4521 por $1,250</p>
+                                        <p class="text-xs text-gray-400 mt-1">Hace 10 min</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 hover:bg-gray-50 cursor-pointer transition-colors bg-red-50/30">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                        <i class='bx bx-user-plus text-blue-600 text-xl'></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-sm text-gray-800">Nuevo cliente registrado</p>
+                                        <p class="text-xs text-gray-500">Empresa XYZ S.A. se unió</p>
+                                        <p class="text-xs text-gray-400 mt-1">Hace 30 min</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 hover:bg-gray-50 cursor-pointer transition-colors">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                                        <i class='bx bx-error text-orange-600 text-xl'></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-sm text-gray-800">Stock bajo</p>
+                                        <p class="text-xs text-gray-500">3 productos necesitan reposición</p>
+                                        <p class="text-xs text-gray-400 mt-1">Hace 2 horas</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 hover:bg-gray-50 cursor-pointer transition-colors">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                        <i class='bx bx-calendar text-purple-600 text-xl'></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-sm text-gray-800">Reunión programada</p>
+                                        <p class="text-xs text-gray-500">Mañana a las 10:00 AM</p>
+                                        <p class="text-xs text-gray-400 mt-1">Hace 5 horas</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 border-t border-gray-100">
+                            <button
+                                class="w-full text-center text-sm font-semibold text-blue-600 hover:text-blue-700 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+                                Ver todas las notificaciones
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleDropdown('profile-dropdown')"
+                        class="w-10 h-10 rounded-lg overflow-hidden border-2 border-transparent hover:border-blue-400 transition-all duration-200 cursor-pointer">
+                        <img src="https://ui-avatars.com/api/?name=Barbara&background=5b8def&color=fff" alt="User"
+                            class="w-full h-full object-cover">
+                    </button>
+                    <!-- Profile Dropdown Panel -->
+                    <div id="profile-dropdown"
+                        class="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden transform transition-all duration-200 origin-top-right overflow-hidden">
+                        <!-- Profile Header -->
+                        <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-5 text-white">
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-xl overflow-hidden border-3 border-white/30 shadow-lg">
+                                    <img src="https://ui-avatars.com/api/?name=Barbara&background=ffffff&color=5b8def&size=128"
+                                        alt="User" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg">Barbara Martínez</h4>
+                                    <p class="text-blue-100 text-sm">Administradora</p>
+                                    <span
+                                        class="inline-flex items-center mt-1 text-xs bg-white/20 px-2 py-0.5 rounded-full">
+                                        <span class="w-2 h-2 bg-green-400 rounded-full mr-1"></span>
+                                        En línea
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Profile Info -->
+                        <div class="p-4 border-b border-gray-100">
+                            <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                                <i class='bx bx-envelope text-gray-400'></i>
+                                <span>barbara@tecnopymes.com</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                <i class='bx bx-building text-gray-400'></i>
+                                <span>TecnoPymes S.A.</span>
+                            </div>
+                        </div>
+                        <!-- Profile Actions -->
+                        <div class="p-2">
+                            <button
+                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
+                                <i class='bx bx-user text-lg text-gray-400'></i>
+                                <span>Mi Perfil</span>
+                            </button>
+                            <button
+                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
+                                <i class='bx bx-cog text-lg text-gray-400'></i>
+                                <span>Configuración</span>
+                            </button>
+                            <button
+                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
+                                <i class='bx bx-help-circle text-lg text-gray-400'></i>
+                                <span>Ayuda y Soporte</span>
+                            </button>
+                        </div>
+                        <!-- Logout -->
+                        <div class="p-3 border-t border-gray-100">
+                            <button onclick="logout()"
+                                class="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors">
+                                <i class='bx bx-log-out text-lg'></i>
+                                <span>Cerrar Sesión</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
 
-        <main class="flex-1 p-4 md:p-8 overflow-y-auto animate-fade-in-up relative" id="main-scroll-area">
+        <!-- Main Content with Scroll -->
+        <main class="flex-1 overflow-y-auto p-8 animate-fade-in-up" id="main-scroll-area"
+            style="background: var(--bg-primary);">
 
 
 
@@ -195,37 +776,255 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-500 text-sm font-medium">Ingresos Totales</h3>
-                            <span class="p-2 bg-green-100 text-green-600 rounded-full"><i
-                                    class='bx bx-dollar'></i></span>
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <!-- Total Revenue Card -->
+                    <div class="p-6 rounded-3xl relative overflow-hidden"
+                        style="background: var(--accent-blue); box-shadow: var(--shadow-md);">
+                        <button class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
+                            style="background: rgba(255, 255, 255, 0.2);">
+                            <i class='bx bx-right-arrow-alt text-white text-xl'></i>
+                        </button>
+                        <div class="mb-4">
+                            <p class="text-white/80 text-xs font-medium mb-2">Ingresos totales</p>
+                            <h3 class="text-white text-3xl font-bold">$ 99,560</h3>
                         </div>
-                        <div class="text-2xl font-bold text-gray-800">$45,231.89</div>
-                        <p class="text-xs text-green-500 mt-2 flex items-center"><i class='bx bx-up-arrow-alt mr-1'></i>
-                            +20.1% vs mes anterior</p>
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-1 rounded-full text-xs font-semibold"
+                                style="background: rgba(72, 187, 120, 0.3); color: #48bb78;">
+                                +8.2%
+                            </span>
+                            <span class="text-white/60 text-xs">Este mes vs anterior</span>
+                        </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-500 text-sm font-medium">Nuevos Clientes</h3>
-                            <span class="p-2 bg-blue-100 text-blue-600 rounded-full"><i class='bx bx-user'></i></span>
+
+                    <!-- Total Orders Card -->
+                    <div class="p-6 rounded-3xl"
+                        style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
+                        <button class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
+                            style="background: var(--bg-hover);">
+                            <i class='bx bx-right-arrow-alt text-xl' style="color: var(--text-muted);"></i>
+                        </button>
+                        <div class="mb-4">
+                            <p class="text-xs font-medium mb-2" style="color: var(--text-secondary);">Total órdenes</p>
+                            <h3 class="text-3xl font-bold" style="color: var(--text-primary);">35</h3>
                         </div>
-                        <div class="text-2xl font-bold text-gray-800">+2,350</div>
-                        <p class="text-xs text-blue-500 mt-2 flex items-center"><i class='bx bx-up-arrow-alt mr-1'></i>
-                            +180
-                            usuarios nuevos</p>
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-1 rounded-full text-xs font-semibold"
+                                style="background: rgba(245, 101, 101, 0.2); color: var(--accent-red);">
+                                -2.1%
+                            </span>
+                            <span class="text-xs" style="color: var(--text-muted);">Este mes vs anterior</span>
+                        </div>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-500 text-sm font-medium">Tareas Pendientes</h3>
-                            <span class="p-2 bg-purple-100 text-purple-600 rounded-full"><i
-                                    class='bx bx-task'></i></span>
+
+                    <!-- Total Visitors Card -->
+                    <div class="p-6 rounded-3xl relative"
+                        style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
+                        <button class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
+                            style="background: var(--bg-hover);">
+                            <i class='bx bx-right-arrow-alt text-xl' style="color: var(--text-muted);"></i>
+                        </button>
+                        <div class="mb-4">
+                            <p class="text-xs font-medium mb-2" style="color: var(--text-secondary);">Total visitantes
+                            </p>
+                            <h3 class="text-3xl font-bold" style="color: var(--text-primary);">45,600</h3>
                         </div>
-                        <div class="text-2xl font-bold text-gray-800">12</div>
-                        <p class="text-xs text-red-500 mt-2 flex items-center"><i class='bx bx-time md-1'></i> 2
-                            urgentes
-                            para hoy</p>
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-1 rounded-full text-xs font-semibold"
+                                style="background: rgba(245, 101, 101, 0.2); color: var(--accent-red);">
+                                -1.5%
+                            </span>
+                            <span class="text-xs" style="color: var(--text-muted);">Este mes vs anterior</span>
+                        </div>
+                    </div>
+
+                    <!-- Net Profit Card -->
+                    <div class="p-6 rounded-3xl relative"
+                        style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
+                        <button class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
+                            style="background: var(--bg-hover);">
+                            <i class='bx bx-right-arrow-alt text-xl' style="color: var(--text-muted);"></i>
+                        </button>
+                        <div class="mb-4">
+                            <p class="text-xs font-medium mb-2" style="color: var(--text-secondary);">Ganancia neta</p>
+                            <h3 class="text-3xl font-bold" style="color: var(--text-primary);">$ 60,450</h3>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-1 rounded-full text-xs font-semibold"
+                                style="background: rgba(72, 187, 120, 0.2); color: var(--accent-green);">
+                                +9.8%
+                            </span>
+                            <span class="text-xs" style="color: var(--text-muted);">Este mes vs anterior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Section with Charts -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Revenue Chart -->
+                    <div class="lg:col-span-2 p-6 rounded-3xl"
+                        style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h3 class="text-lg font-bold mb-1" style="color: var(--text-primary);">Ingresos</h3>
+                                <p class="text-xs" style="color: var(--text-muted);">Este mes vs anterior</p>
+                            </div>
+                            <button class="px-4 py-2 rounded-lg text-sm font-medium"
+                                style="background: var(--bg-hover); color: var(--text-secondary);">
+                                Este mes
+                                <i class='bx bx-chevron-down ml-1'></i>
+                            </button>
+                        </div>
+
+                        <!-- Simple Bar Chart -->
+                        <div class="h-64 flex items-end justify-between gap-3">
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full rounded-t-lg" style="height: 45%; background: var(--accent-blue);">
+                                </div>
+                                <span class="text-xs" style="color: var(--text-muted);">1-Abr</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full rounded-t-lg" style="height: 60%; background: var(--accent-blue);">
+                                </div>
+                                <span class="text-xs" style="color: var(--text-muted);">2-Abr</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full rounded-t-lg" style="height: 50%; background: var(--accent-blue);">
+                                </div>
+                                <span class="text-xs" style="color: var(--text-muted);">3-Abr</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full rounded-t-lg" style="height: 70%; background: var(--accent-blue);">
+                                </div>
+                                <span class="text-xs" style="color: var(--text-muted);">4-Abr</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full rounded-t-lg" style="height: 65%; background: var(--accent-blue);">
+                                </div>
+                                <span class="text-xs" style="color: var(--text-muted);">5-Abr</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full rounded-t-lg" style="height: 85%; background: var(--accent-blue);">
+                                </div>
+                                <span class="text-xs" style="color: var(--text-muted);">6-Abr</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full rounded-t-lg" style="height: 90%; background: var(--accent-blue);">
+                                </div>
+                                <span class="text-xs" style="color: var(--text-muted);">7-Abr</span>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center gap-2">
+                                <div class="w-full rounded-t-lg" style="height: 100%; background: var(--accent-blue);">
+                                </div>
+                                <span class="text-xs" style="color: var(--text-muted);">8-Abr</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sales by Category -->
+                    <div class="p-6 rounded-3xl"
+                        style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h3 class="text-lg font-bold mb-1" style="color: var(--text-primary);">Ventas por
+                                    Categoría</h3>
+                                <p class="text-xs" style="color: var(--text-muted);">Este mes vs anterior</p>
+                            </div>
+                            <button class="w-8 h-8 rounded-full flex items-center justify-center"
+                                style="background: var(--bg-hover);">
+                                <i class='bx bx-dots-horizontal-rounded text-xl' style="color: var(--text-muted);"></i>
+                            </button>
+                        </div>
+
+                        <!-- Donut Chart Placeholder -->
+                        <div class="flex items-center justify-center mb-6">
+                            <div class="relative w-48 h-48">
+                                <svg viewBox="0 0 100 100" class="transform -rotate-90">
+                                    <circle cx="50" cy="50" r="40" fill="none" stroke="#5b8def" stroke-width="20"
+                                        stroke-dasharray="75 251"></circle>
+                                    <circle cx="50" cy="50" r="40" fill="none" stroke="#4a9eff" stroke-width="20"
+                                        stroke-dasharray="63 251" stroke-dashoffset="-75"></circle>
+                                    <circle cx="50" cy="50" r="40" fill="none" stroke="#3b82f6" stroke-width="20"
+                                        stroke-dasharray="50 251" stroke-dashoffset="-138"></circle>
+                                    <circle cx="50" cy="50" r="40" fill="none" stroke="#60a5fa" stroke-width="20"
+                                        stroke-dasharray="63 251" stroke-dashoffset="-188"></circle>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full" style="background: #5b8def;"></div>
+                                    <span class="text-sm" style="color: var(--text-secondary);">Apple MacBook Air
+                                        M2</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full" style="background: #4a9eff;"></div>
+                                    <span class="text-sm" style="color: var(--text-secondary);">Apple Watch Series
+                                        9</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full" style="background: #3b82f6;"></div>
+                                    <span class="text-sm" style="color: var(--text-secondary);">Macbook Air, Orange
+                                        S</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="w-3 h-3 rounded-full" style="background: #60a5fa;"></div>
+                                <span class="text-sm" style="color: var(--text-secondary);">Airpods Pro 2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders and Customers Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <!-- Orders Card -->
+                    <div class="p-8 rounded-3xl relative"
+                        style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
+                        <button class="absolute top-6 left-6 w-10 h-10 rounded-full flex items-center justify-center"
+                            style="background: var(--bg-primary);">
+                            <i class='bx bx-check text-xl' style="color: var(--text-primary);"></i>
+                        </button>
+                        <button class="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center"
+                            style="background: var(--bg-primary);">
+                            <i class='bx bx-dots-horizontal-rounded text-xl' style="color: var(--text-muted);"></i>
+                        </button>
+                        <div class="mt-16">
+                            <h2 class="text-5xl font-bold mb-2" style="color: var(--text-primary);">98 <span
+                                    class="text-2xl font-normal" style="color: var(--text-secondary);">órdenes</span>
+                            </h2>
+                            <p class="text-sm" style="color: var(--text-muted);">12 órdenes están esperando
+                                confirmación.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Customers Card -->
+                    <div class="p-8 rounded-3xl relative"
+                        style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
+                        <button class="absolute top-6 left-6 w-10 h-10 rounded-full flex items-center justify-center"
+                            style="background: var(--bg-primary);">
+                            <i class='bx bx-user text-xl' style="color: var(--text-primary);"></i>
+                        </button>
+                        <button class="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center"
+                            style="background: var(--bg-primary);">
+                            <i class='bx bx-dots-horizontal-rounded text-xl' style="color: var(--text-muted);"></i>
+                        </button>
+                        <div class="mt-16">
+                            <h2 class="text-5xl font-bold mb-2" style="color: var(--text-primary);">17 <span
+                                    class="text-2xl font-normal" style="color: var(--text-secondary);">clientes</span>
+                            </h2>
+                            <p class="text-sm" style="color: var(--text-muted);">17 clientes están esperando respuesta.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -256,7 +1055,255 @@
                     </div>
                 </div>
 
+                <div id="refund-cart-section" class="hidden mb-6">
+                    <div
+                        class="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-2xl p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white flex items-center justify-center mr-3">
+                                    <i class='bx bx-cart text-xl'></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-800">Carrito de Reembolsos</h3>
+                                    <p class="text-xs text-gray-500">Plazo de prueba: 7 días</p>
+                                </div>
+                            </div>
+                            <button onclick="clearRefundCart()"
+                                class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-lg hover:bg-white/50">
+                                <i class='bx bx-trash text-xl'></i>
+                            </button>
+                        </div>
+                        <div id="refund-items-container"
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
+                        </div>
+                        <div
+                            class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-4 border-t border-orange-200">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-blue-50 rounded-lg px-4 py-2">
+                                    <p class="text-xs text-blue-600">
+                                        <i class='bx bx-info-circle mr-1'></i>
+                                        Módulos dentro de 7 días = reembolso completo
+                                    </p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs text-gray-500">Total a reembolsar</p>
+                                    <p id="refund-total-amount" class="text-2xl font-bold text-green-600">$0.00</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="clearRefundCart()"
+                                    class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors">
+                                    Cancelar
+                                </button>
+                                <button onclick="confirmRefunds()"
+                                    class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors flex items-center">
+                                    <i class='bx bx-check mr-1'></i> Confirmar Reembolso
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="modules-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+                    <!-- CRM Pro -->
+                    <div id="module-card-1"
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
+                        <div class="flex items-start justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                                <i class='bx bxs-check-shield'></i>
+                            </div>
+                            <span
+                                class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center"><i
+                                    class="bx bx-check mr-1"></i>Activo</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg mb-2">CRM Pro</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">Gestión avanzada de clientes, pipelines y
+                            analítica de ventas.</p>
+                        <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400">Precio mensual</span>
+                                <span class="font-bold text-gray-900 text-lg">$39.99</span>
+                            </div>
+                            <button onclick="removeModule(1)"
+                                class="bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                <i class='bx bx-trash mr-1'></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Recursos Humanos -->
+                    <div id="module-card-2"
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
+                        <div class="flex items-start justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                                <i class='bx bxs-check-shield'></i>
+                            </div>
+                            <span
+                                class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center"><i
+                                    class="bx bx-check mr-1"></i>Activo</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg mb-2">Recursos Humanos</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">Gestión de nóminas, asistencia y portal del
+                            empleado.</p>
+                        <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400">Precio mensual</span>
+                                <span class="font-bold text-gray-900 text-lg">$34.99</span>
+                            </div>
+                            <button onclick="removeModule(2)"
+                                class="bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                <i class='bx bx-trash mr-1'></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Módulo de Contabilidad -->
+                    <div id="module-card-3"
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
+                        <div class="flex items-start justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                                <i class='bx bx-calculator'></i>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg mb-2">Módulo de Contabilidad</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">Facturación electrónica, libros diarios y
+                            reportes fiscales.</p>
+                        <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400">Precio mensual</span>
+                                <span class="font-bold text-gray-900 text-lg">$29.99</span>
+                            </div>
+                            <button onclick="toggleModule(3)"
+                                class="bg-blue-600 hover:bg-blue-700 text-white shadow-blue-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                Agregar +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Inventario Inteligente -->
+                    <div id="module-card-4"
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
+                        <div class="flex items-start justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                                <i class='bx bx-box'></i>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg mb-2">Inventario Inteligente</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">Control de stock con IA y gestión de múltiples
+                            almacenes.</p>
+                        <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400">Precio mensual</span>
+                                <span class="font-bold text-gray-900 text-lg">$19.99</span>
+                            </div>
+                            <button onclick="toggleModule(4)"
+                                class="bg-blue-600 hover:bg-blue-700 text-white shadow-blue-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                Agregar +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Marketing Hub -->
+                    <div id="module-card-5"
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
+                        <div class="flex items-start justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                                <i class='bx bx-megaphone'></i>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg mb-2">Marketing Hub</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">Automatización de emails y gestión de redes
+                            sociales.</p>
+                        <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400">Precio mensual</span>
+                                <span class="font-bold text-gray-900 text-lg">$24.99</span>
+                            </div>
+                            <button onclick="toggleModule(5)"
+                                class="bg-blue-600 hover:bg-blue-700 text-white shadow-blue-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                Agregar +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Gestor de Proyectos -->
+                    <div id="module-card-6"
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
+                        <div class="flex items-start justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                                <i class='bx bx-task'></i>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg mb-2">Gestor de Proyectos</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">Tableros Kanban, Gantt y seguimiento de tiempos.
+                        </p>
+                        <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400">Precio mensual</span>
+                                <span class="font-bold text-gray-900 text-lg">$14.99</span>
+                            </div>
+                            <button onclick="toggleModule(6)"
+                                class="bg-blue-600 hover:bg-blue-700 text-white shadow-blue-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                Agregar +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Soporte Ticket System -->
+                    <div id="module-card-7"
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
+                        <div class="flex items-start justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                                <i class='bx bx-support'></i>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg mb-2">Soporte Ticket System</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">Mesa de ayuda para atención al cliente
+                            integrada.</p>
+                        <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400">Precio mensual</span>
+                                <span class="font-bold text-gray-900 text-lg">$12.50</span>
+                            </div>
+                            <button onclick="toggleModule(7)"
+                                class="bg-blue-600 hover:bg-blue-700 text-white shadow-blue-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                Agregar +
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Conector E-commerce -->
+                    <div id="module-card-8"
+                        class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
+                        <div class="flex items-start justify-between mb-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                                <i class='bx bx-cart'></i>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-lg mb-2">Conector E-commerce</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">Sincronización con Shopify, WooCommerce y más.
+                        </p>
+                        <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-gray-400">Precio mensual</span>
+                                <span class="font-bold text-gray-900 text-lg">$35.00</span>
+                            </div>
+                            <button onclick="toggleModule(8)"
+                                class="bg-blue-600 hover:bg-blue-700 text-white shadow-blue-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                Agregar +
+                            </button>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -331,9 +1378,9 @@
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Valor de inventario
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Egresos mensuales actuales
                                     ($)</label>
-                                <input type="number" id="calc-inventory" placeholder="Ej: 25000" value="25000"
+                                <input type="number" id="calc-expenses" placeholder="Ej: 25000" value="25000"
                                     class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                             </div>
 
@@ -357,45 +1404,53 @@
                             </div>
                         </div>
 
-                        <div class="h-64 flex items-end justify-around gap-4 mb-6 px-4">
-                            <div class="flex flex-col items-center flex-1">
-                                <div id="bar-current"
-                                    class="w-full bg-gray-300 rounded-t-lg transition-all duration-700"
-                                    style="height: 0%"></div>
+                        <div class="h-48 flex items-end justify-around gap-4 mb-6 px-4">
+                            <div class="flex flex-col items-center flex-1 h-full">
+                                <div class="flex-1 w-full flex items-end">
+                                    <div id="bar-current"
+                                        class="w-full bg-gray-300 rounded-t-lg transition-all duration-700"
+                                        style="height: 10px; min-height: 10px;"></div>
+                                </div>
                                 <span class="text-xs text-gray-500 mt-2 text-center">Actual</span>
                                 <span id="label-revenue-now" class="text-sm font-bold text-gray-700">$0</span>
                             </div>
-                            <div class="flex flex-col items-center flex-1">
-                                <div id="bar-month1"
-                                    class="w-full bg-green-300 rounded-t-lg transition-all duration-700 delay-100"
-                                    style="height: 0%"></div>
+                            <div class="flex flex-col items-center flex-1 h-full">
+                                <div class="flex-1 w-full flex items-end">
+                                    <div id="bar-month1"
+                                        class="w-full bg-green-300 rounded-t-lg transition-all duration-700 delay-100"
+                                        style="height: 10px; min-height: 10px;"></div>
+                                </div>
                                 <span class="text-xs text-gray-500 mt-2 text-center">Mes 1</span>
                             </div>
-                            <div class="flex flex-col items-center flex-1">
-                                <div id="bar-month2"
-                                    class="w-full bg-green-400 rounded-t-lg transition-all duration-700 delay-200"
-                                    style="height: 0%"></div>
+                            <div class="flex flex-col items-center flex-1 h-full">
+                                <div class="flex-1 w-full flex items-end">
+                                    <div id="bar-month2"
+                                        class="w-full bg-green-400 rounded-t-lg transition-all duration-700 delay-200"
+                                        style="height: 10px; min-height: 10px;"></div>
+                                </div>
                                 <span class="text-xs text-gray-500 mt-2 text-center">Mes 2</span>
                             </div>
-                            <div class="flex flex-col items-center flex-1">
-                                <div id="bar-projected"
-                                    class="w-full bg-green-600 rounded-t-lg transition-all duration-700 delay-300"
-                                    style="height: 0%"></div>
+                            <div class="flex flex-col items-center flex-1 h-full">
+                                <div class="flex-1 w-full flex items-end">
+                                    <div id="bar-projected"
+                                        class="w-full bg-green-600 rounded-t-lg transition-all duration-700 delay-300"
+                                        style="height: 10px; min-height: 10px;"></div>
+                                </div>
                                 <span class="text-xs text-gray-500 mt-2 text-center">Proyectado</span>
                                 <span id="label-revenue-proj" class="text-sm font-bold text-green-600">$0</span>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4 mt-4">
-                            <div class="bg-green-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-gray-500 mb-1">Ahorro Estimado</p>
-                                <p id="estimated-savings" class="text-2xl font-bold text-green-600">$0</p>
+                            <div class="bg-red-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-gray-500 mb-1">Costos de venta</p>
+                                <p id="estimated-savings" class="text-2xl font-bold text-red-600">$0</p>
                                 <p class="text-xs text-gray-400">mensuales</p>
                             </div>
-                            <div class="bg-blue-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-gray-500 mb-1">Crecimiento</p>
-                                <p id="growth-percentage" class="text-2xl font-bold text-blue-600">0%</p>
-                                <p class="text-xs text-gray-400">proyectado</p>
+                            <div class="bg-green-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-gray-500 mb-1">Utilidad</p>
+                                <p id="growth-percentage" class="text-2xl font-bold text-green-600">$0</p>
+                                <p class="text-xs text-gray-400">proyectada</p>
                             </div>
                         </div>
                     </div>
@@ -558,7 +1613,8 @@
                     <p class="text-xs text-gray-500">Total Estimado</p>
                     <p class="text-2xl font-bold text-blue-600" id="total-price">$0.00</p>
                 </div>
-                <button onclick="alert('Proceeding to checkout...')"
+                <button
+                    onclick="showToast('¡Plan contratado exitosamente! Te enviaremos los detalles por email.', 'success')"
                     class="bg-[#1a2233] hover:bg-[#252f45] text-white px-6 py-2 rounded-lg font-semibold transition-colors">
                     Contratar Plan
                 </button>
@@ -615,37 +1671,101 @@
         </div>
     </div>
 
+    <!-- Video Tutorial Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center">
+        <div id="modal-backdrop"
+            class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+            onclick="closeVideoModal()"></div>
+        <div id="modal-panel"
+            class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden transform transition-all scale-95 opacity-0">
+            <div class="p-4 text-white flex justify-between items-center" style="background: var(--accent-blue);">
+                <div class="flex items-center">
+                    <i class='bx bx-play-circle text-2xl mr-3'></i>
+                    <h3 id="modal-title" class="text-lg font-bold">Video Tutorial</h3>
+                </div>
+                <button onclick="closeVideoModal()"
+                    class="text-white hover:text-gray-200 hover:rotate-90 transition-all duration-300 p-1 rounded-lg hover:bg-white/20">
+                    <i class='bx bx-x text-2xl'></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                    <div class="text-center">
+                        <i class='bx bx-movie-play text-6xl text-gray-400 mb-3'></i>
+                        <p class="text-gray-500">Video tutorial próximamente</p>
+                        <p class="text-sm text-gray-400 mt-1">Contenido en desarrollo</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-6 py-4 flex justify-end">
+                <button onclick="closeVideoModal()"
+                    class="px-6 py-2 rounded-lg font-semibold transition-colors text-white"
+                    style="background: var(--accent-blue);">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Assistant Button -->
     <button onclick="toggleAssistant()"
-        class="fixed bottom-8 right-8 w-14 h-14 flex items-center justify-center bg-[#1a2233] hover:bg-[#252f45] text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 z-50 group">
-        <i class='bx bx-bot text-3xl'></i>
+        class="fixed bottom-8 right-8 w-16 h-16 flex items-center justify-center text-white rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300 z-50 group animate-float"
+        style="background: var(--accent-blue);">
+        <i class='bx bx-bot text-4xl animate-pulse'></i>
         <span
-            class="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">
+            class="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 glass-effect px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all duration-300 shadow-lg text-sm font-semibold"
+            style="color: var(--text-primary);">
             ¿Necesitas ayuda?
         </span>
     </button>
 
+    <!-- AI Chat Window -->
     <div id="ai-chat"
-        class="fixed bottom-24 right-4 sm:right-8 w-[calc(100vw-2rem)] sm:w-80 bg-white rounded-xl shadow-2xl border border-gray-100 hidden flex-col overflow-hidden transition-all duration-300 transform scale-95 opacity-0 origin-bottom-right z-50">
-        <div class="bg-[#1a2233] p-4 text-white flex justify-between items-center">
+        class="fixed bottom-24 right-4 sm:right-8 w-[calc(100vw-2rem)] sm:w-96 bg-white rounded-2xl shadow-2xl border hidden flex-col overflow-hidden transition-all duration-300 transform scale-95 opacity-0 origin-bottom-right z-50"
+        style="border-color: #e2e8f0;">
+        <div class="p-4 text-white flex justify-between items-center" style="background: var(--accent-blue);">
             <div class="flex items-center">
-                <i class='bx bx-bot text-2xl mr-2'></i>
-                <span class="font-bold">Asistente IA</span>
-            </div>
-            <button onclick="toggleAssistant()" class="text-white hover:text-gray-200"><i class='bx bx-x'></i></button>
-        </div>
-        <div class="p-4 h-64 overflow-y-auto bg-gray-50 text-sm space-y-3">
-            <div class="flex items-start">
-                <div class="bg-blue-50 text-gray-800 p-2 rounded-lg rounded-tl-none max-w-[80%] border border-blue-100">
-                    Hola María. Estoy aquí para guiarte. Selecciona cualquier opción del menú y te explicaré
-                    cómo funciona. ¿Tienes alguna duda específica?
+                <i class='bx bx-bot text-3xl mr-2 animate-pulse'></i>
+                <div>
+                    <span class="font-bold text-lg">Asistente IA</span>
+                    <p class="text-xs text-blue-100">Siempre disponible</p>
                 </div>
             </div>
+            <button onclick="toggleAssistant()"
+                class="text-white hover:text-gray-200 hover:rotate-90 transition-all duration-300 p-1 rounded-lg hover:bg-white/20"><i
+                    class='bx bx-x text-2xl'></i></button>
         </div>
-        <div class="p-3 border-t bg-white">
-            <div class="flex items-center bg-gray-100 rounded-full px-3 py-2">
-                <input type="text" placeholder="Escribe tu duda..."
-                    class="bg-transparent flex-1 outline-none text-sm text-gray-700">
-                <button class="text-[#1a2233] hover:text-blue-600 transition-colors"><i class='bx bx-send'></i></button>
+        <div id="chat-messages" class="p-4 h-72 overflow-y-auto text-sm space-y-3" style="background: #f8fafc;">
+            <!-- Messages will be added here dynamically -->
+        </div>
+        <div class="p-3 border-t" style="border-color: #e2e8f0; background: white;">
+            <form id="chat-form" onsubmit="sendChatMessage(event)" class="flex items-center gap-2">
+                <div class="flex-1 flex items-center rounded-full px-4 py-2 border bg-gray-50"
+                    style="border-color: #e2e8f0;">
+                    <input type="text" id="chat-input" placeholder="Escribe tu pregunta..."
+                        class="bg-transparent flex-1 outline-none text-sm" style="color: var(--text-primary);"
+                        autocomplete="off">
+                </div>
+                <button type="submit"
+                    class="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110 duration-300 text-white"
+                    style="background: var(--accent-blue);">
+                    <i class='bx bx-send text-lg'></i>
+                </button>
+            </form>
+            <!-- Quick actions -->
+            <div class="flex flex-wrap gap-2 mt-3">
+                <button onclick="sendQuickMessage('¿Qué debería revisar hoy?')"
+                    class="text-xs px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors">
+                    📋 Revisar hoy
+                </button>
+                <button onclick="sendQuickMessage('¿Cómo empiezo a usar la plataforma?')"
+                    class="text-xs px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors">
+                    🚀 Empezar
+                </button>
+                <button onclick="sendQuickMessage('¿Puedo cambiar los módulos?')"
+                    class="text-xs px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors">
+                    🔄 Módulos
+                </button>
             </div>
         </div>
     </div>
@@ -658,32 +1778,36 @@
 
     <div id="video-modal" class="fixed inset-0 z-[60] hidden" aria-labelledby="modal-title" role="dialog"
         aria-modal="true">
-        <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity opacity-0" id="modal-backdrop">
+        <div class="fixed inset-0 bg-gradient-to-br from-gray-900/90 via-purple-900/80 to-blue-900/90 backdrop-blur-md transition-opacity opacity-0"
+            id="modal-backdrop">
         </div>
 
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl scale-95 opacity-0"
+                <div class="relative transform overflow-hidden rounded-3xl glass-effect text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl scale-95 opacity-0 border border-white/20"
                     id="modal-panel">
 
                     <div
-                        class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-between items-center border-b border-gray-100">
-                        <h3 class="text-lg font-semibold leading-6 text-gray-900" id="modal-title">
+                        class="glass-effect px-4 py-4 sm:px-6 flex justify-between items-center border-b border-white/20">
+                        <h3 class="text-xl font-bold leading-6 text-white gradient-text" id="modal-title">
                             Tutorial: Función Seleccionada</h3>
                         <button type="button" onclick="closeVideoModal()"
-                            class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none hover:bg-gray-100 p-1 transition-colors">
+                            class="rounded-xl glass-effect text-white/80 hover:text-white focus:outline-none hover:bg-white/20 p-2 transition-all duration-300 hover:rotate-90 ripple">
                             <span class="sr-only">Close</span>
-                            <i class='bx bx-x text-2xl'></i>
+                            <i class='bx bx-x text-3xl'></i>
                         </button>
                     </div>
 
-                    <div class="px-4 py-4 sm:p-6">
+                    <div class="px-4 py-6 sm:p-8">
                         <div
-                            class="relative w-full aspect-video rounded-xl overflow-hidden bg-black group cursor-pointer shadow-inner">
+                            class="relative w-full aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 group cursor-pointer shadow-2xl border-2 border-white/10 hover:border-white/30 transition-all duration-500">
                             <div
-                                class="absolute inset-0 bg-gradient-to-br from-blue-900 to-gray-800 flex items-center justify-center">
-                                <i
-                                    class='bx bx-play-circle text-6xl text-white opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300'></i>
+                                class="absolute inset-0 bg-gradient-to-br from-blue-600/30 via-purple-600/30 to-pink-600/30 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i
+                                        class='bx bx-play-circle text-8xl text-white opacity-90 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500 glow-effect'></i>
+                                    <p class="text-white mt-4 text-lg font-semibold">Haz clic para reproducir</p>
+                                </div>
                             </div>
 
                         </div>
@@ -697,7 +1821,52 @@
     </div>
     </div>
 
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-[100] flex flex-col gap-3"></div>
+
     <script>
+        // Toast Notification System
+        function showToast(message, type = 'success', duration = 3000) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+
+            const icons = {
+                success: 'bx-check-circle',
+                error: 'bx-error-circle',
+                warning: 'bx-error',
+                info: 'bx-info-circle'
+            };
+
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                warning: 'bg-yellow-500',
+                info: 'bg-blue-500'
+            };
+
+            toast.className = `flex items-center gap-3 px-5 py-4 rounded-xl shadow-2xl text-white transform translate-x-full transition-all duration-300 ${colors[type]}`;
+            toast.innerHTML = `
+                <i class='bx ${icons[type]} text-2xl'></i>
+                <span class="font-medium">${message}</span>
+                <button onclick="this.parentElement.remove()" class="ml-2 hover:bg-white/20 rounded-full p-1 transition-colors">
+                    <i class='bx bx-x text-lg'></i>
+                </button>
+            `;
+
+            container.appendChild(toast);
+
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full');
+            }, 10);
+
+            // Auto remove
+            setTimeout(() => {
+                toast.classList.add('translate-x-full', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+
         function updateTags() {
             const now = new Date();
             const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
@@ -723,6 +1892,19 @@
                 if (!sidebar.classList.contains('-ml-64')) {
                     sidebar.classList.add('-ml-64');
                 }
+            }
+        }
+
+        function logout() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                // Limpiar datos de sesión
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userCompany');
+
+                // Redirigir al login
+                window.location.href = 'login.html';
             }
         }
 
@@ -779,6 +1961,7 @@
             modalTitle.textContent = currentVideoTitle;
 
             modal.classList.remove('hidden');
+            modal.classList.add('flex');
             setTimeout(() => {
                 modalBackdrop.classList.remove('opacity-0');
                 modalPanel.classList.remove('scale-95', 'opacity-0');
@@ -792,6 +1975,7 @@
             modalPanel.classList.add('scale-95', 'opacity-0');
 
             setTimeout(() => {
+                modal.classList.remove('flex');
                 modal.classList.add('hidden');
             }, 300);
         }
@@ -808,11 +1992,122 @@
         });
 
         const chatWindow = document.getElementById('ai-chat');
+        const chatMessages = document.getElementById('chat-messages');
+        let chatInitialized = false;
+
+        // Respuestas precargadas del asistente IA
+        const aiResponses = {
+            'default': '¡Gracias por tu mensaje! Soy tu asistente virtual de TecnoPymes. Estoy aquí para ayudarte con cualquier duda sobre la plataforma. ¿En qué puedo ayudarte?',
+            'hola': '¡Hola! 👋 Bienvenido a TecnoPymes. Estoy aquí para ayudarte a aprovechar al máximo nuestra plataforma. ¿Qué te gustaría saber?',
+            'revisar': 'Revisa tus **ventas diarias**, **tareas pendientes** y si hay **pedidos por atender**. Esto te permitirá priorizar sin perder tu tiempo. 📊',
+            'negocio': 'Revisa tus **ventas diarias**, **tareas pendientes** y si hay **pedidos por atender**. Esto te permitirá priorizar sin perder tu tiempo. 📊',
+            'empiezo': 'Primero configura la **información principal de tu negocio** en la calculadora y activa los **módulos que consideres más productivos** para ti. 🚀',
+            'usar': 'Primero configura la **información principal de tu negocio** en la calculadora y activa los **módulos que consideres más productivos** para ti. 🚀',
+            'plataforma': 'Primero configura la **información principal de tu negocio** en la calculadora y activa los **módulos que consideres más productivos** para ti. 🚀',
+            'cambiar': 'Sí, los **módulos pueden activarse o desactivarse** según como vaya creciendo tu negocio. Tienes total flexibilidad. ✅',
+            'modulos': 'Sí, los **módulos pueden activarse o desactivarse** según como vaya creciendo tu negocio. Tienes total flexibilidad. ✅',
+            'después': 'Sí, los **módulos pueden activarse o desactivarse** según como vaya creciendo tu negocio. Tienes total flexibilidad. ✅',
+            'dejo': 'Puedes **retomar el uso cuando lo necesites**, sin que afecte el funcionamiento de tu negocio. Tu información estará segura. 🔒',
+            'tiempo': 'Puedes **retomar el uso cuando lo necesites**, sin que afecte el funcionamiento de tu negocio. Tu información estará segura. 🔒',
+            'gracias': '¡De nada! 😊 Estoy aquí para ayudarte siempre que lo necesites. Si tienes más preguntas, no dudes en escribirme.',
+            'ayuda': 'Estoy aquí para ayudarte. Puedes preguntarme:\n\n📋 ¿Qué debería revisar hoy?\n🚀 ¿Cómo empiezo a usar la plataforma?\n🔄 ¿Puedo cambiar los módulos después?\n⏸️ ¿Qué pasa si dejo de usarlo un tiempo?'
+        };
+
+        function getAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+
+            // Buscar coincidencias en las palabras clave
+            for (const [keyword, response] of Object.entries(aiResponses)) {
+                if (lowerMessage.includes(keyword)) {
+                    return response;
+                }
+            }
+
+            return aiResponses['default'];
+        }
+
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex ${isUser ? 'justify-end' : 'items-start'} animate-fade-in-up`;
+
+            const bubbleClass = isUser
+                ? 'bg-blue-500 text-white p-3 rounded-2xl rounded-tr-none max-w-[80%] shadow-md'
+                : 'bg-white p-3 rounded-2xl rounded-tl-none max-w-[80%] shadow-md border';
+
+            const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+
+            messageDiv.innerHTML = `
+                <div class="${bubbleClass}" ${!isUser ? 'style="border-color: #e2e8f0; color: var(--text-primary);"' : ''}>
+                    ${formattedText}
+                </div>
+            `;
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typing-indicator';
+            typingDiv.className = 'flex items-start animate-fade-in-up';
+            typingDiv.innerHTML = `
+                <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-md border" style="border-color: #e2e8f0;">
+                    <div class="flex gap-1">
+                        <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0s;"></span>
+                        <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s;"></span>
+                        <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
+                    </div>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.getElementById('typing-indicator');
+            if (typing) typing.remove();
+        }
+
+        function initializeChat() {
+            if (!chatInitialized) {
+                addMessage('¡Hola! 👋 Soy tu asistente de TecnoPymes. Estoy aquí para guiarte y resolver tus dudas. ¿En qué puedo ayudarte hoy?');
+                chatInitialized = true;
+            }
+        }
+
+        function sendChatMessage(event) {
+            event.preventDefault();
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, true);
+            input.value = '';
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            // Simulate AI response delay
+            setTimeout(() => {
+                removeTypingIndicator();
+                const response = getAIResponse(message);
+                addMessage(response);
+            }, 1000 + Math.random() * 500);
+        }
+
+        function sendQuickMessage(message) {
+            document.getElementById('chat-input').value = message;
+            sendChatMessage(new Event('submit'));
+        }
+
         function toggleAssistant() {
             if (chatWindow.classList.contains('hidden')) {
                 chatWindow.classList.remove('hidden');
                 setTimeout(() => {
                     chatWindow.classList.remove('scale-95', 'opacity-0');
+                    initializeChat();
                 }, 10);
             } else {
                 chatWindow.classList.add('scale-95', 'opacity-0');
@@ -821,6 +2116,39 @@
                 }, 300);
             }
         }
+
+        // Dropdowns functionality
+        let activeDropdown = null;
+
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+
+            // Close any other open dropdown
+            if (activeDropdown && activeDropdown !== dropdown) {
+                activeDropdown.classList.add('hidden');
+            }
+
+            // Toggle current dropdown
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+                activeDropdown = dropdown;
+            } else {
+                dropdown.classList.add('hidden');
+                activeDropdown = null;
+            }
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function (event) {
+            const isDropdownButton = event.target.closest('button[onclick*="toggleDropdown"]');
+            const isInsideDropdown = event.target.closest('#emails-dropdown, #notifications-dropdown, #profile-dropdown');
+
+            if (!isDropdownButton && !isInsideDropdown && activeDropdown) {
+                activeDropdown.classList.add('hidden');
+                activeDropdown = null;
+            }
+        });
+
 
         function showView(viewName) {
             checkMobileAndCloseSidebar();
@@ -841,32 +2169,33 @@
                 el.classList.add('animate-fade-in-up');
             };
 
-
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active-nav', 'bg-sidebar-hover', 'text-white', 'border-blue-500');
-                link.classList.add('text-gray-400', 'border-transparent');
-            });
-
-
-            const navMap = {
-                'dashboard': 'nav-dashboard',
-                'catalog': 'nav-catalog',
-                'calculator': 'nav-calculator'
-            };
-            if (navMap[viewName]) {
-                const activeNav = document.getElementById(navMap[viewName]);
-                if (activeNav) {
-                    activeNav.classList.add('active-nav', 'bg-sidebar-hover', 'text-white', 'border-blue-500');
-                    activeNav.classList.remove('text-gray-400', 'border-transparent');
-                }
-            }
-
-
+            // Scroll to top
             if (mainScrollArea) {
                 mainScrollArea.scrollTop = 0;
             }
 
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+                link.style.background = 'transparent';
+                link.style.color = 'var(--text-muted)';
+            });
 
+            const linkMap = {
+                'dashboard': 'nav-dashboard',
+                'catalog': 'nav-catalog',
+                'calculator': 'nav-calculator'
+            };
+            if (linkMap[viewName]) {
+                const activeLink = document.getElementById(linkMap[viewName]);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                    activeLink.style.background = 'var(--accent-blue)';
+                    activeLink.style.color = 'white';
+                }
+            }
+
+            // Hide all views
             dashboard.classList.add('hidden');
             catalog.classList.add('hidden');
             calculator.classList.add('hidden');
@@ -876,11 +2205,10 @@
             if (crmLineas) crmLineas.classList.add('hidden');
             planSummary.classList.add('hidden');
 
-
+            // Show selected view
             if (viewName === 'catalog') {
                 catalog.classList.remove('hidden');
                 resetAnim(catalog);
-                renderModules();
                 planSummary.classList.remove('hidden');
                 updatePlanSummary();
             } else if (viewName === 'calculator') {
@@ -909,8 +2237,8 @@
         });
 
         const modules = [
-            { id: 1, name: 'CRM Pro', desc: 'Gestión avanzada de clientes, pipelines y analítica de ventas.', price: 0, active: true, icon: 'bx-briefcase' },
-            { id: 2, name: 'Recursos Humanos', desc: 'Gestión de nóminas, asistencia y portal del empleado.', price: 0, active: true, icon: 'bx-group' },
+            { id: 1, name: 'CRM Pro', desc: 'Gestión avanzada de clientes, pipelines y analítica de ventas.', price: 39.99, active: true, icon: 'bx-briefcase' },
+            { id: 2, name: 'Recursos Humanos', desc: 'Gestión de nóminas, asistencia y portal del empleado.', price: 34.99, active: true, icon: 'bx-group' },
             { id: 3, name: 'Módulo de Contabilidad', desc: 'Facturación electrónica, libros diarios y reportes fiscales.', price: 29.99, active: false, icon: 'bx-calculator' },
             { id: 4, name: 'Inventario Inteligente', desc: 'Control de stock con IA y gestión de múltiples almacenes.', price: 19.99, active: false, icon: 'bx-box' },
             { id: 5, name: 'Marketing Hub', desc: 'Automatización de emails y gestión de redes sociales.', price: 24.99, active: false, icon: 'bx-megaphone' },
@@ -959,28 +2287,257 @@
                             <span class="text-xs text-gray-400">Precio mensual</span>
                             <span class="font-bold text-gray-900 text-lg">${m.active ? 'Incluido' : `$${m.price}`}</span>
                         </div>
-                        <button onclick="toggleModule(${m.id})" 
-                            class="${m.active ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white shadow-blue-200 hover:shadow-lg'} px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
-                            ${m.active ? 'Instalado' : 'Agregar +'}
-                        </button>
+                        ${m.active && m.price > 0 ?
+                        `<button onclick="removeModule(${m.id})" 
+                                class="bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                <i class='bx bx-trash mr-1'></i> Eliminar
+                            </button>` :
+                        m.active ?
+                            `<button class="bg-gray-100 text-gray-400 cursor-not-allowed px-4 py-2 rounded-lg text-sm font-medium">
+                                Instalado
+                            </button>` :
+                            `<button onclick="toggleModule(${m.id})" 
+                                class="bg-blue-600 hover:bg-blue-700 text-white shadow-blue-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                Agregar +
+                            </button>`
+                    }
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
+
         function toggleModule(id) {
             const module = modules.find(m => m.id === id);
             if (module && !module.active) {
-                const btn = event.target;
+                const btn = event.target.closest('button');
                 btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i>";
+                btn.disabled = true;
 
                 setTimeout(() => {
                     module.active = true;
-                    module.name += " (Nuevo)";
-                    renderModules(document.getElementById('module-search').value);
+
+                    // Find the module card and update it
+                    const card = document.getElementById(`module-card-${id}`);
+                    if (card) {
+                        // Update icon container to show shield
+                        const iconDiv = card.querySelector('.flex.items-start.justify-between.mb-4');
+                        const iconContainer = iconDiv.querySelector('div');
+                        iconContainer.innerHTML = "<i class='bx bxs-check-shield'></i>";
+
+                        // Add active badge if not exists
+                        if (!iconDiv.querySelector('span')) {
+                            iconDiv.innerHTML += `<span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center"><i class="bx bx-check mr-1"></i>Activo</span>`;
+                        }
+
+                        // Update price to "Incluido" and button
+                        const priceSpan = card.querySelector('.font-bold.text-gray-900.text-lg');
+                        priceSpan.textContent = 'Incluido';
+
+                        // Update button to remove
+                        btn.className = "bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95";
+                        btn.innerHTML = "<i class='bx bx-trash mr-1'></i> Eliminar";
+                        btn.disabled = false;
+                        btn.onclick = () => removeModule(id);
+                    }
+
                     updatePlanSummary();
-                    showCapsule('Módulo Agregado', `Has suscrito el módulo ${module.name} a tu plan por $${module.price}/mes.`, 'Configurar Ahora');
+                    showToast(`Módulo "${module.name}" agregado a tu plan`, 'success');
                 }, 800);
+            }
+        }
+
+        // Carrito de reembolsos
+        let refundCart = [];
+        let refundCartOpen = false;
+
+        // Precios de referencia para módulos "incluidos" (para simulación)
+        const modulePrices = {
+            1: 39.99,  // CRM Pro
+            2: 34.99,  // Recursos Humanos
+            3: 29.99,  // Contabilidad
+            4: 19.99,  // Inventario
+            5: 24.99,  // Marketing
+            6: 14.99,  // Proyectos
+            7: 12.50,  // Soporte
+            8: 35.00   // E-commerce
+        };
+
+        function removeModule(id) {
+            const module = modules.find(m => m.id === id);
+            if (module && module.active) {
+                // Agregar al carrito de reembolsos en lugar de eliminar directamente
+                addToRefundCart(module);
+            }
+        }
+
+        function addToRefundCart(module) {
+            // Verificar si ya está en el carrito
+            if (refundCart.find(item => item.id === module.id)) {
+                showToast(`"${module.name}" ya está en el carrito de reembolsos`, 'warning');
+                return;
+            }
+
+            // Obtener precio real o de referencia
+            const actualPrice = module.price > 0 ? module.price : modulePrices[module.id] || 19.99;
+
+            // Simular fecha de activación (entre 1 y 6 días para que siempre esté en plazo)
+            const daysAgo = Math.floor(Math.random() * 6) + 1;
+            const activationDate = new Date();
+            activationDate.setDate(activationDate.getDate() - daysAgo);
+
+            const daysRemaining = 7 - daysAgo;
+            const isEligible = daysRemaining > 0;
+            const refundAmount = isEligible ? actualPrice : 0;
+
+            refundCart.push({
+                id: module.id,
+                name: module.name,
+                price: actualPrice,
+                originalPrice: module.price,
+                icon: module.icon,
+                activationDate: activationDate,
+                daysUsed: daysAgo,
+                daysRemaining: Math.max(0, daysRemaining),
+                isEligible: isEligible,
+                refundAmount: refundAmount
+            });
+
+            updateRefundCartUI();
+            showToast(`"${module.name}" agregado al carrito de reembolsos`, 'info');
+        }
+
+        function updateRefundCartUI() {
+            const itemsContainer = document.getElementById('refund-items-container');
+            const totalEl = document.getElementById('refund-total-amount');
+            const cartSection = document.getElementById('refund-cart-section');
+
+            if (!itemsContainer || !cartSection) return;
+
+            if (refundCart.length === 0) {
+                cartSection.classList.add('hidden');
+                itemsContainer.innerHTML = '';
+                totalEl.textContent = '$0.00';
+                return;
+            }
+
+            cartSection.classList.remove('hidden');
+            itemsContainer.innerHTML = '';
+
+            let totalRefund = 0;
+
+            refundCart.forEach(item => {
+                totalRefund += item.refundAmount;
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'bg-white rounded-xl p-4 border border-gray-100 shadow-sm';
+                itemEl.innerHTML = `
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mr-3">
+                                <i class='bx ${item.icon} text-xl'></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800">${item.name}</p>
+                                <p class="text-xs text-gray-400">Precio: $${item.price.toFixed(2)}/mes</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromRefundCart(${item.id})" class="text-gray-400 hover:text-red-500 transition-colors p-1">
+                            <i class='bx bx-x text-xl'></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between bg-gray-50 rounded-lg p-2">
+                        ${item.isEligible
+                        ? `<span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-medium flex items-center">
+                                <i class='bx bx-check mr-1'></i>${item.daysRemaining} días restantes
+                               </span>`
+                        : `<span class="bg-red-100 text-red-600 text-xs px-3 py-1 rounded-full font-medium flex items-center">
+                                <i class='bx bx-x mr-1'></i>Plazo expirado
+                               </span>`
+                    }
+                        <span class="font-bold text-lg ${item.isEligible ? 'text-green-600' : 'text-gray-400'}">${item.isEligible ? `+$${item.refundAmount.toFixed(2)}` : '$0.00'}</span>
+                    </div>
+                `;
+                itemsContainer.appendChild(itemEl);
+            });
+
+            totalEl.textContent = `$${totalRefund.toFixed(2)}`;
+        }
+
+        function removeFromRefundCart(id) {
+            refundCart = refundCart.filter(item => item.id !== id);
+            updateRefundCartUI();
+        }
+
+        function toggleRefundCart() {
+            const cart = document.getElementById('refund-cart-integrated');
+            if (!cart) return;
+
+            if (refundCart.length === 0) {
+                cart.classList.add('hidden');
+            } else {
+                cart.classList.toggle('hidden');
+            }
+        }
+
+        function showRefundCartButton() {
+            // No longer needed with integrated cart
+        }
+
+        function hideRefundCartButton() {
+            // No longer needed with integrated cart
+        }
+
+        function clearRefundCart() {
+            refundCart = [];
+            updateRefundCartUI();
+            showToast('Carrito de reembolsos vaciado', 'info');
+        }
+
+        function confirmRefunds() {
+            if (refundCart.length === 0) return;
+
+            const eligibleItems = refundCart.filter(item => item.isEligible);
+            const totalRefund = eligibleItems.reduce((sum, item) => sum + item.refundAmount, 0);
+
+            // Desactivar los módulos del carrito
+            refundCart.forEach(item => {
+                const module = modules.find(m => m.id === item.id);
+                if (module) {
+                    module.active = false;
+
+                    // Update the card UI
+                    const card = document.getElementById(`module-card-${item.id}`);
+                    if (card) {
+                        const iconDiv = card.querySelector('.flex.items-start.justify-between.mb-4');
+                        const iconContainer = iconDiv.querySelector('div');
+                        iconContainer.innerHTML = `<i class='bx ${module.icon}'></i>`;
+
+                        const badge = iconDiv.querySelector('span');
+                        if (badge) badge.remove();
+
+                        const priceSpan = card.querySelector('.font-bold.text-gray-900.text-lg');
+                        priceSpan.textContent = `$${module.price}`;
+
+                        const btn = card.querySelector('button');
+                        btn.className = "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95";
+                        btn.innerHTML = "Agregar +";
+                        btn.onclick = () => toggleModule(item.id);
+                    }
+                }
+            });
+
+            // Limpiar carrito
+            refundCart = [];
+            updateRefundCartUI();
+            toggleRefundCart();
+            hideRefundCartButton();
+            updatePlanSummary();
+
+            if (totalRefund > 0) {
+                showToast(`¡Reembolso procesado! Se acreditarán $${totalRefund.toFixed(2)} a tu método de pago`, 'success');
+            } else {
+                showToast('Módulos eliminados. No había reembolsos elegibles.', 'info');
             }
         }
 
@@ -1006,33 +2563,30 @@
             const hours = parseFloat(document.getElementById('calc-hours').value) || 0;
             const errors = parseFloat(document.getElementById('calc-errors').value) || 0;
             const revenue = parseFloat(document.getElementById('calc-revenue').value) || 0;
-            const inventory = parseFloat(document.getElementById('calc-inventory').value) || 0;
+            const expenses = parseFloat(document.getElementById('calc-expenses').value) || 0;
 
-
-            const simulatedGrowth = 1.35;
-            const moneyLostPerHour = 25;
-            const moneyLostPerError = 50;
-
-            const currentLoss = (hours * 4 * moneyLostPerHour) + (errors * moneyLostPerError);
-            const projectedRevenue = (revenue * simulatedGrowth) + (currentLoss * 0.8);
-
+            // Cálculos
+            const simulatedGrowth = 1.15; // 15% de crecimiento proyectado
+            const projectedRevenue = revenue * simulatedGrowth;
+            const utility = revenue - expenses; // Utilidad actual
+            const projectedUtility = projectedRevenue - (expenses * 0.9); // Egresos reducidos en 10%
 
             document.getElementById('results-blur').classList.add('hidden');
             document.getElementById('results-panel').classList.remove('opacity-50');
 
-            const growthPercent = ((projectedRevenue - revenue) / revenue * 100).toFixed(0);
-
+            // Mostrar resultados
             document.getElementById('label-revenue-now').textContent = `$${revenue.toLocaleString()}`;
             document.getElementById('label-revenue-proj').textContent = `$${projectedRevenue.toFixed(0).toLocaleString()}`;
-            document.getElementById('estimated-savings').textContent = `$${(currentLoss * 0.8).toFixed(0)}`;
-            document.getElementById('growth-percentage').textContent = `+${growthPercent}%`;
-
+            document.getElementById('estimated-savings').textContent = `$${expenses.toLocaleString()}`;
+            document.getElementById('growth-percentage').textContent = `$${projectedUtility.toFixed(0).toLocaleString()}`;
 
             setTimeout(() => {
-                document.getElementById('bar-current').style.height = "40%";
-                document.getElementById('bar-month1').style.height = "55%";
-                document.getElementById('bar-month2').style.height = "70%";
-                document.getElementById('bar-projected').style.height = "85%";
+                const maxHeight = 120; // altura máxima en px
+                const maxValue = Math.max(revenue, projectedRevenue);
+                document.getElementById('bar-current').style.height = `${Math.max(20, revenue / maxValue * maxHeight)}px`;
+                document.getElementById('bar-month1').style.height = `${Math.max(20, revenue * 1.05 / maxValue * maxHeight)}px`;
+                document.getElementById('bar-month2').style.height = `${Math.max(20, revenue * 1.10 / maxValue * maxHeight)}px`;
+                document.getElementById('bar-projected').style.height = `${Math.max(20, projectedRevenue / maxValue * maxHeight)}px`;
             }, 100);
         }
 
@@ -1061,13 +2615,13 @@
             const email = document.getElementById('module-email').value;
 
             if (!name || !email) {
-                alert('Por favor completa el nombre del módulo y tu email.');
+                showToast('Por favor completa el nombre del módulo y tu email.', 'error');
                 return;
             }
 
 
             closeModuleModal();
-            alert('¡Solicitud enviada con éxito! Un especialista Enterprise te contactará pronto a ' + email);
+            showToast('¡Solicitud enviada con éxito! Un especialista te contactará pronto a ' + email, 'success');
         }
 
         document.querySelectorAll('nav a')[0].addEventListener('click', () => {
@@ -1076,8 +2630,27 @@
         });
 
         document.getElementById('module-search').addEventListener('input', (e) => {
-            renderModules(e.target.value);
+            const searchText = e.target.value.toLowerCase();
+            const moduleCards = document.querySelectorAll('#modules-grid > div');
+            moduleCards.forEach(card => {
+                const title = card.querySelector('h3');
+                if (title) {
+                    const moduleName = title.textContent.toLowerCase();
+                    if (moduleName.includes(searchText)) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
         });
+
+        // Función para cerrar sesión
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'login.html';
+        }
     </script>
     <style>
         @keyframes fadeInUp {
