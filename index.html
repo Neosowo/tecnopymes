@@ -2602,8 +2602,8 @@
 
             document.getElementById('label-revenue-now').textContent = `$${revenue.toLocaleString()}`;
             document.getElementById('label-revenue-proj').textContent = `$${projectedRevenue.toFixed(0).toLocaleString()}`;
-            document.getElementById('estimated-savings').textContent = `$${expenses.toLocaleString()}`;
-            document.getElementById('growth-percentage').textContent = `$${projectedUtility.toFixed(0).toLocaleString()}`;
+            document.getElementById('estimated-savings').textContent = `$${costs.toLocaleString()}`;
+            document.getElementById('growth-percentage').textContent = `$${utility.toLocaleString()}`;
 
             setTimeout(() => {
                 const maxHeight = 120; // altura máxima en px
