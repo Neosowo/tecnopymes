@@ -707,6 +707,86 @@
                     </div>
                 </div>
 
+                <!-- Centro de Ayuda Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleDropdown('help-dropdown')"
+                        class="hover:text-blue-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100"
+                        style="color: var(--text-muted);" title="Centro de Ayuda">
+                        <i class='bx bx-help-circle text-xl'></i>
+                    </button>
+                    <!-- Help Dropdown Panel -->
+                    <div id="help-dropdown"
+                        class="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden transform transition-all duration-200 origin-top-right">
+                        <div class="p-4 border-b border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold" style="color: var(--text-primary);">Centro de Ayuda</h3>
+                                <i class='bx bx-help-circle text-2xl' style="color: var(--accent-primary);"></i>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <button onclick="showView('dashboard')"
+                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class='bx bx-video text-blue-600 text-xl'></i>
+                                </div>
+                                <div class="flex-1 text-left">
+                                    <p class="font-semibold text-sm text-gray-800">Ver Video Tutorial</p>
+                                    <p class="text-xs text-gray-500">Guía completa de uso</p>
+                                </div>
+                            </button>
+                            <button onclick="showView('catalog')"
+                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center"
+                                    style="background: rgba(56, 105, 244, 0.15);">
+                                    <i class='bx bx-package text-xl' style="color: var(--accent-primary);"></i>
+                                </div>
+                                <div class="flex-1 text-left">
+                                    <p class="font-semibold text-sm text-gray-800">¿Cómo gestionar módulos?</p>
+                                    <p class="text-xs text-gray-500">Agregar y eliminar módulos</p>
+                                </div>
+                            </button>
+                            <button onclick="showView('calculator')"
+                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                                    <i class='bx bx-calculator text-purple-600 text-xl'></i>
+                                </div>
+                                <div class="flex-1 text-left">
+                                    <p class="font-semibold text-sm text-gray-800">Calculadora de Utilidad</p>
+                                    <p class="text-xs text-gray-500">Proyecta tus ingresos</p>
+                                </div>
+                            </button>
+                            <button
+                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                                    <i class='bx bx-phone text-green-600 text-xl'></i>
+                                </div>
+                                <div class="flex-1 text-left">
+                                    <p class="font-semibold text-sm text-gray-800">Contacto Directo</p>
+                                    <p class="text-xs text-gray-500">+593 99 123 4567</p>
+                                </div>
+                            </button>
+                            <button
+                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
+                                <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                                    <i class='bx bx-time-five text-orange-600 text-xl'></i>
+                                </div>
+                                <div class="flex-1 text-left">
+                                    <p class="font-semibold text-sm text-gray-800">Horario de Atención</p>
+                                    <p class="text-xs text-gray-500">Lun-Vie: 9:00 AM - 6:00 PM</p>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="p-3 border-t" style="border-color: var(--border-color);">
+                            <a href="mailto:soporte@tecnopymes.com"
+                                class="w-full text-center text-sm font-semibold py-2 rounded-lg transition-colors block"
+                                style="color: var(--accent-primary);"
+                                onmouseover="this.style.background='rgba(56, 105, 244, 0.1)'"
+                                onmouseout="this.style.background='transparent'">
+                                📧 soporte@tecnopymes.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Profile Dropdown -->
                 <div class="relative">
@@ -760,11 +840,6 @@
                                 class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
                                 <i class='bx bx-cog text-lg text-gray-400'></i>
                                 <span>Configuración</span>
-                            </button>
-                            <button
-                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
-                                <i class='bx bx-help-circle text-lg text-gray-400'></i>
-                                <span>Ayuda y Soporte</span>
                             </button>
                         </div>
                         <!-- Logout -->
@@ -1922,17 +1997,7 @@
         </div>
     </div>
 
-    <!-- Help Center Button -->
-    <button onclick="toggleAssistant()"
-        class="fixed bottom-8 right-8 w-16 h-16 flex items-center justify-center text-white rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300 z-50 group"
-        style="background: linear-gradient(135deg, #276CE4 0%, #1747BB 100%); box-shadow: 0 8px 30px rgba(105, 82, 235, 0.5);">
-        <i class='bx bx-help-circle text-3xl'></i>
-        <span
-            class="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-white px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all duration-300 shadow-lg text-sm font-semibold border border-gray-100"
-            style="color: #276CE4;">
-            Centro de Ayuda
-        </span>
-    </button>
+
 
     <!-- Centro de Ayuda Proactivo -->
     <div id="ai-chat"
