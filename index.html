@@ -496,6 +496,16 @@
                     </a>
                 </li>
 
+                <!-- Módulos Contratados (dinámico) -->
+                <li>
+                    <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                        Módulos Contratados
+                    </div>
+                    <ul id="dynamic-modules-menu" class="space-y-1">
+                        <!-- Los módulos contratados se agregarán aquí dinámicamente -->
+                    </ul>
+                </li>
+
                 <!-- Calculadora -->
                 <li>
                     <a href="#" id="nav-calculator" onclick="showView('calculator')"
@@ -1246,6 +1256,54 @@
                     </div>
                 </div>
 
+                <!-- Carrito de Compras Visual -->
+                <div id="shopping-cart-section" class="hidden mb-8 animate-fade-in-up">
+                    <div class="bg-white rounded-2xl shadow-lg border-2 border-blue-200 overflow-hidden">
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class='bx bx-cart text-3xl text-white'></i>
+                                <div>
+                                    <h3 class="font-bold text-white text-lg">Carrito de Compras</h3>
+                                    <p class="text-blue-100 text-sm"><span id="cart-item-count">0</span> módulo(s)
+                                        seleccionado(s)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div id="shopping-cart-items" class="space-y-3 mb-4">
+                                <!-- Los items del carrito se agregarán aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Módulos Contratados -->
+                <div id="contracted-modules-section" class="hidden mb-8 animate-fade-in-up">
+                    <div class="bg-white rounded-2xl shadow-lg border-2 border-green-200 overflow-hidden">
+                        <div class="bg-gradient-to-r from-green-500 to-green-600 p-4 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class='bx bx-check-shield text-3xl text-white'></i>
+                                <div>
+                                    <h3 class="font-bold text-white text-lg">Mis Módulos Contratados</h3>
+                                    <p class="text-green-100 text-sm"><span id="contracted-count">0</span> módulo(s)
+                                        activo(s)</p>
+                                </div>
+                            </div>
+                            <button onclick="toggleContractedModules()"
+                                class="text-white hover:bg-white/20 p-2 rounded-lg transition-colors">
+                                <i class='bx bx-chevron-up text-2xl' id="contracted-toggle-icon"></i>
+                            </button>
+                        </div>
+                        <div id="contracted-modules-content" class="p-6">
+                            <div id="contracted-modules-items"
+                                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <!-- Los módulos contratados se agregarán aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Módulos Disponibles</h2>
                 <div id="modules-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
 
                     <!-- CRM Pro -->
@@ -1888,6 +1946,213 @@
                 </div>
             </div>
 
+            <!-- Vistas de Módulos Contratados -->
+
+            <!-- Vista: CRM Pro -->
+            <div id="module-crm-pro-view" class="hidden">
+                <div class="bg-gradient-to-r from-blue-50 to-sky-50 p-6 rounded-2xl mb-8 border border-blue-200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class='bx bx-briefcase text-2xl text-blue-600'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">CRM Pro</h2>
+                            <p class="text-sm text-gray-600 mt-1">Gestión avanzada de clientes, pipelines y analítica de
+                                ventas.</p>
+                            <button onclick="currentVideoTitle='Tutorial: CRM Pro'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-16 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-line-chart text-8xl text-gray-300 mb-6'></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Próximamente</h3>
+                    <p class="text-gray-500 max-w-md mx-auto">Esta sección está en desarrollo. Pronto podrás gestionar
+                        tu CRM completo con pipelines avanzados y analítica aquí.</p>
+                </div>
+            </div>
+
+            <!-- Vista: Recursos Humanos -->
+            <div id="module-recursos-humanos-view" class="hidden">
+                <div class="bg-gradient-to-r from-green-50 to-lime-50 p-6 rounded-2xl mb-8 border border-green-200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class='bx bx-group text-2xl text-green-600'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Recursos Humanos</h2>
+                            <p class="text-sm text-gray-600 mt-1">Gestión de nóminas, asistencia y portal del empleado.
+                            </p>
+                            <button onclick="currentVideoTitle='Tutorial: Recursos Humanos'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-16 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-user-plus text-8xl text-gray-300 mb-6'></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Próximamente</h3>
+                    <p class="text-gray-500 max-w-md mx-auto">Esta sección está en desarrollo. Pronto podrás gestionar
+                        tu equipo, nóminas y asistencia aquí.</p>
+                </div>
+            </div>
+
+            <!-- Vista: Módulo de Contabilidad -->
+            <div id="module-contabilidad-view" class="hidden">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-2xl mb-8 border border-blue-200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class='bx bx-calculator text-2xl text-blue-600'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Módulo de Contabilidad</h2>
+                            <p class="text-sm text-gray-600 mt-1">Facturación electrónica, libros diarios y reportes
+                                fiscales.</p>
+                            <button onclick="currentVideoTitle='Tutorial: Contabilidad'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-16 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-receipt text-8xl text-gray-300 mb-6'></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Próximamente</h3>
+                    <p class="text-gray-500 max-w-md mx-auto">Esta sección está en desarrollo. Pronto podrás gestionar
+                        tu contabilidad completa aquí.</p>
+                </div>
+            </div>
+
+            <!-- Vista: Inventario Inteligente -->
+            <div id="module-inventario-view" class="hidden">
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl mb-8 border border-purple-200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class='bx bx-box text-2xl text-purple-600'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Inventario Inteligente</h2>
+                            <p class="text-sm text-gray-600 mt-1">Control de stock con IA y gestión de múltiples
+                                almacenes.</p>
+                            <button onclick="currentVideoTitle='Tutorial: Inventario'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-16 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-package text-8xl text-gray-300 mb-6'></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Próximamente</h3>
+                    <p class="text-gray-500 max-w-md mx-auto">Esta sección está en desarrollo. Pronto podrás gestionar
+                        todo tu inventario aquí.</p>
+                </div>
+            </div>
+
+            <!-- Vista: Marketing Hub -->
+            <div id="module-marketing-view" class="hidden">
+                <div class="bg-gradient-to-r from-orange-50 to-yellow-50 p-6 rounded-2xl mb-8 border border-orange-200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class='bx bx-megaphone text-2xl text-orange-600'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Marketing Hub</h2>
+                            <p class="text-sm text-gray-600 mt-1">Automatización de emails y gestión de redes sociales.
+                            </p>
+                            <button onclick="currentVideoTitle='Tutorial: Marketing Hub'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-16 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-spreadsheet text-8xl text-gray-300 mb-6'></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Próximamente</h3>
+                    <p class="text-gray-500 max-w-md mx-auto">Esta sección está en desarrollo. Pronto podrás gestionar
+                        tus campañas de marketing aquí.</p>
+                </div>
+            </div>
+
+            <!-- Vista: Gestor de Proyectos -->
+            <div id="module-proyectos-view" class="hidden">
+                <div class="bg-gradient-to-r from-cyan-50 to-blue-50 p-6 rounded-2xl mb-8 border border-cyan-200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class='bx bx-task text-2xl text-cyan-600'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Gestor de Proyectos</h2>
+                            <p class="text-sm text-gray-600 mt-1">Tableros Kanban, Gantt y seguimiento de tiempos.</p>
+                            <button onclick="currentVideoTitle='Tutorial: Gestor de Proyectos'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-16 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-folder-plus text-8xl text-gray-300 mb-6'></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Próximamente</h3>
+                    <p class="text-gray-500 max-w-md mx-auto">Esta sección está en desarrollo. Pronto podrás gestionar
+                        todos tus proyectos aquí.</p>
+                </div>
+            </div>
+
+            <!-- Vista: Soporte Ticket System -->
+            <div id="module-soporte-view" class="hidden">
+                <div class="bg-gradient-to-r from-red-50 to-pink-50 p-6 rounded-2xl mb-8 border border-red-200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class='bx bx-support text-2xl text-red-600'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Soporte Ticket System</h2>
+                            <p class="text-sm text-gray-600 mt-1">Mesa de ayuda para atención al cliente integrada.</p>
+                            <button onclick="currentVideoTitle='Tutorial: Soporte'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-16 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-message-square-detail text-8xl text-gray-300 mb-6'></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Próximamente</h3>
+                    <p class="text-gray-500 max-w-md mx-auto">Esta sección está en desarrollo. Pronto podrás gestionar
+                        tickets de soporte aquí.</p>
+                </div>
+            </div>
+
+            <!-- Vista: Conector E-commerce -->
+            <div id="module-ecommerce-view" class="hidden">
+                <div class="bg-gradient-to-r from-violet-50 to-purple-50 p-6 rounded-2xl mb-8 border border-violet-200">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-violet-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class='bx bx-cart text-2xl text-violet-600'></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Conector E-commerce</h2>
+                            <p class="text-sm text-gray-600 mt-1">Sincronización con Shopify, WooCommerce y más.</p>
+                            <button onclick="currentVideoTitle='Tutorial: E-commerce'; openVideoModal()"
+                                class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
+                                <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-16 rounded-xl shadow-sm border border-gray-100 text-center">
+                    <i class='bx bx-store text-8xl text-gray-300 mb-6'></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Próximamente</h3>
+                    <p class="text-gray-500 max-w-md mx-auto">Esta sección está en desarrollo. Pronto podrás conectar tu
+                        tienda online aquí.</p>
+                </div>
+            </div>
+
         </main>
     </div>
 
@@ -1896,16 +2161,16 @@
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div>
                 <h4 class="text-sm font-bold text-gray-800 uppercase tracking-wide">Tu Plan TecnoPymes</h4>
-                <p class="text-xs text-gray-500"><span id="total-modules">0</span> módulos seleccionados</p>
+                <p class="text-xs text-gray-500"><span id="total-modules">0</span> módulos en carrito</p>
             </div>
             <div class="flex items-center gap-6">
                 <div class="text-right">
                     <p class="text-xs text-gray-500">Total Estimado</p>
                     <p class="text-2xl font-bold text-blue-600" id="total-price">$0.00</p>
                 </div>
-                <button
-                    onclick="showToast('¡Plan contratado exitosamente! Te enviaremos los detalles por email.', 'success')"
-                    class="bg-[#1a2233] hover:bg-[#252f45] text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                <button onclick="confirmPurchase()"
+                    class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
+                    <i class='bx bx-check-circle text-xl'></i>
                     Contratar Plan
                 </button>
             </div>
@@ -2631,48 +2896,96 @@
             if (crmOportunidades) crmOportunidades.classList.add('hidden');
             if (crmComisiones) crmComisiones.classList.add('hidden');
             if (crmLineas) crmLineas.classList.add('hidden');
-            planSummary.classList.add('hidden');
+
+            // Ocultar vistas de módulos
+            const moduleViews = [
+                'module-crm-pro-view',
+                'module-recursos-humanos-view',
+                'module-contabilidad-view',
+                'module-inventario-view',
+                'module-marketing-view',
+                'module-proyectos-view',
+                'module-soporte-view',
+                'module-ecommerce-view'
+            ];
+            moduleViews.forEach(viewId => {
+                const view = document.getElementById(viewId);
+                if (view) view.classList.add('hidden');
+            });
+
+            // Ocultar plan summary por defecto
+            if (planSummary) {
+                planSummary.classList.add('hidden');
+            }
 
             // Show selected view
-            if (viewName === 'catalog') {
+            if (viewName === 'dashboard-view' || viewName === 'dashboard') {
+                dashboard.classList.remove('hidden');
+                resetAnim(dashboard);
+            } else if (viewName === 'catalog-view' || viewName === 'catalog') {
                 catalog.classList.remove('hidden');
                 resetAnim(catalog);
                 planSummary.classList.remove('hidden');
                 updatePlanSummary();
-            } else if (viewName === 'calculator') {
+            } else if (viewName === 'calculator-view' || viewName === 'calculator') {
                 calculator.classList.remove('hidden');
                 resetAnim(calculator);
-            } else if (viewName === 'crm-clientes') {
+            } else if (viewName === 'crm-clientes-view' || viewName === 'crm-clientes') {
                 crmClientes.classList.remove('hidden');
                 resetAnim(crmClientes);
-            } else if (viewName === 'crm-oportunidades') {
+            } else if (viewName === 'crm-oportunidades-view' || viewName === 'crm-oportunidades') {
                 crmOportunidades.classList.remove('hidden');
                 resetAnim(crmOportunidades);
-            } else if (viewName === 'crm-comisiones') {
+            } else if (viewName === 'crm-comisiones-view' || viewName === 'crm-comisiones') {
                 crmComisiones.classList.remove('hidden');
                 resetAnim(crmComisiones);
-            } else if (viewName === 'crm-lineas') {
+            } else if (viewName === 'crm-lineas-view' || viewName === 'crm-lineas') {
                 crmLineas.classList.remove('hidden');
                 resetAnim(crmLineas);
             } else {
-                dashboard.classList.remove('hidden');
-                resetAnim(dashboard);
+                // Intentar buscar por ID directamente (para vistas de módulos)
+                const moduleView = document.getElementById(viewName);
+                if (moduleView) {
+                    moduleView.classList.remove('hidden');
+                    resetAnim(moduleView);
+                } else {
+                    dashboard.classList.remove('hidden');
+                    resetAnim(dashboard);
+                }
             }
+        }
+
+        // Inicializar módulos activos al cargar la página
+        function initializeModules() {
+            // Agregar módulos activos al sidebar
+            modules.forEach(module => {
+                if (module.active) {
+                    addModuleToSidebar(module);
+                }
+            });
+
+            // Actualizar la UI de módulos contratados
+            updateContractedModulesUI();
+
+            // Renderizar los módulos disponibles
+            renderModules();
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             showView('dashboard');
+            // Inicializar módulos activos
+            initializeModules();
         });
 
         const modules = [
-            { id: 1, name: 'CRM Pro', desc: 'Gestión avanzada de clientes, pipelines y analítica de ventas.', price: 39.99, active: true, icon: 'bx-briefcase' },
-            { id: 2, name: 'Recursos Humanos', desc: 'Gestión de nóminas, asistencia y portal del empleado.', price: 34.99, active: true, icon: 'bx-group' },
-            { id: 3, name: 'Módulo de Contabilidad', desc: 'Facturación electrónica, libros diarios y reportes fiscales.', price: 29.99, active: false, icon: 'bx-calculator' },
-            { id: 4, name: 'Inventario Inteligente', desc: 'Control de stock con IA y gestión de múltiples almacenes.', price: 19.99, active: false, icon: 'bx-box' },
-            { id: 5, name: 'Marketing Hub', desc: 'Automatización de emails y gestión de redes sociales.', price: 24.99, active: false, icon: 'bx-megaphone' },
-            { id: 6, name: 'Gestor de Proyectos', desc: 'Tableros Kanban, Gantt y seguimiento de tiempos.', price: 14.99, active: false, icon: 'bx-task' },
-            { id: 7, name: 'Soporte Ticket System', desc: 'Mesa de ayuda para atención al cliente integrada.', price: 12.50, active: false, icon: 'bx-support' },
-            { id: 8, name: 'Conector E-commerce', desc: 'Sincronización con Shopify, WooCommerce y más.', price: 35.00, active: false, icon: 'bx-cart' },
+            { id: 1, name: 'CRM', desc: 'Gestión avanzada de clientes, productos y análisis de ventas.', price: 0, active: true, icon: 'bx-briefcase', isDefault: true },
+            { id: 2, name: 'Recursos Humanos', desc: 'Gestión de nóminas, asistencia y portal del empleado.', price: 0, active: true, icon: 'bx-group', isDefault: true },
+            { id: 3, name: 'Módulo de Contabilidad', desc: 'Facturación electrónica, registro de gastos e informes financieros.', price: 29.99, active: false, icon: 'bx-calculator' },
+            { id: 4, name: 'Control de Inventario', desc: 'Administración de stock con alertas automáticas y soporte para varios almacenes.', price: 19.99, active: false, icon: 'bx-box' },
+            { id: 5, name: 'Herramientas de Marketing', desc: 'Envío de correos automatizados y gestión de redes sociales.', price: 24.99, active: false, icon: 'bx-megaphone' },
+            { id: 6, name: 'Gestor de Proyectos y Tareas', desc: 'Organiza tus proyectos, asigna tareas y lleva el control del tiempo de tu equipo.', price: 14.99, active: false, icon: 'bx-task' },
+            { id: 7, name: 'Sistema de Soporte al Cliente', desc: 'Mesa de ayuda para gestionar consultas y tickets de clientes.', price: 12.50, active: false, icon: 'bx-support' },
+            { id: 8, name: 'Ventas Unificadas', desc: 'Reúne en un solo panel todas tus ventas de internet, físicas y redes sociales.', price: 35.00, active: false, icon: 'bx-cart' },
         ];
 
         function renderModules(filterText = "") {
@@ -2680,19 +2993,31 @@
             if (!grid) return;
 
             grid.innerHTML = "";
-            const filtered = modules.filter(m => m.name.toLowerCase().includes(filterText.toLowerCase()));
+            // Filtrar módulos: solo mostrar los que NO están activos y que coincidan con la búsqueda
+            const filtered = modules.filter(m => !m.active && m.name.toLowerCase().includes(filterText.toLowerCase()));
 
             if (filtered.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full text-center py-16 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-                        <i class='bx bx-search-alt text-6xl text-gray-300 mb-4'></i>
-                        <p class="text-gray-500 text-lg font-medium">No encontramos el módulo "${filterText}"</p>
-                        <p class="text-gray-400 text-sm mb-6">Pero podemos crearlo para ti.</p>
+                // Si no hay módulos disponibles para contratar
+                if (filterText === "") {
+                    grid.innerHTML = `
+                        <div class="col-span-full text-center py-16 bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl border-2 border-green-200">
+                            <i class='bx bx-check-circle text-6xl text-green-500 mb-4'></i>
+                            <p class="text-gray-700 text-lg font-bold mb-2">¡Todos los módulos están contratados!</p>
+                            <p class="text-gray-500 text-sm">Revisa el menú lateral para acceder a tus módulos.</p>
+                        </div>
+                    `;
+                } else {
+                    grid.innerHTML = `
+                        <div class="col-span-full text-center py-16 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+                            <i class='bx bx-search-alt text-6xl text-gray-300 mb-4'></i>
+                            <p class="text-gray-500 text-lg font-medium">No encontramos el módulo "${filterText}"</p>
+                            <p class="text-gray-400 text-sm mb-6">Pero podemos crearlo para ti.</p>
                         <button onclick="requestCustomModule('${filterText}')" class="text-blue-600 hover:text-blue-700 font-semibold underline">
                             Solicitar creación de módulo "${filterText}"
                         </button>
                     </div>
                 `;
+                }
                 return;
             }
 
@@ -2704,27 +3029,23 @@
                         <div class="w-12 h-12 rounded-lg bg-lime-50 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
                             <i class='bx ${m.active ? 'bxs-check-shield' : m.icon}'></i>
                         </div>
-                        ${m.active ? '<span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center"><i class="bx bx-check mr-1"></i>Activo</span>' : ''}
+                        ${m.active ? '<span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center"><i class="bx bx-check mr-1"></i>Ya adquirido</span>' : ''}
                     </div>
                     
                     <h3 class="font-bold text-gray-800 text-lg mb-2">${m.name}</h3>
                     <p class="text-gray-500 text-sm mb-6 flex-grow">${m.desc}</p>
                     
                     <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
-                        <div class="flex flex-col">
-                            <span class="text-xs text-gray-400">Precio mensual</span>
-                            <span class="font-bold text-gray-900 text-lg">${m.active ? 'Incluido' : `$${m.price}`}</span>
-                        </div>
-                        ${m.active && m.price > 0 ?
+                        ${m.active ?
                         `<button onclick="removeModule(${m.id})" 
-                                class="bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
-                                <i class='bx bx-trash mr-1'></i> Eliminar
+                                class="w-full bg-orange-100 hover:bg-orange-200 text-orange-600 px-4 py-2.5 rounded-lg text-sm font-medium transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                                <i class='bx bx-undo text-lg'></i> Solicitar Reembolso
                             </button>` :
-                        m.active ?
-                            `<button class="bg-gray-100 text-gray-400 cursor-not-allowed px-4 py-2 rounded-lg text-sm font-medium">
-                                Instalado
-                            </button>` :
-                            `<button onclick="toggleModule(${m.id})" 
+                        `<div class="flex flex-col">
+                            <span class="text-xs text-gray-400">Precio mensual</span>
+                            <span class="font-bold text-gray-900 text-lg">$${m.price}</span>
+                         </div>
+                         <button onclick="toggleModule(${m.id})" 
                                 class="bg-blue-600 hover:bg-blue-700 text-white shadow-lime-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
                                 Agregar +
                             </button>`
@@ -2735,43 +3056,357 @@
             });
         }
 
+        // CARRITO DE COMPRAS
+        let shoppingCart = [];
+
         function toggleModule(id) {
             const module = modules.find(m => m.id === id);
             if (module && !module.active) {
-                const btn = event.target.closest('button');
-                btn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i>";
-                btn.disabled = true;
+                // Verificar si ya está en el carrito
+                if (shoppingCart.find(item => item.id === id)) {
+                    showToast(`${module.name} ya está en el carrito`, 'warning');
+                    return;
+                }
 
-                setTimeout(() => {
+                // Agregar al carrito
+                addToShoppingCart(module);
+                showToast(`${module.name} agregado al carrito`, 'success');
+            }
+        }
+
+        function addToShoppingCart(module) {
+            shoppingCart.push(module);
+            updateShoppingCartUI();
+
+            // Mostrar el carrito si estaba oculto
+            const cartSection = document.getElementById('shopping-cart-section');
+            if (cartSection) {
+                cartSection.classList.remove('hidden');
+            }
+        }
+
+        function updateShoppingCartUI() {
+            // Actualizar el carrito visual
+            const itemsContainer = document.getElementById('shopping-cart-items');
+            const cartSection = document.getElementById('shopping-cart-section');
+            const cartItemCount = document.getElementById('cart-item-count');
+
+            // Actualizar el plan summary
+            const totalModulesEl = document.getElementById('total-modules');
+            const totalPriceEl = document.getElementById('total-price');
+            const planSummary = document.getElementById('plan-summary');
+
+            if (shoppingCart.length === 0) {
+                // Ocultar ambos
+                if (cartSection) cartSection.classList.add('hidden');
+                if (planSummary) planSummary.classList.add('hidden');
+                if (itemsContainer) itemsContainer.innerHTML = '';
+                if (totalModulesEl) totalModulesEl.textContent = '0';
+                if (totalPriceEl) totalPriceEl.textContent = '$0.00';
+                if (cartItemCount) cartItemCount.textContent = '0';
+                return;
+            }
+
+            // Mostrar ambos
+            if (cartSection) cartSection.classList.remove('hidden');
+            if (planSummary) planSummary.classList.remove('hidden');
+
+            let total = 0;
+
+            // Limpiar carrito visual
+            if (itemsContainer) {
+                itemsContainer.innerHTML = '';
+
+                // Agregar cada módulo al carrito visual
+                shoppingCart.forEach(module => {
+                    total += module.price;
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-200 shadow-sm hover:shadow-md transition-all';
+                    itemEl.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                                    <i class='bx ${module.icon} text-2xl'></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-800">${module.name}</p>
+                                    <p class="text-sm text-gray-500">${module.desc}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="text-right">
+                                    <p class="text-xs text-gray-500">Precio mensual</p>
+                                    <p class="text-xl font-bold text-blue-600">$${module.price}</p>
+                                </div>
+                                <button onclick="removeFromShoppingCart(${module.id})" 
+                                    class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors">
+                                    <i class='bx bx-trash text-xl'></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    itemsContainer.appendChild(itemEl);
+                });
+            }
+
+            // Actualizar contadores y totales
+            if (cartItemCount) cartItemCount.textContent = shoppingCart.length;
+            if (totalModulesEl) totalModulesEl.textContent = shoppingCart.length;
+            if (totalPriceEl) totalPriceEl.textContent = `$${total.toFixed(2)}`;
+        }
+
+        function removeFromShoppingCart(moduleId) {
+            shoppingCart = shoppingCart.filter(m => m.id !== moduleId);
+            updateShoppingCartUI();
+            showToast('Módulo removido del carrito', 'info');
+        }
+
+        function clearShoppingCart() {
+            shoppingCart = [];
+            updateShoppingCartUI();
+            showToast('Carrito vaciado', 'info');
+        }
+
+        function toggleShoppingCart() {
+            const content = document.getElementById('shopping-cart-content');
+            const icon = document.getElementById('cart-toggle-icon');
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.remove('bx-chevron-down');
+                icon.classList.add('bx-chevron-up');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('bx-chevron-up');
+                icon.classList.add('bx-chevron-down');
+            }
+        }
+
+        function confirmPurchase() {
+            if (shoppingCart.length === 0) {
+                showToast('El carrito está vacío', 'warning');
+                return;
+            }
+
+            // Simular proceso de pago
+            const planSummary = document.getElementById('plan-summary');
+            planSummary.style.opacity = '0.5';
+            showToast('Procesando compra...', 'info');
+
+            setTimeout(() => {
+                // Activar todos los módulos del carrito y agregarlos al sidebar
+                shoppingCart.forEach(module => {
                     module.active = true;
+                    addModuleToSidebar(module);
 
-                    // Find the module card and update it
-                    const card = document.getElementById(`module-card-${id}`);
+                    // Actualizar la card en el catálogo
+                    const card = document.getElementById(`module-card-${module.id}`);
                     if (card) {
-                        // Update icon container to show shield
                         const iconDiv = card.querySelector('.flex.items-start.justify-between.mb-4');
                         const iconContainer = iconDiv.querySelector('div');
                         iconContainer.innerHTML = "<i class='bx bxs-check-shield'></i>";
 
-                        // Add active badge if not exists
                         if (!iconDiv.querySelector('span')) {
-                            iconDiv.innerHTML += `<span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center"><i class="bx bx-check mr-1"></i>Activo</span>`;
+                            iconDiv.innerHTML += `<span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center"><i class="bx bx-check mr-1"></i>Ya adquirido</span>`;
                         }
 
-                        // Update price to "Incluido" and button
-                        const priceSpan = card.querySelector('.font-bold.text-gray-900.text-lg');
-                        priceSpan.textContent = 'Incluido';
-
-                        // Update button to remove
-                        btn.className = "bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95";
-                        btn.innerHTML = "<i class='bx bx-trash mr-1'></i> Eliminar";
-                        btn.disabled = false;
-                        btn.onclick = () => removeModule(id);
+                        const priceSection = card.querySelector('.pt-4.border-t.border-gray-50');
+                        if (priceSection) {
+                            priceSection.innerHTML = `
+                                <button onclick="removeModule(${module.id})" 
+                                    class="w-full bg-orange-100 hover:bg-orange-200 text-orange-600 px-4 py-2.5 rounded-lg text-sm font-medium transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                                    <i class='bx bx-undo text-lg'></i> Solicitar Reembolso
+                                </button>
+                            `;
+                        }
                     }
+                });
 
-                    updatePlanSummary();
-                    showToast(`Módulo "${module.name}" agregado a tu plan`, 'success');
-                }, 800);
+                const total = shoppingCart.reduce((sum, m) => sum + m.price, 0);
+                showToast(`¡Compra exitosa! ${shoppingCart.length} módulo(s) contratado(s). Total: $${total.toFixed(2)}/mes`, 'success');
+
+                // Limpiar carrito
+                shoppingCart = [];
+                updateShoppingCartUI();
+                planSummary.style.opacity = '1';
+
+                // Actualizar el catálogo y la sección de módulos contratados
+                renderModules();
+                updateContractedModulesUI();
+                updatePlanSummary();
+            }, 2000);
+        }
+
+        // GESTIÓN DE MÓDULOS CONTRATADOS
+        function updateContractedModulesUI() {
+            const contractedSection = document.getElementById('contracted-modules-section');
+            const contractedItems = document.getElementById('contracted-modules-items');
+            const contractedCount = document.getElementById('contracted-count');
+
+            if (!contractedSection || !contractedItems) return;
+
+            const activeModules = modules.filter(m => m.active);
+
+            if (activeModules.length === 0) {
+                contractedSection.classList.add('hidden');
+                contractedItems.innerHTML = '';
+                if (contractedCount) contractedCount.textContent = '0';
+                return;
+            }
+
+            contractedSection.classList.remove('hidden');
+            contractedItems.innerHTML = '';
+            if (contractedCount) contractedCount.textContent = activeModules.length;
+
+            activeModules.forEach(module => {
+                const card = document.createElement('div');
+                card.className = 'bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-4 hover:shadow-lg transition-all';
+                card.innerHTML = `
+                    <div class="flex items-start gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-lg bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0">
+                            <i class='bx ${module.icon} text-2xl'></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-gray-800 mb-1">${module.name}</h4>
+                            <p class="text-xs text-gray-600 line-clamp-2">${module.desc}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-green-200">
+                        <div>
+                            <p class="text-xs text-gray-500">Costo mensual</p>
+                            <p class="text-lg font-bold text-green-600">$${module.price}/mes</p>
+                        </div>
+                        <button onclick="returnContractedModule(${module.id})" 
+                            class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
+                            <i class='bx bx-undo'></i>
+                            Cancelar
+                        </button>
+                    </div>
+                `;
+                contractedItems.appendChild(card);
+            });
+        }
+
+        function toggleContractedModules() {
+            const content = document.getElementById('contracted-modules-content');
+            const icon = document.getElementById('contracted-toggle-icon');
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.remove('bx-chevron-down');
+                icon.classList.add('bx-chevron-up');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('bx-chevron-up');
+                icon.classList.add('bx-chevron-down');
+            }
+        }
+
+        function returnContractedModule(moduleId) {
+            const module = modules.find(m => m.id === moduleId);
+            if (!module || !module.active) return;
+
+            // Confirmar devolución
+            const confirmed = confirm(`¿Estás seguro de que deseas devolver "${module.name}"?\n\nSe procesará un reembolso según tu período de uso.`);
+
+            if (!confirmed) return;
+
+            showToast('Procesando devolución...', 'info');
+
+            setTimeout(() => {
+                // Desactivar módulo
+                module.active = false;
+
+                // Quitar del sidebar
+                removeModuleFromSidebar(moduleId);
+
+                // Actualizar las vistas
+                updateContractedModulesUI();
+                renderModules();
+                updatePlanSummary();
+
+                showToast(`"${module.name}" ha sido devuelto exitosamente. Se procesará el reembolso correspondiente.`, 'success');
+            }, 1000);
+        }
+
+        // Nueva función para agregar módulos al sidebar
+        function addModuleToSidebar(module) {
+            const dynamicMenu = document.getElementById('dynamic-modules-menu');
+            if (!dynamicMenu) return;
+
+            // Verificar si ya existe
+            if (document.getElementById(`sidebar-module-${module.id}`)) {
+                return;
+            }
+
+            const menuItem = document.createElement('li');
+            menuItem.id = `sidebar-module-${module.id}`;
+            menuItem.className = 'animate-slide-in';
+            menuItem.innerHTML = `
+                <a href="#" onclick="showModuleView(${module.id})"
+                    class="sidebar-link flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 group"
+                    style="color: var(--text-muted);">
+                    <i class='bx ${module.icon} text-xl mr-3'></i>
+                    ${module.name}
+                    <span class="ml-auto bg-green-100 text-green-600 text-xs px-2 py-0.5 rounded-full font-semibold">
+                        Nuevo
+                    </span>
+                </a>
+            `;
+
+            dynamicMenu.appendChild(menuItem);
+
+            // Quitar el badge "Nuevo" después de 5 segundos
+            setTimeout(() => {
+                const badge = menuItem.querySelector('span.bg-green-100');
+                if (badge) {
+                    badge.style.opacity = '0';
+                    setTimeout(() => badge.remove(), 300);
+                }
+            }, 5000);
+        }
+
+        // Función para mostrar la vista de un módulo específico
+        function showModuleView(moduleId) {
+            const module = modules.find(m => m.id === moduleId);
+            if (!module) return;
+
+            checkMobileAndCloseSidebar();
+
+            // Mapeo de IDs de módulos a nombres de vistas
+            const moduleViewMap = {
+                1: 'module-crm-pro-view',        // CRM Pro → ahora tiene su propia vista
+                2: 'module-recursos-humanos-view',
+                3: 'module-contabilidad-view',
+                4: 'module-inventario-view',
+                5: 'module-marketing-view',
+                6: 'module-proyectos-view',
+                7: 'module-soporte-view',
+                8: 'module-ecommerce-view'
+            };
+
+            const viewName = moduleViewMap[moduleId];
+            if (viewName) {
+                showView(viewName);
+                showToast(`Accediendo a ${module.name}...`, 'info');
+            } else {
+                showToast(`${module.name} - Funcionalidad en desarrollo`, 'info');
+                showView('dashboard-view');
+            }
+        }
+
+        // Función para remover módulos del sidebar
+        function removeModuleFromSidebar(moduleId) {
+            const menuItem = document.getElementById(`sidebar-module-${moduleId}`);
+            if (menuItem) {
+                // Animación de salida
+                menuItem.style.opacity = '0';
+                menuItem.style.transform = 'translateX(-20px)';
+
+                setTimeout(() => {
+                    menuItem.remove();
+                }, 300);
             }
         }
 
@@ -2932,6 +3567,9 @@
                 if (module) {
                     module.active = false;
 
+                    // Remover del sidebar
+                    removeModuleFromSidebar(item.id);
+
                     // Update the card UI
                     const card = document.getElementById(`module-card-${item.id}`);
                     if (card) {
@@ -2942,13 +3580,20 @@
                         const badge = iconDiv.querySelector('span');
                         if (badge) badge.remove();
 
-                        const priceSpan = card.querySelector('.font-bold.text-gray-900.text-lg');
-                        priceSpan.textContent = `$${module.price}`;
-
-                        const btn = card.querySelector('button');
-                        btn.className = "bg-blue-600 hover:bg-blue-700 text-white shadow-lime-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95";
-                        btn.innerHTML = "Agregar +";
-                        btn.onclick = () => toggleModule(item.id);
+                        // Restaurar sección de precio completa
+                        const priceSection = card.querySelector('.pt-4.border-t.border-gray-50');
+                        if (priceSection) {
+                            priceSection.innerHTML = `
+                                <div class="flex flex-col">
+                                    <span class="text-xs text-gray-400">Precio mensual</span>
+                                    <span class="font-bold text-gray-900 text-lg">$${module.price}</span>
+                                </div>
+                                <button onclick="toggleModule(${item.id})" 
+                                    class="bg-blue-600 hover:bg-blue-700 text-white shadow-lime-200 hover:shadow-lg px-4 py-2 rounded-lg text-sm font-medium transition-all transform active:scale-95">
+                                    Agregar +
+                                </button>
+                            `;
+                        }
                     }
                 }
             });
