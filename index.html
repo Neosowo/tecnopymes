@@ -459,42 +459,26 @@
                     </a>
                 </li>
 
-                <!-- CRM con Submenu -->
+                <!-- CRM (opción fija) -->
                 <li>
-                    <button id="crm-btn" onclick="toggleMenu('crm-submenu', 'crm-arrow')"
-                        class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 cursor-pointer"
+                    <a href="#" id="nav-crm" onclick="showView('module-crm-pro-view')"
+                        class="sidebar-link flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 group"
                         style="color: var(--text-muted);">
-                        <div class="flex items-center">
-                            <i class='bx bx-briefcase text-xl mr-3'></i>
-                            CRM
-                        </div>
-                        <i id="crm-arrow" class='bx bx-chevron-down text-lg transition-transform duration-200'></i>
-                    </button>
-                    <ul id="crm-submenu" class="ml-8 mt-1 space-y-1 hidden">
-                        <li><a href="#" onclick="showView('crm-clientes')"
-                                class="block px-4 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors"
-                                style="color: var(--text-muted);">Gestión de Clientes</a></li>
-                        <li><a href="#" onclick="showView('crm-oportunidades')"
-                                class="block px-4 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors"
-                                style="color: var(--text-muted);">Gestión de Oportunidades</a></li>
-                        <li><a href="#" onclick="showView('crm-comisiones')"
-                                class="block px-4 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors"
-                                style="color: var(--text-muted);">Gestión de Comisiones</a></li>
-                        <li><a href="#" onclick="showView('crm-lineas')"
-                                class="block px-4 py-2 text-sm rounded-lg hover:bg-gray-100 transition-colors"
-                                style="color: var(--text-muted);">Líneas de Negocios</a></li>
-                    </ul>
+                        <i class='bx bx-briefcase text-xl mr-3'></i>
+                        CRM
+                    </a>
                 </li>
 
-                <!-- Recursos Humanos -->
+                <!-- Recursos Humanos (opción fija) -->
                 <li>
-                    <a href="#"
+                    <a href="#" id="nav-rrhh" onclick="showView('module-recursos-humanos-view')"
                         class="sidebar-link flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 group"
                         style="color: var(--text-muted);">
                         <i class='bx bx-group text-xl mr-3'></i>
                         Recursos Humanos
                     </a>
                 </li>
+
 
                 <!-- Módulos Contratados (dinámico) -->
                 <li>
@@ -721,81 +705,127 @@
                 <div class="relative">
                     <button onclick="toggleDropdown('help-dropdown')"
                         class="hover:text-blue-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100"
-                        style="color: var(--text-muted);" title="Centro de Ayuda">
+                        style="color: var(--text-muted);" title="Preguntas Frecuentes">
                         <i class='bx bx-help-circle text-xl'></i>
                     </button>
-                    <!-- Help Dropdown Panel -->
+                    <!-- FAQ Dropdown Panel -->
                     <div id="help-dropdown"
-                        class="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden transform transition-all duration-200 origin-top-right">
-                        <div class="p-4 border-b border-gray-100">
+                        class="absolute right-0 mt-2 w-96 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden transform transition-all duration-200 origin-top-right max-h-[80vh] overflow-hidden flex flex-col">
+                        <div class="p-4 border-b border-gray-100 flex-shrink-0">
                             <div class="flex items-center justify-between">
-                                <h3 class="font-bold" style="color: var(--text-primary);">Centro de Ayuda</h3>
+                                <h3 class="font-bold text-lg" style="color: var(--text-primary);">Preguntas Frecuentes
+                                </h3>
                                 <i class='bx bx-help-circle text-2xl' style="color: var(--accent-primary);"></i>
                             </div>
+                            <p class="text-xs text-gray-500 mt-1">Encuentra respuestas rápidas</p>
                         </div>
-                        <div class="p-2">
-                            <button onclick="showView('dashboard')"
-                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                                    <i class='bx bx-video text-blue-600 text-xl'></i>
+                        <div class="overflow-y-auto flex-1 p-3">
+                            <!-- FAQ 1 -->
+                            <div class="mb-2">
+                                <button onclick="toggleFAQ('faq1')"
+                                    class="w-full flex items-start gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-xl transition-colors text-left">
+                                    <i class='bx bx-chevron-right text-xl transition-transform' id="faq1-icon"
+                                        style="color: var(--accent-primary);"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-sm text-gray-800">¿El sistema se puede adaptar a mi
+                                            negocio?</p>
+                                    </div>
+                                </button>
+                                <div id="faq1-answer"
+                                    class="hidden px-4 py-3 ml-11 text-sm text-gray-600 bg-blue-50/50 rounded-lg mx-3 mb-2">
+                                    Sí, el sistema se ajusta según la información y las necesidades de cada empresa.
                                 </div>
-                                <div class="flex-1 text-left">
-                                    <p class="font-semibold text-sm text-gray-800">Ver Video Tutorial</p>
-                                    <p class="text-xs text-gray-500">Guía completa de uso</p>
+                            </div>
+
+                            <!-- FAQ 2 -->
+                            <div class="mb-2">
+                                <button onclick="toggleFAQ('faq2')"
+                                    class="w-full flex items-start gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-xl transition-colors text-left">
+                                    <i class='bx bx-chevron-right text-xl transition-transform' id="faq2-icon"
+                                        style="color: var(--accent-primary);"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-sm text-gray-800">¿Qué tipo de información tengo
+                                            que ingresar?</p>
+                                    </div>
+                                </button>
+                                <div id="faq2-answer"
+                                    class="hidden px-4 py-3 ml-11 text-sm text-gray-600 bg-blue-50/50 rounded-lg mx-3 mb-2">
+                                    Debes ingresar datos básicos de tu empresa, como ventas, gastos, procesos y otra
+                                    información necesaria para que el sistema pueda funcionar correctamente.
                                 </div>
-                            </button>
-                            <button onclick="showView('catalog')"
-                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
-                                <div class="w-10 h-10 rounded-full flex items-center justify-center"
-                                    style="background: rgba(56, 105, 244, 0.15);">
-                                    <i class='bx bx-package text-xl' style="color: var(--accent-primary);"></i>
+                            </div>
+
+                            <!-- FAQ 3 -->
+                            <div class="mb-2">
+                                <button onclick="toggleFAQ('faq3')"
+                                    class="w-full flex items-start gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-xl transition-colors text-left">
+                                    <i class='bx bx-chevron-right text-xl transition-transform' id="faq3-icon"
+                                        style="color: var(--accent-primary);"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-sm text-gray-800">¿El sistema guarda y protege mi
+                                            información?</p>
+                                    </div>
+                                </button>
+                                <div id="faq3-answer"
+                                    class="hidden px-4 py-3 ml-11 text-sm text-gray-600 bg-blue-50/50 rounded-lg mx-3 mb-2">
+                                    Sí, la información que ingreses se maneja de forma segura y se utiliza únicamente
+                                    para el funcionamiento del sistema.
                                 </div>
-                                <div class="flex-1 text-left">
-                                    <p class="font-semibold text-sm text-gray-800">¿Cómo gestionar módulos?</p>
-                                    <p class="text-xs text-gray-500">Agregar y eliminar módulos</p>
+                            </div>
+
+                            <!-- FAQ 4 -->
+                            <div class="mb-2">
+                                <button onclick="toggleFAQ('faq4')"
+                                    class="w-full flex items-start gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-xl transition-colors text-left">
+                                    <i class='bx bx-chevron-right text-xl transition-transform' id="faq4-icon"
+                                        style="color: var(--accent-primary);"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-sm text-gray-800">¿Puedo acceder al sistema desde
+                                            cualquier dispositivo?</p>
+                                    </div>
+                                </button>
+                                <div id="faq4-answer"
+                                    class="hidden px-4 py-3 ml-11 text-sm text-gray-600 bg-blue-50/50 rounded-lg mx-3 mb-2">
+                                    Sí, puedes acceder desde una computadora, tablet o celular con conexión a internet.
                                 </div>
-                            </button>
-                            <button onclick="showView('calculator')"
-                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
-                                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
-                                    <i class='bx bx-calculator text-purple-600 text-xl'></i>
+                            </div>
+
+                            <!-- FAQ 5 -->
+                            <div class="mb-2">
+                                <button onclick="toggleFAQ('faq5')"
+                                    class="w-full flex items-start gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-xl transition-colors text-left">
+                                    <i class='bx bx-chevron-right text-xl transition-transform' id="faq5-icon"
+                                        style="color: var(--accent-primary);"></i>
+                                    <div class="flex-1">
+                                        <p class="font-semibold text-sm text-gray-800">¿Qué pasa si tengo una duda que
+                                            no está aquí?</p>
+                                    </div>
+                                </button>
+                                <div id="faq5-answer"
+                                    class="hidden px-4 py-3 ml-11 text-sm text-gray-600 bg-blue-50/50 rounded-lg mx-3 mb-2">
+                                    Puedes contactar a un asesor desde la plataforma para recibir ayuda personalizada.
                                 </div>
-                                <div class="flex-1 text-left">
-                                    <p class="font-semibold text-sm text-gray-800">Calculadora de Utilidad</p>
-                                    <p class="text-xs text-gray-500">Proyecta tus ingresos</p>
-                                </div>
-                            </button>
-                            <button
-                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
-                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                                    <i class='bx bx-phone text-green-600 text-xl'></i>
-                                </div>
-                                <div class="flex-1 text-left">
-                                    <p class="font-semibold text-sm text-gray-800">Contacto Directo</p>
-                                    <p class="text-xs text-gray-500">+593 99 123 4567</p>
-                                </div>
-                            </button>
-                            <button
-                                class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
-                                <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
-                                    <i class='bx bx-time-five text-orange-600 text-xl'></i>
-                                </div>
-                                <div class="flex-1 text-left">
-                                    <p class="font-semibold text-sm text-gray-800">Horario de Atención</p>
-                                    <p class="text-xs text-gray-500">Lun-Vie: 9:00 AM - 6:00 PM</p>
-                                </div>
-                            </button>
+                            </div>
                         </div>
-                        <div class="p-3 border-t" style="border-color: var(--border-color);">
+                        <div class="p-3 border-t flex-shrink-0" style="border-color: var(--border-color);">
                             <a href="mailto:soporte@tecnopymes.com"
                                 class="w-full text-center text-sm font-semibold py-2 rounded-lg transition-colors block"
                                 style="color: var(--accent-primary);"
                                 onmouseover="this.style.background='rgba(56, 105, 244, 0.1)'"
                                 onmouseout="this.style.background='transparent'">
-                                📧 soporte@tecnopymes.com
+                                <i class='bx bx-envelope mr-1'></i> soporte@tecnopymes.com
                             </a>
                         </div>
                     </div>
+                </div>
+
+                <!-- WhatsApp Button -->
+                <div class="relative">
+                    <a href="https://wa.me/593999999999" target="_blank"
+                        class="hover:text-green-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100 flex items-center justify-center"
+                        style="color: var(--text-muted);" title="Contactar por WhatsApp">
+                        <i class='bx bxl-whatsapp text-xl'></i>
+                    </a>
                 </div>
 
                 <!-- Profile Dropdown -->
@@ -1190,12 +1220,6 @@
                         </div>
 
                         <div class="flex items-center gap-3 w-full md:w-auto">
-                            <div class="relative w-full md:w-64">
-                                <i
-                                    class='bx bx-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl'></i>
-                                <input type="text" id="module-search" placeholder="Buscar módulos..."
-                                    class="w-full pl-10 pr-4 py-2.5 border-none rounded-xl focus:outline-none focus:ring-2 focus:ring-white/50 bg-white shadow-sm text-sm text-gray-800">
-                            </div>
                             <button onclick="currentVideoTitle='Tutorial: Catálogo de Módulos'; openVideoModal()"
                                 class="px-4 py-2.5 rounded-xl font-bold text-sm transition-all hover:scale-105 flex-shrink-0 flex items-center gap-2"
                                 style="background: white; color: var(--color-primary); box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
@@ -1318,7 +1342,7 @@
                                 class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full flex items-center"><i
                                     class="bx bx-check mr-1"></i>Activo</span>
                         </div>
-                        <h3 class="font-bold text-gray-800 text-lg mb-2">CRM Pro</h3>
+                        <h3 class="font-bold text-gray-800 text-lg mb-2">CRM</h3>
                         <p class="text-gray-500 text-sm mb-6 flex-grow">Gestión avanzada de clientes, pipelines y
                             analítica de ventas.</p>
                         <div class="pt-4 border-t border-gray-50 flex items-center justify-between">
@@ -1547,11 +1571,7 @@
                                         <i class='bx bx-code-alt text-2xl'></i>
                                         Solicitar Nuevo Módulo
                                     </button>
-                                    <button
-                                        class="px-6 py-4 rounded-xl font-semibold transition-all border-2 border-white/30 hover:border-white/60 hover:bg-white/10 flex items-center gap-2">
-                                        <i class='bx bx-phone text-xl'></i>
-                                        Hablar con un asesor
-                                    </button>
+
                                 </div>
                             </div>
 
@@ -1570,17 +1590,7 @@
                         </div>
 
                         <!-- Features row -->
-                        <div class="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg flex items-center justify-center"
-                                    style="background: rgba(255, 255, 255, 0.2);">
-                                    <i class='bx bx-time text-xl' style="color: #ffffff;"></i>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-white">Entrega rápida</p>
-                                    <p class="text-sm text-gray-400">2-4 semanas promedio</p>
-                                </div>
-                            </div>
+                        <div class="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-lg flex items-center justify-center"
                                     style="background: rgba(255, 255, 255, 0.2);">
@@ -1956,10 +1966,10 @@
                             <i class='bx bx-briefcase text-2xl text-blue-600'></i>
                         </div>
                         <div>
-                            <h2 class="text-2xl font-bold text-gray-800">CRM Pro</h2>
+                            <h2 class="text-2xl font-bold text-gray-800">CRM</h2>
                             <p class="text-sm text-gray-600 mt-1">Gestión avanzada de clientes, pipelines y analítica de
                                 ventas.</p>
-                            <button onclick="currentVideoTitle='Tutorial: CRM Pro'; openVideoModal()"
+                            <button onclick="currentVideoTitle='Tutorial: CRM'; openVideoModal()"
                                 class="mt-2 text-xs font-semibold text-blue-600 hover:text-blue-800 inline-flex items-center transition-colors">
                                 <i class='bx bx-play-circle mr-1 text-lg'></i> Ver Video Tutorial
                             </button>
@@ -2560,6 +2570,22 @@
             }, duration);
         }
 
+        // ===============================
+        // FAQ ACCORDION FUNCTIONALITY
+        // ===============================
+        function toggleFAQ(faqId) {
+            const answer = document.getElementById(faqId + '-answer');
+            const icon = document.getElementById(faqId + '-icon');
+
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(90deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
         function updateTags() {
             const now = new Date();
             const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
@@ -2876,11 +2902,31 @@
 
             const linkMap = {
                 'dashboard': 'nav-dashboard',
+                'dashboard-view': 'nav-dashboard',
                 'catalog': 'nav-catalog',
-                'calculator': 'nav-calculator'
+                'catalog-view': 'nav-catalog',
+                'calculator': 'nav-calculator',
+                'calculator-view': 'nav-calculator',
+                'module-crm-pro-view': 'nav-crm',
+                'module-recursos-humanos-view': 'nav-rrhh'
             };
-            if (linkMap[viewName]) {
-                const activeLink = document.getElementById(linkMap[viewName]);
+
+            let activeId = linkMap[viewName];
+
+            // Si no está en el mapa, podría ser un módulo dinámico
+            if (!activeId && viewName.startsWith('module-')) {
+                // El ID en el sidebar de módulos dinámicos se genera como `sidebar-link-${id}`
+                // Pero necesitamos buscarlo por su atributo onclick o por una clase
+                // Vamos a intentar buscar el enlace que coincida con el showView actual
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(`'${viewName}'`)) {
+                        activeId = link.id;
+                    }
+                });
+            }
+
+            if (activeId) {
+                const activeLink = document.getElementById(activeId);
                 if (activeLink) {
                     activeLink.classList.add('active');
                     activeLink.style.background = 'var(--accent-primary)';
@@ -2978,8 +3024,6 @@
         });
 
         const modules = [
-            { id: 1, name: 'CRM', desc: 'Gestión avanzada de clientes, productos y análisis de ventas.', price: 0, active: true, icon: 'bx-briefcase', isDefault: true },
-            { id: 2, name: 'Recursos Humanos', desc: 'Gestión de nóminas, asistencia y portal del empleado.', price: 0, active: true, icon: 'bx-group', isDefault: true },
             { id: 3, name: 'Módulo de Contabilidad', desc: 'Facturación electrónica, registro de gastos e informes financieros.', price: 29.99, active: false, icon: 'bx-calculator' },
             { id: 4, name: 'Control de Inventario', desc: 'Administración de stock con alertas automáticas y soporte para varios almacenes.', price: 19.99, active: false, icon: 'bx-box' },
             { id: 5, name: 'Herramientas de Marketing', desc: 'Envío de correos automatizados y gestión de redes sociales.', price: 24.99, active: false, icon: 'bx-megaphone' },
@@ -2993,8 +3037,8 @@
             if (!grid) return;
 
             grid.innerHTML = "";
-            // Filtrar módulos: solo mostrar los que NO están activos y que coincidan con la búsqueda
-            const filtered = modules.filter(m => !m.active && m.name.toLowerCase().includes(filterText.toLowerCase()));
+            // Filtrar módulos: solo mostrar los que NO están activos, NO tienen hideFromCatalog y que coincidan con la búsqueda
+            const filtered = modules.filter(m => !m.active && !m.hideFromCatalog && m.name.toLowerCase().includes(filterText.toLowerCase()));
 
             if (filtered.length === 0) {
                 // Si no hay módulos disponibles para contratar
@@ -3344,7 +3388,7 @@
             menuItem.id = `sidebar-module-${module.id}`;
             menuItem.className = 'animate-slide-in';
             menuItem.innerHTML = `
-                <a href="#" onclick="showModuleView(${module.id})"
+                <a href="#" id="sidebar-link-${module.id}" onclick="showModuleView(${module.id})"
                     class="sidebar-link flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 group"
                     style="color: var(--text-muted);">
                     <i class='bx ${module.icon} text-xl mr-3'></i>
@@ -3389,6 +3433,22 @@
             const viewName = moduleViewMap[moduleId];
             if (viewName) {
                 showView(viewName);
+
+                // Forzar resaltado para módulos dinámicos que no están en el mapa fijo de showView
+                const dynamicLink = document.getElementById(`sidebar-link-${moduleId}`);
+                if (dynamicLink) {
+                    // Limpiar otros activos primero (ya lo hace showView, pero por si acaso)
+                    document.querySelectorAll('.sidebar-link').forEach(l => {
+                        l.classList.remove('active');
+                        l.style.background = 'transparent';
+                        l.style.color = 'var(--text-muted)';
+                    });
+
+                    dynamicLink.classList.add('active');
+                    dynamicLink.style.background = 'var(--accent-primary)';
+                    dynamicLink.style.color = 'white';
+                }
+
                 showToast(`Accediendo a ${module.name}...`, 'info');
             } else {
                 showToast(`${module.name} - Funcionalidad en desarrollo`, 'info');
