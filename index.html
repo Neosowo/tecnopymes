@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -821,7 +820,7 @@
 
                 <!-- WhatsApp Button -->
                 <div class="relative">
-                    <a href="https://wa.me/593999999999" target="_blank"
+                    <a href="https://wa.me/593980591472" target="_blank"
                         class="hover:text-green-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100 flex items-center justify-center"
                         style="color: var(--text-muted);" title="Contactar por WhatsApp">
                         <i class='bx bxl-whatsapp text-xl'></i>
@@ -2282,40 +2281,89 @@
     </div>
 
     <!-- Video Tutorial Modal -->
-    <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center">
+    <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
         <div id="modal-backdrop"
-            class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+            class="absolute inset-0 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-300"
             onclick="closeVideoModal()"></div>
         <div id="modal-panel"
-            class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden transform transition-all scale-95 opacity-0">
-            <div class="p-4 text-white flex justify-between items-center" style="background: var(--accent-primary);">
-                <div class="flex items-center">
-                    <i class='bx bx-play-circle text-2xl mr-3'></i>
-                    <h3 id="modal-title" class="text-lg font-bold">Video Tutorial</h3>
+            class="relative bg-white rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden transform transition-all scale-95 opacity-0">
+            <!-- Header -->
+            <div class="p-5 text-white flex justify-between items-center"
+                style="background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-dark) 100%);">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center"
+                        style="background: rgba(255,255,255,0.2);">
+                        <i class='bx bx-play-circle text-2xl'></i>
+                    </div>
+                    <div>
+                        <h3 id="modal-title" class="text-lg font-bold">Video Tutorial</h3>
+                        <p class="text-xs text-white/80">Aprende a usar esta función</p>
+                    </div>
                 </div>
                 <button onclick="closeVideoModal()"
-                    class="text-white hover:text-gray-200 hover:rotate-90 transition-all duration-300 p-1 rounded-lg hover:bg-white/20">
-                    <i class='bx bx-x text-2xl'></i>
+                    class="w-10 h-10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 group">
+                    <i class='bx bx-x text-2xl group-hover:rotate-90 transition-transform duration-300'></i>
                 </button>
             </div>
-            <div class="p-6">
-                <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                    <div class="text-center">
-                        <i class='bx bx-movie-play text-6xl text-gray-400 mb-3'></i>
-                        <p class="text-gray-500">Video tutorial próximamente</p>
-                        <p class="text-sm text-gray-400 mt-1">Contenido en desarrollo</p>
+
+            <!-- Video Content -->
+            <div class="bg-black relative">
+                <!-- Video Player (shown when video is available) -->
+                <div id="video-container" class="hidden relative">
+                    <!-- Loading Spinner -->
+                    <div id="video-loading" class="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+                        <div class="text-center">
+                            <div
+                                class="w-16 h-16 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-3">
+                            </div>
+                            <p class="text-white text-sm">Cargando video...</p>
+                        </div>
+                    </div>
+
+                    <video id="tutorial-video-player" class="w-full aspect-video bg-black" controls
+                        controlsList="nodownload" onloadeddata="hideVideoLoading()" onwaiting="showVideoLoading()"
+                        onplaying="hideVideoLoading()">
+                        <source id="tutorial-video-source" src="" type="video/mp4">
+                        Tu navegador no soporta la reproducción de videos.
+                    </video>
+                </div>
+
+                <!-- YouTube Player (shown when video is from YouTube) -->
+                <div id="youtube-container" class="hidden relative">
+                    <iframe id="youtube-iframe" class="w-full aspect-video" src="" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Placeholder (shown when no video is available) -->
+                <div id="placeholder-container"
+                    class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <div class="text-center px-6">
+                        <div class="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                            <i class='bx bx-movie-play text-6xl text-white/50'></i>
+                        </div>
+                        <p class="text-white text-lg font-semibold mb-2">Video tutorial próximamente</p>
+                        <p class="text-white/60 text-sm">Este contenido está en desarrollo</p>
                     </div>
                 </div>
             </div>
-            <div class="bg-gray-50 px-6 py-4 flex justify-end">
+
+            <!-- Footer with Actions -->
+            <div class="bg-gray-50 px-6 py-4 flex justify-between items-center border-t border-gray-200">
+                <div class="flex items-center gap-2 text-sm text-gray-600">
+                    <i class='bx bx-info-circle'></i>
+                    <span>Usa los controles del video para pausar o ajustar el volumen</span>
+                </div>
                 <button onclick="closeVideoModal()"
-                    class="px-6 py-2 rounded-lg font-semibold transition-colors text-white"
+                    class="px-6 py-2.5 rounded-xl font-semibold transition-all hover:scale-105 text-white shadow-lg"
                     style="background: var(--accent-primary);">
                     Cerrar
                 </button>
             </div>
         </div>
     </div>
+
 
 
 
@@ -2464,7 +2512,7 @@
                 <i class='bx bx-time-five mr-1'></i>
                 Tiempo de respuesta promedio: <strong style="color: #276CE4;">~15 minutos</strong>
             </p>
-            <a href="https://wa.me/593999999999" target="_blank"
+            <a href="https://wa.me/593980591472" target="_blank"
                 class="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-lg"
                 style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);">
                 <i class='bx bxl-whatsapp text-2xl'></i>
@@ -2476,7 +2524,7 @@
                     style="color: #276CE4;">
                     <i class='bx bx-envelope'></i> Email
                 </a>
-                <a href="tel:+593999999999"
+                <a href="tel:+593980591472"
                     class="flex-1 flex items-center justify-center gap-1 py-2 rounded-lg text-sm font-medium transition-all border border-gray-200 hover:bg-gray-50"
                     style="color: #276CE4;">
                     <i class='bx bx-phone'></i> Llamar
@@ -2721,8 +2769,55 @@
         const modalPanel = document.getElementById('modal-panel');
         const modalTitle = document.getElementById('modal-title');
 
+        // Mapeo de títulos de tutoriales a videos
+        // Puedes usar URLs de YouTube (formato: https://www.youtube.com/embed/VIDEO_ID)
+        // o archivos locales (formato: media/nombre.mp4)
+        const videoMapping = {
+            'Tutorial: Dashboard General': 'https://www.youtube.com/embed/dQw4w9WgXcQ',  // Video de prueba que SÍ permite inserción
+            'Tutorial: Catálogo de Módulos': 'https://www.youtube.com/embed/0xLO8Ecg4NQ',
+            'Tutorial: Calculadora de Ganancias': 'https://www.youtube.com/embed/Edywx2HJs8w'
+        };
+
         function openVideoModal() {
             modalTitle.textContent = currentVideoTitle;
+
+            // Obtener elementos del modal
+            const videoPlayer = document.getElementById('tutorial-video-player');
+            const videoSource = document.getElementById('tutorial-video-source');
+            const videoContainer = document.getElementById('video-container');
+            const youtubeContainer = document.getElementById('youtube-container');
+            const youtubeIframe = document.getElementById('youtube-iframe');
+            const placeholderContainer = document.getElementById('placeholder-container');
+
+            // Verificar si existe un video para este tutorial
+            const videoPath = videoMapping[currentVideoTitle];
+
+            if (videoPath) {
+                // Verificar si es un video de YouTube o local
+                if (videoPath.includes('youtube.com') || videoPath.includes('youtu.be')) {
+                    // Es un video de YouTube
+                    youtubeContainer.classList.remove('hidden');
+                    videoContainer.classList.add('hidden');
+                    placeholderContainer.classList.add('hidden');
+
+                    // Configurar el iframe de YouTube
+                    youtubeIframe.src = videoPath;
+                } else {
+                    // Es un video local
+                    videoContainer.classList.remove('hidden');
+                    youtubeContainer.classList.add('hidden');
+                    placeholderContainer.classList.add('hidden');
+
+                    // Configurar la fuente del video local
+                    videoSource.src = videoPath;
+                    videoPlayer.load();
+                }
+            } else {
+                // No hay video disponible, mostrar placeholder
+                videoContainer.classList.add('hidden');
+                youtubeContainer.classList.add('hidden');
+                placeholderContainer.classList.remove('hidden');
+            }
 
             modal.classList.remove('hidden');
             modal.classList.add('flex');
@@ -2734,6 +2829,19 @@
         }
 
         function closeVideoModal() {
+            // Pausar el video local si está reproduciéndose
+            const videoPlayer = document.getElementById('tutorial-video-player');
+            if (videoPlayer) {
+                videoPlayer.pause();
+                videoPlayer.currentTime = 0;
+            }
+
+            // Limpiar el iframe de YouTube para detener la reproducción
+            const youtubeIframe = document.getElementById('youtube-iframe');
+            if (youtubeIframe) {
+                youtubeIframe.src = '';
+            }
+
             modalBackdrop.classList.add('opacity-0');
             modalPanel.classList.remove('scale-100', 'opacity-100');
             modalPanel.classList.add('scale-95', 'opacity-0');
@@ -2742,6 +2850,21 @@
                 modal.classList.remove('flex');
                 modal.classList.add('hidden');
             }, 300);
+        }
+
+        // Funciones para manejar el indicador de carga del video
+        function showVideoLoading() {
+            const loadingIndicator = document.getElementById('video-loading');
+            if (loadingIndicator) {
+                loadingIndicator.classList.remove('hidden');
+            }
+        }
+
+        function hideVideoLoading() {
+            const loadingIndicator = document.getElementById('video-loading');
+            if (loadingIndicator) {
+                loadingIndicator.classList.add('hidden');
+            }
         }
 
         const sidebarLinks = document.querySelectorAll('nav a');
@@ -2905,7 +3028,7 @@
         // Close dropdowns when clicking outside
         document.addEventListener('click', function (event) {
             const isDropdownButton = event.target.closest('button[onclick*="toggleDropdown"]');
-            const isInsideDropdown = event.target.closest('#emails-dropdown, #notifications-dropdown, #profile-dropdown');
+            const isInsideDropdown = event.target.closest('#emails-dropdown, #notifications-dropdown, #profile-dropdown, #help-dropdown');
 
             if (!isDropdownButton && !isInsideDropdown && activeDropdown) {
                 activeDropdown.classList.add('hidden');
