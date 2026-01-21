@@ -1,8 +1,4 @@
-// ===============================
-// UTILIDADES GENERALES
-// ===============================
-
-// TOAST NOTIFICATION SYSTEM
+// Dev Neos
 function showToast(message, type = 'success', duration = 3000) {
     const container = document.getElementById('toast-container');
     const toast = document.createElement('div');
@@ -32,19 +28,18 @@ function showToast(message, type = 'success', duration = 3000) {
 
     container.appendChild(toast);
 
-    // Animate in
+    
     setTimeout(() => {
         toast.classList.remove('translate-x-full');
     }, 10);
 
-    // Auto remove
+    
     setTimeout(() => {
         toast.classList.add('translate-x-full', 'opacity-0');
         setTimeout(() => toast.remove(), 300);
     }, duration);
 }
 
-// FAQ ACCORDION FUNCTIONALITY
 function toggleFAQ(faqId) {
     const answer = document.getElementById(faqId + '-answer');
     const icon = document.getElementById(faqId + '-icon');
@@ -58,7 +53,6 @@ function toggleFAQ(faqId) {
     }
 }
 
-// DATE AND TIME UPDATE
 function updateTags() {
     const now = new Date();
     const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
@@ -70,7 +64,6 @@ function updateTags() {
     document.getElementById('time-display').textContent = timeString;
 }
 
-// SIDEBAR FUNCTIONALITY
 const sidebar = document.getElementById('sidebar');
 
 function toggleSidebar() {
@@ -85,32 +78,30 @@ function checkMobileAndCloseSidebar() {
     }
 }
 
-// LOGOUT FUNCTIONALITY
 function logout() {
     if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
-        // Limpiar datos de sesión
+        
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('userEmail');
         localStorage.removeItem('userName');
         localStorage.removeItem('userCompany');
 
-        // Redirigir al login
+        
         window.location.href = 'login.html';
     }
 }
 
-// DROPDOWN FUNCTIONALITY
 let activeDropdown = null;
 
 function toggleDropdown(dropdownId) {
     const dropdown = document.getElementById(dropdownId);
 
-    // Close any other open dropdown
+    
     if (activeDropdown && activeDropdown !== dropdown) {
         activeDropdown.classList.add('hidden');
     }
 
-    // Toggle current dropdown
+    
     if (dropdown.classList.contains('hidden')) {
         dropdown.classList.remove('hidden');
         activeDropdown = dropdown;
@@ -120,7 +111,6 @@ function toggleDropdown(dropdownId) {
     }
 }
 
-// Close dropdowns when clicking outside
 document.addEventListener('click', function (event) {
     const isDropdownButton = event.target.closest('button[onclick*="toggleDropdown"]');
     const isInsideDropdown = event.target.closest('#emails-dropdown, #notifications-dropdown, #profile-dropdown, #help-dropdown');
@@ -131,7 +121,6 @@ document.addEventListener('click', function (event) {
     }
 });
 
-// VIDEO MODAL FUNCTIONALITY
 const videoMapping = {
     'Tutorial: Catálogo de Módulos': 'https://www.youtube.com/embed/0xLO8Ecg4NQ',
     'Tutorial: Calculadora de Ganancias': 'https://www.youtube.com/embed/Edywx2HJs8w'
@@ -147,7 +136,7 @@ function openVideoModal() {
 
     modalTitle.textContent = currentVideoTitle;
 
-    // Obtener elementos del modal
+    
     const videoPlayer = document.getElementById('tutorial-video-player');
     const videoSource = document.getElementById('tutorial-video-source');
     const videoContainer = document.getElementById('video-container');
@@ -155,31 +144,31 @@ function openVideoModal() {
     const youtubeIframe = document.getElementById('youtube-iframe');
     const placeholderContainer = document.getElementById('placeholder-container');
 
-    // Verificar si existe un video para este tutorial
+    
     const videoPath = videoMapping[currentVideoTitle];
 
     if (videoPath) {
-        // Verificar si es un video de YouTube o local
+        
         if (videoPath.includes('youtube.com') || videoPath.includes('youtu.be')) {
-            // Es un video de YouTube
+            
             youtubeContainer.classList.remove('hidden');
             videoContainer.classList.add('hidden');
             placeholderContainer.classList.add('hidden');
 
-            // Configurar el iframe de YouTube
+            
             youtubeIframe.src = videoPath;
         } else {
-            // Es un video local
+            
             videoContainer.classList.remove('hidden');
             youtubeContainer.classList.add('hidden');
             placeholderContainer.classList.add('hidden');
 
-            // Configurar la fuente del video local
+            
             videoSource.src = videoPath;
             videoPlayer.load();
         }
     } else {
-        // No hay video disponible, mostrar placeholder
+        
         videoContainer.classList.add('hidden');
         youtubeContainer.classList.add('hidden');
         placeholderContainer.classList.remove('hidden');
@@ -199,14 +188,14 @@ function closeVideoModal() {
     const modalBackdrop = document.getElementById('modal-backdrop');
     const modalPanel = document.getElementById('modal-panel');
 
-    // Pausar el video local si está reproduciéndose
+    
     const videoPlayer = document.getElementById('tutorial-video-player');
     if (videoPlayer) {
         videoPlayer.pause();
         videoPlayer.currentTime = 0;
     }
 
-    // Limpiar el iframe de YouTube para detener la reproducción
+    
     const youtubeIframe = document.getElementById('youtube-iframe');
     if (youtubeIframe) {
         youtubeIframe.src = '';
@@ -222,7 +211,6 @@ function closeVideoModal() {
     }, 300);
 }
 
-// Funciones para manejar el indicador de carga del video
 function showVideoLoading() {
     const loadingIndicator = document.getElementById('video-loading');
     if (loadingIndicator) {
@@ -237,11 +225,9 @@ function hideVideoLoading() {
     }
 }
 
-// CHAT ASSISTANT FUNCTIONALITY
 const chatWindow = document.getElementById('ai-chat');
 let chatInitialized = false;
 
-// Respuestas precargadas del asistente IA
 const aiResponses = {
     'default': '¡Gracias por tu mensaje! Soy tu asistente virtual de TecnoPymes. Estoy aquí para ayudarte con cualquier duda sobre la plataforma. ¿En qué puedo ayudarte?',
     'hola': '¡Hola! 👋 Bienvenido a TecnoPymes. Estoy aquí para ayudarte a aprovechar al máximo nuestra plataforma. ¿Qué te gustaría saber?',
@@ -262,7 +248,7 @@ const aiResponses = {
 function getAIResponse(message) {
     const lowerMessage = message.toLowerCase();
 
-    // Buscar coincidencias en las palabras clave
+    
     for (const [keyword, response] of Object.entries(aiResponses)) {
         if (lowerMessage.includes(keyword)) {
             return response;
@@ -330,14 +316,14 @@ function sendChatMessage(event) {
 
     if (!message) return;
 
-    // Add user message
+    
     addMessage(message, true);
     input.value = '';
 
-    // Show typing indicator
+    
     showTypingIndicator();
 
-    // Simulate AI response delay
+    
     setTimeout(() => {
         removeTypingIndicator();
         const response = getAIResponse(message);
@@ -365,7 +351,6 @@ function toggleAssistant() {
     }
 }
 
-// MODULE REQUEST MODAL
 function requestCustomModule(prefill = "") {
     const modal = document.getElementById('module-request-modal');
     modal.classList.remove('hidden');
@@ -399,25 +384,23 @@ function submitModuleRequest() {
     showToast('¡Solicitud enviada con éxito! Un especialista te contactará pronto a ' + email, 'success');
 }
 
-// DARK MODE FUNCTIONALITY
 function toggleDarkMode() {
     const html = document.documentElement;
     const isDark = html.classList.toggle('dark');
     localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
 
-    // Show toast notification
+    
     showToast(isDark ? 'Modo oscuro activado' : 'Modo claro activado', 'info', 2000);
 }
 
-// Initialize dark mode on page load
 function initDarkMode() {
     const darkMode = localStorage.getItem('darkMode');
 
-    // Check if user prefers dark mode
+    
     if (darkMode === 'enabled') {
         document.documentElement.classList.add('dark');
     } else if (darkMode === null) {
-        // Check system preference if no setting saved
+        
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.documentElement.classList.add('dark');
             localStorage.setItem('darkMode', 'enabled');
@@ -425,14 +408,13 @@ function initDarkMode() {
     }
 }
 
-// PURCHASE SUCCESS MODAL (Roblox Style)
 function showPurchaseSuccessModal(modules, total) {
     const modal = document.getElementById('purchase-success-modal');
     const modalContent = document.getElementById('purchase-modal-content');
     const modulesList = document.getElementById('purchase-modules-list');
     const totalElement = document.getElementById('purchase-total');
 
-    // Llenar la lista de módulos
+    
     modulesList.innerHTML = '';
     modules.forEach(module => {
         const moduleItem = document.createElement('div');
@@ -450,10 +432,10 @@ function showPurchaseSuccessModal(modules, total) {
         modulesList.appendChild(moduleItem);
     });
 
-    // Actualizar el total
+    
     totalElement.textContent = `$${total.toFixed(2)}`;
 
-    // Mostrar el modal con animación
+    
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 
@@ -462,9 +444,9 @@ function showPurchaseSuccessModal(modules, total) {
         modalContent.classList.add('modal-show');
     }, 50);
 
-    // Reproducir sonido de éxito (opcional)
-    // const successSound = new Audio('path/to/success-sound.mp3');
-    // successSound.play().catch(() => {});
+    
+    
+    
 }
 
 function closePurchaseModal() {
@@ -480,7 +462,6 @@ function closePurchaseModal() {
     }, 300);
 }
 
-// Initialize on page load
 setInterval(updateTags, 1000);
 updateTags();
 initDarkMode();

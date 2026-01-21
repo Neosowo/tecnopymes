@@ -1,8 +1,4 @@
-// ===============================
-// GESTION DE MÓDULOS
-// ===============================
-
-// Lista de módulos disponibles
+// Dev Neos
 const modules = [
     { id: 1, name: 'CRM', desc: 'Gestión avanzada de clientes, pipelines y analítica de ventas.', price: 39.99, active: true, icon: 'bx-briefcase', hideFromCatalog: true },
     { id: 2, name: 'Recursos Humanos', desc: 'Gestión de nóminas, asistencia y portal del empleado.', price: 34.99, active: true, icon: 'bx-group', hideFromCatalog: true },
@@ -14,19 +10,18 @@ const modules = [
     { id: 8, name: 'Conector E-commerce', desc: 'Sincronización con Shopify, WooCommerce y más.', price: 35.00, active: false, icon: 'bx-cart' },
 ];
 
-// CARRITO DE COMPRAS
 let shoppingCart = [];
 
 function toggleModule(id) {
     const module = modules.find(m => m.id === id);
     if (module && !module.active) {
-        // Verificar si ya está en el carrito
+        
         if (shoppingCart.find(item => item.id === id)) {
             showToast(`${module.name} ya está en el carrito`, 'warning');
             return;
         }
 
-        // Agregar al carrito
+        
         addToShoppingCart(module);
         showToast(`${module.name} agregado al carrito`, 'success');
     }
@@ -36,7 +31,7 @@ function addToShoppingCart(module) {
     shoppingCart.push(module);
     updateShoppingCartUI();
 
-    // Mostrar el carrito si estaba oculto
+    
     const cartSection = document.getElementById('shopping-cart-section');
     if (cartSection) {
         cartSection.classList.remove('hidden');
@@ -97,21 +92,20 @@ function confirmPurchase() {
 
     const total = shoppingCart.reduce((sum, m) => sum + m.price, 0);
 
-    // Abrir el carrusel de simulación de pago
+    
     openPaymentSimulation([...shoppingCart], total);
 }
 
-// RENDERIZAR MÓDULOS DISPONIBLES
 function renderModules(filterText = "") {
     const grid = document.getElementById('modules-grid');
     if (!grid) return;
 
     grid.innerHTML = "";
-    // Filtrar módulos: solo mostrar los que NO están activos, NO tienen hideFromCatalog y que coincidan con la búsqueda
+    
     const filtered = modules.filter(m => !m.active && !m.hideFromCatalog && m.name.toLowerCase().includes(filterText.toLowerCase()));
 
     if (filtered.length === 0) {
-        // Si no hay módulos disponibles para contratar
+        
         if (filterText === "") {
             grid.innerHTML = `
                 <div class="col-span-full text-center py-16 bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl border-2 border-green-200">
@@ -165,7 +159,6 @@ function renderModules(filterText = "") {
     });
 }
 
-// MÓDULOS CONTRATADOS
 function updateContractedModulesUI() {
     const contractedSection = document.getElementById('contracted-modules-section');
     const contractedItemsContainer = document.getElementById('contracted-modules-items');
@@ -176,8 +169,8 @@ function updateContractedModulesUI() {
         return;
     }
 
-    // Filtrar módulos activos que NO tengan hideFromCatalog: true
-    // Los módulos con hideFromCatalog vienen incluidos en el paquete base y no deben mostrarse como "contratados"
+    
+    
     const activeModules = modules.filter(m => m.active && !m.hideFromCatalog);
 
     if (activeModules.length === 0) {
@@ -188,7 +181,7 @@ function updateContractedModulesUI() {
     contractedSection.classList.remove('hidden');
     contractedCount.textContent = activeModules.length;
 
-    // Limpiar contenedor
+    
     contractedItemsContainer.innerHTML = '';
 
     activeModules.forEach(module => {
@@ -222,11 +215,6 @@ function updateContractedModulesUI() {
     });
 }
 
-// Event Delegation para los botones de Devolver - MÁS ROBUSTO
-// Event Delegation removido a favor de onclick directo para mejor compatibilidad
-// document.addEventListener('click', function (e) { ... });
-
-// Función separada para manejar la devolución
 function handleModuleReturn(moduleId, moduleName) {
     console.log('handleModuleReturn llamada:', moduleId, moduleName);
 
@@ -244,23 +232,23 @@ function handleModuleReturn(moduleId, moduleName) {
         return;
     }
 
-    // Confirmar devolución
-    // const confirmMessage = `¿Estás seguro de que deseas devolver "${module.name}"?\n\nSe procesará un reembolso según tu período de uso.`;
-    // if (!confirm(confirmMessage)) return;
+    
+    
+    
 
-    // Procesar devolución
+    
     console.log('Procesando devolución de:', module.name);
     showToast('Procesando devolución...', 'info');
 
-    // Desactivar módulo inmediatamente
+    
     module.active = false;
 
-    // Breve delay para la animación
+    
     setTimeout(() => {
-        // Quitar del sidebar
+        
         removeModuleFromSidebar(moduleId);
 
-        // Actualizar todas las vistas
+        
         updateContractedModulesUI();
         renderModules();
         updatePlanSummary();
@@ -269,7 +257,6 @@ function handleModuleReturn(moduleId, moduleName) {
         console.log('Devolución completada');
     }, 500);
 }
-
 
 function toggleContractedModules() {
     const content = document.getElementById('contracted-modules-content');
@@ -297,26 +284,26 @@ function returnContractedModule(moduleId) {
         return;
     }
 
-    // Confirmar devolución (Custom implementation or direct)
-    // const confirmed = confirm(...); 
-    // if (!confirmed) return;
+    
+    
+    
 
-    // Instead of native confirm which is failing for the user, we'll proceed and allow Undo via Toast if needed (advanced)
-    // For now, let's just proceed to unblock the user.
+    
+    
     console.log('Procesando devolución (confirmación omitida por error en navegador)...');
 
     console.log('Procesando devolución...');
     showToast('Procesando devolución...', 'info');
 
     setTimeout(() => {
-        // Desactivar módulo
+        
         module.active = false;
         console.log('Módulo desactivado:', module);
 
-        // Quitar del sidebar
+        
         removeModuleFromSidebar(moduleId);
 
-        // Actualizar las vistas
+        
         updateContractedModulesUI();
         renderModules();
         updatePlanSummary();
@@ -326,23 +313,21 @@ function returnContractedModule(moduleId) {
     }, 1000);
 }
 
-// Exponer la función globalmente para que funcione con onclick en HTML dinámico
 window.returnContractedModule = returnContractedModule;
 
-// SIDEBAR - AGREGAR Y REMOVER MÓDULOS
 function addModuleToSidebar(module) {
     const dynamicMenu = document.getElementById('dynamic-modules-menu');
     if (!dynamicMenu) return;
 
-    // Verificar si ya existe
+    
     if (document.getElementById(`sidebar-module-${module.id}`)) {
         return;
     }
 
-    // Si es el primer módulo, limpiar el mensaje de "No hay módulos contratados"
+    
     const placeholderMessage = dynamicMenu.querySelector('p.italic');
     if (placeholderMessage) {
-        dynamicMenu.innerHTML = ''; // Limpiar todo el contenido
+        dynamicMenu.innerHTML = ''; 
     }
 
     const menuItem = document.createElement('li');
@@ -362,7 +347,7 @@ function addModuleToSidebar(module) {
 
     dynamicMenu.appendChild(menuItem);
 
-    // Quitar el badge "Nuevo" después de 5 segundos
+    
     setTimeout(() => {
         const badge = menuItem.querySelector('span.bg-green-100');
         if (badge) {
@@ -378,9 +363,9 @@ function showModuleView(moduleId) {
 
     checkMobileAndCloseSidebar();
 
-    // Mapeo de IDs de módulos a nombres de vistas
+    
     const moduleViewMap = {
-        1: 'module-crm-pro-view',        // CRM Pro → ahora tiene su propia vista
+        1: 'module-crm-pro-view',        
         2: 'module-recursos-humanos-view',
         3: 'module-contabilidad-view',
         4: 'module-inventario-view',
@@ -394,10 +379,10 @@ function showModuleView(moduleId) {
     if (viewName) {
         showView(viewName);
 
-        // Forzar resaltado para módulos dinámicos que no están en el mapa fijo de showView
+        
         const dynamicLink = document.getElementById(`sidebar-link-${moduleId}`);
         if (dynamicLink) {
-            // Limpiar otros activos primero (ya lo hace showView, pero por si acaso)
+            
             document.querySelectorAll('.sidebar-link').forEach(l => {
                 l.classList.remove('active');
                 l.style.background = 'transparent';
@@ -419,14 +404,14 @@ function showModuleView(moduleId) {
 function removeModuleFromSidebar(moduleId) {
     const menuItem = document.getElementById(`sidebar-module-${moduleId}`);
     if (menuItem) {
-        // Animación de salida
+        
         menuItem.style.opacity = '0';
         menuItem.style.transform = 'translateX(-20px)';
 
         setTimeout(() => {
             menuItem.remove();
 
-            // Si no quedan módulos, mostrar mensaje de placeholder
+            
             const dynamicMenu = document.getElementById('dynamic-modules-menu');
             if (dynamicMenu && dynamicMenu.children.length === 0) {
                 const placeholderLi = document.createElement('li');
@@ -442,31 +427,29 @@ function removeModuleFromSidebar(moduleId) {
     }
 }
 
-// CARRITO DE REEMBOLSOS
 let refundCart = [];
 
-// Precios de referencia para módulos "incluidos" (para simulación)
 const modulePrices = {
-    1: 39.99,  // CRM Pro
-    2: 34.99,  // Recursos Humanos
-    3: 29.99,  // Contabilidad
-    4: 19.99,  // Inventario
-    5: 24.99,  // Marketing
-    6: 14.99,  // Proyectos
-    7: 12.50,  // Soporte
-    8: 35.00   // E-commerce
+    1: 39.99,  
+    2: 34.99,  
+    3: 29.99,  
+    4: 19.99,  
+    5: 24.99,  
+    6: 14.99,  
+    7: 12.50,  
+    8: 35.00   
 };
 
 function removeModule(id) {
     const module = modules.find(m => m.id === id);
     if (module && module.active) {
-        // Agregar al carrito de reembolsos en lugar de eliminar directamente
+        
         addToRefundCart(module);
     }
 }
 
 function addToRefundCart(module) {
-    // Verificar si ya está en el carrito
+    
     if (refundCart.find(item => item.id === module.id)) {
         showToast(`"${module.name}" ya está en el carrito de reembolsos`, 'warning');
         return;
@@ -573,16 +556,16 @@ function confirmRefunds() {
     const eligibleItems = refundCart.filter(item => item.isEligible);
     const totalRefund = eligibleItems.reduce((sum, item) => sum + item.refundAmount, 0);
 
-    // Desactivar los módulos del carrito
+    
     refundCart.forEach(item => {
         const module = modules.find(m => m.id === item.id);
         if (module) {
             module.active = false;
 
-            // Remover del sidebar
+            
             removeModuleFromSidebar(item.id);
 
-            // Update the card UI
+            
             const card = document.getElementById(`module-card-${item.id}`);
             if (card) {
                 const iconDiv = card.querySelector('.flex.items-start.justify-between.mb-4');
@@ -592,7 +575,7 @@ function confirmRefunds() {
                 const badge = iconDiv.querySelector('span');
                 if (badge) badge.remove();
 
-                // Restaurar sección de precio completa
+                
                 const priceSection = card.querySelector('.pt-4.border-t.border-gray-50');
                 if (priceSection) {
                     priceSection.innerHTML = `
@@ -610,7 +593,7 @@ function confirmRefunds() {
         }
     });
 
-    // Limpiar carrito
+    
     refundCart = [];
     updateRefundCartUI();
     updatePlanSummary();
@@ -622,13 +605,12 @@ function confirmRefunds() {
     }
 }
 
-// ACTUALIZAR RESUMEN DEL PLAN
 function updatePlanSummary() {
-    // Solo contar módulos activos que NO vienen incluidos por defecto (hideFromCatalog)
+    
     const purchasedModules = modules.filter(m => m.active && !m.hideFromCatalog);
     const total = purchasedModules.reduce((sum, m) => sum + m.price, 0);
 
-    // También contar los del carrito de compras
+    
     const cartTotal = shoppingCart.reduce((sum, m) => sum + m.price, 0);
     const cartCount = shoppingCart.length;
 
@@ -636,7 +618,6 @@ function updatePlanSummary() {
     document.getElementById('total-price').textContent = `$${cartTotal.toFixed(2)}`;
 }
 
-// BUSCAR MÓDULOS
 document.getElementById('module-search')?.addEventListener('input', (e) => {
     const searchText = e.target.value.toLowerCase();
     const moduleCards = document.querySelectorAll('#modules-grid > div');
@@ -653,18 +634,17 @@ document.getElementById('module-search')?.addEventListener('input', (e) => {
     });
 });
 
-// Inicializar módulos activos al cargar la página
 function initializeModules() {
-    // Agregar módulos activos al sidebar
+    
     modules.forEach(module => {
         if (module.active) {
             addModuleToSidebar(module);
         }
     });
 
-    // Actualizar la UI de módulos contratados
+    
     updateContractedModulesUI();
 
-    // Renderizar los módulos disponibles
+    
     renderModules();
 }

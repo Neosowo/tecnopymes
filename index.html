@@ -1,16 +1,17 @@
-﻿<!DOCTYPE html>
+<!-- Dev Neos -->
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecnoPymes</title>
-    <!-- Dev Erick -->
+    
 
-    <!-- Boxicons -->
+    
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    <!-- Tailwind CSS -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -26,13 +27,13 @@
         }
     </script>
 
-    <!-- Estilos principales -->
+    
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body class="font-roboto h-screen flex overflow-hidden">
 
-    <!-- Verificación de sesión - Redirige al login si no está autenticado -->
+    
     <script>
             (function () {
                 if (localStorage.getItem('isLoggedIn') !== 'true') {
@@ -41,11 +42,11 @@
             })();
     </script>
 
-    <!-- Sidebar con Estilo Claro y Nombres -->
+    
     <aside class="w-64 flex flex-col flex-shrink-0 transition-all duration-300"
         style="background: var(--bg-secondary); border-right: 1px solid #e2e8f0;" id="sidebar">
 
-        <!-- Logo -->
+        
         <div class="h-16 flex items-center px-6 border-b" style="border-color: #e2e8f0;">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center mr-3"
                 style="background: var(--accent-primary);">
@@ -54,10 +55,10 @@
             <span class="text-lg font-bold" style="color: var(--text-primary);">TECNOPYMES</span>
         </div>
 
-        <!-- Navigation -->
+        
         <nav class="flex-1 overflow-y-auto py-4 no-scrollbar">
             <ul class="space-y-1 px-3">
-                <!-- SECCIÓN: NAVEGACIÓN PRINCIPAL -->
+                
                 <li>
                     <div class="px-4 py-2 text-xs font-semibold uppercase tracking-wider"
                         style="color: var(--text-muted);">
@@ -65,7 +66,7 @@
                     </div>
                 </li>
 
-                <!-- Catálogo de Módulos (PRIMERO - Página de Inicio) -->
+                
                 <li>
                     <a href="#" id="nav-catalog" onclick="showView('catalog')"
                         class="sidebar-link active flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group"
@@ -75,7 +76,7 @@
                     </a>
                 </li>
 
-                <!-- Calculadora -->
+                
                 <li>
                     <a href="#" id="nav-calculator" onclick="showView('calculator')"
                         class="sidebar-link flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 group"
@@ -85,7 +86,7 @@
                     </a>
                 </li>
 
-                <!-- Tutoriales -->
+                
                 <li>
                     <a href="#" id="nav-tutoriales" onclick="showView('tutoriales')"
                         class="sidebar-link flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 group"
@@ -95,7 +96,7 @@
                     </a>
                 </li>
 
-                <!-- Dashboard (AL FINAL) -->
+                
                 <li>
                     <a href="#" id="nav-dashboard" onclick="showView('dashboard')"
                         class="sidebar-link flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 hover:bg-gray-100 group"
@@ -105,19 +106,19 @@
                     </a>
                 </li>
 
-                <!-- SEPARADOR CON ESPACIO -->
+                
                 <li class="pt-4">
                     <div class="border-t" style="border-color: var(--border-color); margin: 0 1rem;"></div>
                 </li>
 
-                <!-- SECCIÓN: MÓDULOS CONTRATADOS -->
+                
                 <li class="pt-2">
                     <div class="px-4 py-2 text-xs font-semibold uppercase tracking-wider"
                         style="color: var(--text-muted);">
                         Módulos Contratados
                     </div>
                     <ul id="dynamic-modules-menu" class="space-y-1 mt-2">
-                        <!-- Los módulos contratados se agregarán aquí dinámicamente -->
+                        
                         <li class="px-4 py-2">
                             <p class="text-xs italic" style="color: var(--text-muted);">
                                 No hay módulos contratados
@@ -128,7 +129,7 @@
             </ul>
         </nav>
 
-        <!-- Footer del Sidebar -->
+        
         <div class="p-4 border-t" style="border-color: var(--border-color);">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
@@ -150,10 +151,10 @@
         </div>
     </aside>
 
-    <!-- Main Content Area -->
+    
     <div class="flex-1 flex flex-col overflow-hidden">
 
-        <!-- Top Header -->
+        
         <header class="bg-white h-16 shadow-sm flex items-center justify-between px-4 sticky top-0 z-50">
             <div class="flex items-center gap-4">
                 <button onclick="toggleSidebar()" class="text-gray-600 hover:text-gray-900 focus:outline-none">
@@ -168,7 +169,7 @@
             </div>
 
             <div class="flex items-center gap-3 text-gray-500">
-                <!-- Correos Dropdown -->
+                
                 <div class="relative">
                     <button onclick="toggleDropdown('emails-dropdown')"
                         class="hover:text-blue-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100 relative"
@@ -177,7 +178,7 @@
                         <span class="absolute top-1 right-1 block h-2 w-2 rounded-full"
                             style="background: var(--accent-primary);"></span>
                     </button>
-                    <!-- Emails Dropdown Panel -->
+                    
                     <div id="emails-dropdown"
                         class="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden transform transition-all duration-200 origin-top-right">
                         <div class="p-4 border-b border-gray-100">
@@ -237,7 +238,7 @@
                     </div>
                 </div>
 
-                <!-- Notificaciones Dropdown -->
+                
                 <div class="relative">
                     <button onclick="toggleDropdown('notifications-dropdown')"
                         class="hover:text-blue-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100 relative"
@@ -246,7 +247,7 @@
                         <span
                             class="absolute top-1 right-1 block h-2 w-2 rounded-full ring-2 ring-white bg-red-500 animate-pulse"></span>
                     </button>
-                    <!-- Notifications Dropdown Panel -->
+                    
                     <div id="notifications-dropdown"
                         class="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden transform transition-all duration-200 origin-top-right">
                         <div class="p-4 border-b border-gray-100">
@@ -317,7 +318,7 @@
                     </div>
                 </div>
 
-                <!-- Botón FAQ (enlace a la página) -->
+                
                 <div class="relative">
                     <button onclick="showView('faq')"
                         class="hover:text-blue-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100"
@@ -326,7 +327,7 @@
                     </button>
                 </div>
 
-                <!-- Botón Soporte (enlace a la página) -->
+                
                 <div class="relative">
                     <button onclick="showView('soporte')"
                         class="hover:text-blue-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100"
@@ -335,7 +336,7 @@
                     </button>
                 </div>
 
-                <!-- WhatsApp Button -->
+                
                 <div class="relative">
                     <a href="https://wa.me/593980591472" target="_blank"
                         class="hover:text-green-600 hover:scale-110 transition-all duration-200 p-2 rounded-lg hover:bg-gray-100 flex items-center justify-center"
@@ -344,18 +345,18 @@
                     </a>
                 </div>
 
-                <!-- Profile Dropdown -->
+                
                 <div class="relative">
                     <button onclick="toggleDropdown('profile-dropdown')"
                         class="w-10 h-10 rounded-lg overflow-hidden border-2 border-transparent hover:border-blue-400 transition-all duration-200 cursor-pointer">
                         <img src="https://ui-avatars.com/api/?name=Barbara&background=3869F4&color=FFFFFF" alt="User"
                             class="w-full h-full object-cover">
                     </button>
-                    <!-- Profile Dropdown Panel -->
+                    
                     <div id="profile-dropdown"
                         class="absolute right-0 mt-2 w-72 rounded-2xl shadow-2xl border hidden transform transition-all duration-200 origin-top-right overflow-hidden"
                         style="background: var(--bg-card); border-color: var(--border-color);">
-                        <!-- Profile Header -->
+                        
                         <div class="p-5" style="background: #0D131A;">
                             <div class="flex items-center gap-4">
                                 <div class="w-16 h-16 rounded-xl overflow-hidden border-3 border-white/10 shadow-lg">
@@ -374,7 +375,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Profile Info -->
+                        
                         <div class="p-4 border-b border-gray-100">
                             <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
                                 <i class='bx bx-envelope text-gray-400'></i>
@@ -385,7 +386,7 @@
                                 <span>TecnoPymes S.A.</span>
                             </div>
                         </div>
-                        <!-- Profile Actions -->
+                        
                         <div class="p-2">
                             <button
                                 class="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-xl transition-colors">
@@ -398,7 +399,7 @@
                                 <span>Configuración</span>
                             </button>
                         </div>
-                        <!-- Logout -->
+                        
                         <div class="p-3 border-t border-gray-100">
                             <button onclick="logout()"
                                 class="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-xl transition-colors">
@@ -411,12 +412,9 @@
             </div>
         </header>
 
-        <!-- Main Content with Scroll -->
+        
         <main class="flex-1 overflow-y-auto p-8 animate-fade-in-up" id="main-scroll-area"
             style="background: var(--bg-primary);">
-
-
-
 
             <div id="dashboard-view">
 
@@ -424,7 +422,6 @@
                     <h3 id="capsule-title"></h3>
                     <p id="capsule-desc"></p>
                 </div>
-
 
                 <div
                     class="section-header-light rounded-2xl p-6 shadow-lg mt-4 mb-8 animate-fade-in-up relative overflow-hidden">
@@ -454,9 +451,9 @@
                     </div>
                 </div>
 
-                <!-- Stats Grid -->
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <!-- Total Revenue Card -->
+                    
                     <div class="p-6 rounded-3xl relative overflow-hidden"
                         style="background: var(--accent-primary); box-shadow: var(--shadow-md);">
                         <button class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
@@ -476,7 +473,7 @@
                         </div>
                     </div>
 
-                    <!-- Total Orders Card -->
+                    
                     <div class="p-6 rounded-3xl"
                         style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
                         <button class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
@@ -496,7 +493,7 @@
                         </div>
                     </div>
 
-                    <!-- Total Visitors Card -->
+                    
                     <div class="p-6 rounded-3xl relative"
                         style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
                         <button class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
@@ -517,7 +514,7 @@
                         </div>
                     </div>
 
-                    <!-- Net Profit Card -->
+                    
                     <div class="p-6 rounded-3xl relative"
                         style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
                         <button class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
@@ -538,9 +535,9 @@
                     </div>
                 </div>
 
-                <!-- Bottom Section with Charts -->
+                
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Revenue Chart -->
+                    
                     <div class="lg:col-span-2 p-6 rounded-3xl"
                         style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
                         <div class="flex items-center justify-between mb-6">
@@ -555,7 +552,7 @@
                             </button>
                         </div>
 
-                        <!-- Simple Bar Chart -->
+                        
                         <div class="h-64 flex items-end justify-between gap-3">
                             <div class="flex-1 flex flex-col items-center gap-2">
                                 <div class="w-full rounded-t-lg"
@@ -608,7 +605,7 @@
                         </div>
                     </div>
 
-                    <!-- Sales by Category -->
+                    
                     <div class="p-6 rounded-3xl"
                         style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
                         <div class="flex items-center justify-between mb-6">
@@ -623,7 +620,7 @@
                             </button>
                         </div>
 
-                        <!-- Donut Chart Placeholder -->
+                        
                         <div class="flex items-center justify-center mb-6">
                             <div class="relative w-48 h-48">
                                 <svg viewBox="0 0 100 100" class="transform -rotate-90">
@@ -639,7 +636,7 @@
                             </div>
                         </div>
 
-                        <!-- Legend -->
+                        
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2">
@@ -670,9 +667,9 @@
                     </div>
                 </div>
 
-                <!-- Orders and Customers Section -->
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <!-- Orders Card -->
+                    
                     <div class="p-8 rounded-3xl relative"
                         style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
                         <button class="absolute top-6 left-6 w-10 h-10 rounded-full flex items-center justify-center"
@@ -693,7 +690,7 @@
                         </div>
                     </div>
 
-                    <!-- Customers Card -->
+                    
                     <div class="p-8 rounded-3xl relative"
                         style="background: var(--bg-card); box-shadow: var(--shadow-md); border: 1px solid #e2e8f0;">
                         <button class="absolute top-6 left-6 w-10 h-10 rounded-full flex items-center justify-center"
@@ -715,7 +712,6 @@
                 </div>
             </div>
 
-
             <div id="catalog-view" class="hidden">
 
                 <div
@@ -736,14 +732,6 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-3 w-full md:w-auto">
-                            <button onclick="currentVideoTitle='Tutorial: Catálogo de Módulos'; openVideoModal()"
-                                class="px-4 py-2.5 rounded-xl font-bold text-sm transition-all hover:scale-105 flex-shrink-0 flex items-center gap-2"
-                                style="background: white; color: var(--color-primary); box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                                <i class='bx bx-play-circle text-2xl'></i>
-                                <span class="hidden lg:inline">Tutorial</span>
-                            </button>
-                        </div>
                     </div>
                 </div>
 
@@ -797,7 +785,7 @@
                     </div>
                 </div>
 
-                <!-- Carrito de Compras Visual -->
+                
                 <div id="shopping-cart-section" class="hidden mb-8 animate-fade-in-up">
                     <div class="bg-white rounded-2xl shadow-lg border-2 border-blue-200 overflow-hidden">
                         <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4 flex items-center justify-between">
@@ -812,13 +800,13 @@
                         </div>
                         <div class="p-6">
                             <div id="shopping-cart-items" class="space-y-3 mb-4">
-                                <!-- Los items del carrito se agregarán aquí -->
+                                
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Módulos Contratados -->
+                
                 <div id="contracted-modules-section" class="hidden mb-8 animate-fade-in-up">
                     <div class="bg-white rounded-2xl shadow-lg border-2 border-green-200 overflow-hidden">
                         <div class="bg-gradient-to-r from-green-500 to-green-600 p-4 flex items-center justify-between">
@@ -838,7 +826,7 @@
                         <div id="contracted-modules-content" class="p-6">
                             <div id="contracted-modules-items"
                                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <!-- Los módulos contratados se agregarán aquí -->
+                                
                             </div>
                         </div>
                     </div>
@@ -847,7 +835,7 @@
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">Módulos Disponibles</h2>
                 <div id="modules-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
 
-                    <!-- CRM Pro -->
+                    
                     <div id="module-card-1"
                         class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
                         <div class="flex items-start justify-between mb-4">
@@ -874,7 +862,7 @@
                         </div>
                     </div>
 
-                    <!-- Recursos Humanos -->
+                    
                     <div id="module-card-2"
                         class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
                         <div class="flex items-start justify-between mb-4">
@@ -901,7 +889,7 @@
                         </div>
                     </div>
 
-                    <!-- Módulo de Contabilidad -->
+                    
                     <div id="module-card-3"
                         class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
                         <div class="flex items-start justify-between mb-4">
@@ -925,7 +913,7 @@
                         </div>
                     </div>
 
-                    <!-- Inventario Inteligente -->
+                    
                     <div id="module-card-4"
                         class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
                         <div class="flex items-start justify-between mb-4">
@@ -949,7 +937,7 @@
                         </div>
                     </div>
 
-                    <!-- Marketing Hub -->
+                    
                     <div id="module-card-5"
                         class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
                         <div class="flex items-start justify-between mb-4">
@@ -973,7 +961,7 @@
                         </div>
                     </div>
 
-                    <!-- Gestor de Proyectos -->
+                    
                     <div id="module-card-6"
                         class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
                         <div class="flex items-start justify-between mb-4">
@@ -997,7 +985,7 @@
                         </div>
                     </div>
 
-                    <!-- Soporte Ticket System -->
+                    
                     <div id="module-card-7"
                         class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
                         <div class="flex items-start justify-between mb-4">
@@ -1021,7 +1009,7 @@
                         </div>
                     </div>
 
-                    <!-- Conector E-commerce -->
+                    
                     <div id="module-card-8"
                         class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 relative group flex flex-col">
                         <div class="flex items-start justify-between mb-4">
@@ -1047,12 +1035,11 @@
 
                 </div>
 
-
-                <!-- SECCIÓN DESTACADA: Solicitar Nuevo Módulo -->
+                
                 <div
                     class="section-header-light rounded-3xl p-10 text-white relative overflow-hidden shadow-2xl mb-24 border-2 border-lime-400/30">
 
-                    <!-- Decorative elements -->
+                    
                     <div class="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20"
                         style="background: radial-gradient(circle, #ffffff 0%, transparent 70%); filter: blur(60px);">
                     </div>
@@ -1106,7 +1093,7 @@
                             </div>
                         </div>
 
-                        <!-- Features row -->
+                        
                         <div class="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-lg flex items-center justify-center"
@@ -1133,10 +1120,9 @@
                 </div>
             </div>
 
-
             <div id="calculator-view" class="hidden">
 
-                <!-- Header de la Calculadora -->
+                
                 <div class="rounded-2xl p-8 shadow-lg mb-8 animate-fade-in-up relative overflow-hidden"
                     style="background: linear-gradient(135deg, #55629d 0%, #5f79ee 100%);">
                     <div class="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10"
@@ -1161,7 +1147,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                    <!-- PANEL DE ENTRADA (Izquierda) -->
+                    
                     <div
                         class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden flex flex-col h-full">
                         <div class="p-6 border-b border-gray-50 flex items-center justify-between"
@@ -1175,7 +1161,7 @@
                         </div>
 
                         <div class="p-8 space-y-6 flex-grow overflow-y-auto no-scrollbar">
-                            <!-- Ingresos -->
+                            
                             <div>
                                 <label class="block text-sm font-bold text-[#4e5663] mb-2">Ingresos mensuales
                                     ($)</label>
@@ -1192,7 +1178,7 @@
                                     mes</p>
                             </div>
 
-                            <!-- Egresos Fijos -->
+                            
                             <div>
                                 <label class="block text-sm font-bold text-[#4e5663] mb-2">Egresos Mensuales ($)</label>
                                 <div class="relative group">
@@ -1208,7 +1194,7 @@
                                     básicos, impuestos, transporte fijo, etc.. )</p>
                             </div>
 
-                            <!-- Costos Variables -->
+                            
                             <div>
                                 <label class="block text-sm font-bold text-[#4e5663] mb-2">Costos variables mensuales
                                     ($)</label>
@@ -1227,7 +1213,7 @@
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 border-t border-gray-100">
-                                <!-- Horas -->
+                                
                                 <div>
                                     <label class="block text-sm font-bold text-[#4e5663] mb-2">Horas trabajadas al
                                         mes</label>
@@ -1242,7 +1228,7 @@
                                             oninput="updateCalculator()">
                                     </div>
                                 </div>
-                                <!-- Valor Hora -->
+                                
                                 <div>
                                     <label class="block text-sm font-bold text-[#4e5663] mb-2">Valor hora trabajo
                                         ($)</label>
@@ -1260,7 +1246,7 @@
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Errores -->
+                                
                                 <div>
                                     <label class="block text-sm font-bold text-[#4e5663] mb-2">Errores al mes</label>
                                     <div class="relative group">
@@ -1276,7 +1262,7 @@
                                     <p class="text-[9px] text-[#7c7c89] mt-1.5 ml-1 leading-tight font-medium italic">
                                         Reprocesos, producto mal hecho, clientes insatisfechos.</p>
                                 </div>
-                                <!-- Costo Error -->
+                                
                                 <div>
                                     <label class="block text-sm font-bold text-[#4e5663] mb-2">Costo por error
                                         ($)</label>
@@ -1304,9 +1290,9 @@
                         </div>
                     </div>
 
-                    <!-- PANEL DE RESULTADOS (Derecha) -->
+                    
                     <div class="flex flex-col gap-6">
-                        <!-- Card Principal: Resumen de Costos y Utilidad Real -->
+                        
                         <div
                             class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden relative h-full">
                             <div class="p-6 border-b border-gray-50 flex items-center justify-between"
@@ -1319,7 +1305,7 @@
                             </div>
 
                             <div class="p-8 space-y-8">
-                                <!-- Costo Laboral -->
+                                
                                 <div>
                                     <div class="flex justify-between items-center mb-3">
                                         <span class="text-sm font-bold text-[#4e5663] flex items-center">
@@ -1334,7 +1320,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Costo por Errores -->
+                                
                                 <div>
                                     <div class="flex justify-between items-center mb-3">
                                         <span class="text-sm font-bold text-[#4e5663] flex items-center">
@@ -1350,7 +1336,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Utilidad Real -->
+                                
                                 <div class="pt-6 border-t border-gray-100">
                                     <div class="flex justify-between items-center mb-3">
                                         <span class="text-sm font-bold text-[#4e5663] flex items-center">
@@ -1367,9 +1353,9 @@
                             </div>
                         </div>
 
-                        <!-- KPIs Grid -->
+                        
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Margen -->
+                            
                             <div
                                 class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 text-center flex flex-col items-center justify-center relative overflow-hidden group">
                                 <div
@@ -1382,7 +1368,7 @@
                                 <div class="text-[10px] font-bold text-[#cad0d8] uppercase">Sobre ventas brutas</div>
                             </div>
 
-                            <!-- Productividad -->
+                            
                             <div
                                 class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 text-center flex flex-col items-center justify-center relative overflow-hidden group">
                                 <div
@@ -1396,7 +1382,7 @@
                             </div>
                         </div>
 
-                        <!-- Botón de Exportación (Estético) -->
+                        
                         <button onclick="showToast('Generando reporte PDF...', 'info')"
                             class="w-full py-5 bg-[#4e5663] text-white rounded-3xl font-bold flex items-center justify-center gap-3 shadow-lg hover:shadow-xl hover:bg-[#55629d] transition-all">
                             <i class='bx bxs-file-pdf text-2xl'></i> Descargar Reporte de Análisis
@@ -1404,7 +1390,7 @@
                     </div>
                 </div>
 
-                <!-- NOTA DE FORMULAS (Opcional, decorativa) -->
+                
                 <div class="bg-white/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-200">
                     <p class="text-xs text-[#7c7c89] font-medium leading-relaxed italic">
                         * Fórmulas aplicadas: Costo Laboral (Hrs Ã— Val/Hr) | Ineficiencia (Errores Ã— Costo Prom) |
@@ -1412,7 +1398,6 @@
                     </p>
                 </div>
             </div>
-
 
             <div id="crm-clientes-view" class="hidden">
                 <div class="bg-lime-50 border-l-4 border-blue-500 p-6 rounded-r-lg shadow-sm mb-8 animate-fade-in-up">
@@ -1440,7 +1425,6 @@
                 </div>
             </div>
 
-
             <div id="crm-oportunidades-view" class="hidden">
                 <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg shadow-sm mb-8 animate-fade-in-up">
                     <div class="flex items-center">
@@ -1467,7 +1451,6 @@
                 </div>
             </div>
 
-
             <div id="crm-comisiones-view" class="hidden">
                 <div
                     class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-r-lg shadow-sm mb-8 animate-fade-in-up">
@@ -1493,7 +1476,6 @@
                     </p>
                 </div>
             </div>
-
 
             <div id="crm-lineas-view" class="hidden">
                 <div
@@ -1523,9 +1505,9 @@
                 </div>
             </div>
 
-            <!-- Vistas de Módulos Contratados -->
+            
 
-            <!-- Vista: CRM Pro -->
+            
             <div id="module-crm-pro-view" class="hidden">
                 <div class="bg-gradient-to-r from-blue-50 to-sky-50 p-6 rounded-2xl mb-8 border border-blue-200">
                     <div class="flex items-start gap-4">
@@ -1553,7 +1535,7 @@
                 </div>
             </div>
 
-            <!-- Vista: Recursos Humanos -->
+            
             <div id="module-recursos-humanos-view" class="hidden">
                 <div class="bg-gradient-to-r from-green-50 to-lime-50 p-6 rounded-2xl mb-8 border border-green-200">
                     <div class="flex items-start gap-4">
@@ -1581,7 +1563,7 @@
                 </div>
             </div>
 
-            <!-- Vista: Módulo de Contabilidad -->
+            
             <div id="module-contabilidad-view" class="hidden">
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-2xl mb-8 border border-blue-200">
                     <div class="flex items-start gap-4">
@@ -1608,7 +1590,7 @@
                 </div>
             </div>
 
-            <!-- Vista: Inventario Inteligente -->
+            
             <div id="module-inventario-view" class="hidden">
                 <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl mb-8 border border-purple-200">
                     <div class="flex items-start gap-4">
@@ -1635,7 +1617,7 @@
                 </div>
             </div>
 
-            <!-- Vista: Marketing Hub -->
+            
             <div id="module-marketing-view" class="hidden">
                 <div class="bg-gradient-to-r from-orange-50 to-yellow-50 p-6 rounded-2xl mb-8 border border-orange-200">
                     <div class="flex items-start gap-4">
@@ -1663,7 +1645,7 @@
                 </div>
             </div>
 
-            <!-- Vista: Gestor de Proyectos -->
+            
             <div id="module-proyectos-view" class="hidden">
                 <div class="bg-gradient-to-r from-cyan-50 to-blue-50 p-6 rounded-2xl mb-8 border border-cyan-200">
                     <div class="flex items-start gap-4">
@@ -1689,7 +1671,7 @@
                 </div>
             </div>
 
-            <!-- Vista: Soporte Ticket System -->
+            
             <div id="module-soporte-view" class="hidden">
                 <div class="bg-gradient-to-r from-red-50 to-pink-50 p-6 rounded-2xl mb-8 border border-red-200">
                     <div class="flex items-start gap-4">
@@ -1715,7 +1697,7 @@
                 </div>
             </div>
 
-            <!-- Vista: Conector E-commerce -->
+            
             <div id="module-ecommerce-view" class="hidden">
                 <div class="bg-gradient-to-r from-violet-50 to-purple-50 p-6 rounded-2xl mb-8 border border-violet-200">
                     <div class="flex items-start gap-4">
@@ -1741,7 +1723,7 @@
                 </div>
             </div>
 
-            <!-- Vista: Tutoriales -->
+            
             <div id="tutoriales-view" class="hidden">
                 <div
                     class="section-header-light rounded-2xl p-6 shadow-lg mt-4 mb-8 animate-fade-in-up relative overflow-hidden">
@@ -1761,9 +1743,9 @@
                     </div>
                 </div>
 
-                <!-- Grid de Videos Tutoriales -->
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Video 1: Catálogo de Módulos -->
+                    
                     <div
                         class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all">
                         <div
@@ -1782,7 +1764,7 @@
                         </div>
                     </div>
 
-                    <!-- Video 2: Calculadora de Ganancias -->
+                    
                     <div
                         class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all">
                         <div
@@ -1801,7 +1783,7 @@
                         </div>
                     </div>
 
-                    <!-- Video 3: Dashboard General -->
+                    
                     <div
                         class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all">
                         <div
@@ -1821,7 +1803,7 @@
                 </div>
             </div>
 
-            <!-- Vista: Soporte -->
+            
             <div id="soporte-view" class="hidden">
                 <div
                     class="section-header-light rounded-2xl p-6 shadow-lg mt-4 mb-8 animate-fade-in-up relative overflow-hidden">
@@ -1840,9 +1822,9 @@
                     </div>
                 </div>
 
-                <!-- Información de Contacto -->
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <!-- Email de Soporte -->
+                    
                     <div
                         class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all">
                         <div class="flex items-center mb-4">
@@ -1860,7 +1842,7 @@
                         </a>
                     </div>
 
-                    <!-- WhatsApp -->
+                    
                     <div
                         class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all">
                         <div class="flex items-center mb-4">
@@ -1879,7 +1861,7 @@
                         </a>
                     </div>
 
-                    <!--  Teléfono -->
+                    
                     <div
                         class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all">
                         <div class="flex items-center mb-4">
@@ -1896,7 +1878,7 @@
                         </a>
                     </div>
 
-                    <!-- Horarios -->
+                    
                     <div
                         class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all">
                         <div class="flex items-center mb-4">
@@ -1917,7 +1899,7 @@
                     </div>
                 </div>
 
-                <!-- Formulario de Contacto Rápido -->
+                
                 <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-100">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">¿Necesitas ayuda inmediata?</h3>
                     <p class="text-gray-600 mb-6">Nuestro equipo de soporte está listo para asistirte. Contáctanos por
@@ -1938,7 +1920,7 @@
                 </div>
             </div>
 
-            <!-- Vista: Preguntas Frecuentes (FAQ) -->
+            
             <div id="faq-view" class="hidden">
                 <div
                     class="section-header-light rounded-2xl p-6 shadow-lg mt-4 mb-8 animate-fade-in-up relative overflow-hidden">
@@ -1957,9 +1939,9 @@
                     </div>
                 </div>
 
-                <!-- Categorías de FAQ -->
+                
                 <div class="grid grid-cols-1 gap-4">
-                    <!-- FAQ 1 -->
+                    
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <button onclick="toggleFAQ('faq-page-1')"
                             class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
@@ -1984,7 +1966,7 @@
                         </div>
                     </div>
 
-                    <!-- FAQ 2 -->
+                    
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <button onclick="toggleFAQ('faq-page-2')"
                             class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
@@ -2011,7 +1993,7 @@
                         </div>
                     </div>
 
-                    <!-- FAQ 3 -->
+                    
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <button onclick="toggleFAQ('faq-page-3')"
                             class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
@@ -2037,7 +2019,7 @@
                         </div>
                     </div>
 
-                    <!-- FAQ 4 -->
+                    
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <button onclick="toggleFAQ('faq-page-4')"
                             class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
@@ -2062,7 +2044,7 @@
                         </div>
                     </div>
 
-                    <!-- FAQ 5 -->
+                    
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <button onclick="toggleFAQ('faq-page-5')"
                             class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
@@ -2086,7 +2068,7 @@
                         </div>
                     </div>
 
-                    <!-- FAQ 6 -->
+                    
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <button onclick="toggleFAQ('faq-page-6')"
                             class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
@@ -2110,7 +2092,7 @@
                         </div>
                     </div>
 
-                    <!-- FAQ 7 -->
+                    
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <button onclick="toggleFAQ('faq-page-7')"
                             class="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors">
@@ -2163,7 +2145,6 @@
         </div>
     </div>
 
-
     <div id="module-request-modal"
         class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden transform transition-all">
@@ -2212,14 +2193,14 @@
         </div>
     </div>
 
-    <!-- Video Tutorial Modal -->
+    
     <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
         <div id="modal-backdrop"
             class="absolute inset-0 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-300"
             onclick="closeVideoModal()"></div>
         <div id="modal-panel"
             class="relative bg-white rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden transform transition-all scale-95 opacity-0">
-            <!-- Header -->
+            
             <div class="p-5 text-white flex justify-between items-center"
                 style="background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-dark) 100%);">
                 <div class="flex items-center gap-3">
@@ -2238,11 +2219,11 @@
                 </button>
             </div>
 
-            <!-- Video Content -->
+            
             <div class="bg-black relative">
-                <!-- Video Player (shown when video is available) -->
+                
                 <div id="video-container" class="hidden relative">
-                    <!-- Loading Spinner -->
+                    
                     <div id="video-loading" class="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
                         <div class="text-center">
                             <div
@@ -2260,7 +2241,7 @@
                     </video>
                 </div>
 
-                <!-- YouTube Player (shown when video is from YouTube) -->
+                
                 <div id="youtube-container" class="hidden relative">
                     <iframe id="youtube-iframe" class="w-full aspect-video" src="" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -2268,7 +2249,7 @@
                     </iframe>
                 </div>
 
-                <!-- Placeholder (shown when no video is available) -->
+                
                 <div id="placeholder-container"
                     class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
                     <div class="text-center px-6">
@@ -2281,7 +2262,7 @@
                 </div>
             </div>
 
-            <!-- Footer with Actions -->
+            
             <div class="bg-gray-50 px-6 py-4 flex justify-between items-center border-t border-gray-200">
                 <div class="flex items-center gap-2 text-sm text-gray-600">
                     <i class='bx bx-info-circle'></i>
@@ -2296,15 +2277,12 @@
         </div>
     </div>
 
-
-
-
-    <!-- Centro de Ayuda Proactivo -->
+    
     <div id="ai-chat"
         class="fixed bottom-24 right-4 sm:right-8 w-[calc(100vw-2rem)] sm:w-[420px] bg-white rounded-2xl shadow-2xl border hidden flex-col overflow-hidden transition-all duration-300 transform scale-95 opacity-0 origin-bottom-right z-50"
         style="border-color: #e2e8f0; max-height: 85vh;">
 
-        <!-- Header -->
+        
         <div class="p-4 text-white flex justify-between items-center"
             style="background: linear-gradient(135deg, #276CE4 0%, #1747BB 100%);">
             <div class="flex items-center">
@@ -2323,10 +2301,10 @@
             </button>
         </div>
 
-        <!-- Scrollable Content -->
+        
         <div class="flex-1 overflow-y-auto p-4 space-y-4" style="background: #f8fafc;">
 
-            <!-- Trayectoria en el Mercado -->
+            
             <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 rounded-lg flex items-center justify-center"
@@ -2351,7 +2329,7 @@
                 </div>
             </div>
 
-            <!-- Stack Tecnológico -->
+            
             <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 rounded-lg flex items-center justify-center"
@@ -2380,7 +2358,7 @@
                 </p>
             </div>
 
-            <!-- Cartera de Clientes -->
+            
             <div class="bg-white rounded-xl p-4 shadow-sm border-2" style="border-color: rgba(105, 82, 235, 0.3);">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 rounded-lg flex items-center justify-center"
@@ -2405,7 +2383,7 @@
                 </div>
             </div>
 
-            <!-- Procesos y Metodología -->
+            
             <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-10 h-10 rounded-lg flex items-center justify-center"
@@ -2438,7 +2416,7 @@
 
         </div>
 
-        <!-- Footer con Contacto -->
+        
         <div class="p-4 border-t" style="border-color: #e2e8f0; background: white;">
             <p class="text-xs text-gray-500 text-center mb-3">
                 <i class='bx bx-time-five mr-1'></i>
@@ -2464,8 +2442,6 @@
             </div>
         </div>
     </div>
-
-
 
     </main>
 
@@ -2509,19 +2485,17 @@
 
                     </div>
 
-
                 </div>
             </div>
         </div>
     </div>
     </div>
 
-
-    <!-- Modal de Compra Exitosa (Estilo Roblox) -->
+    
     <div id="purchase-success-modal"
         class="fixed inset-0 bg-black/70 backdrop-blur-md z-[999] hidden items-center justify-center p-4">
         <div class="relative max-w-lg w-full">
-            <!-- Partículas de fondo animadas -->
+            
             <div class="absolute inset-0 overflow-hidden pointer-events-none">
                 <div class="absolute w-2 h-2 bg-yellow-400 rounded-full animate-ping" style="top: 10%; left: 20%;">
                 </div>
@@ -2533,10 +2507,10 @@
                     style="bottom: 30%; right: 20%; animation-delay: 0.9s;"></div>
             </div>
 
-            <!-- Contenido del Modal -->
+            
             <div class="bg-gradient-to-br from-white via-blue-50 to-purple-50 rounded-3xl shadow-2xl overflow-hidden transform scale-0 transition-transform duration-500"
                 id="purchase-modal-content">
-                <!-- Header con gradiente -->
+                
                 <div
                     class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-8 text-center relative overflow-hidden">
                     <div class="absolute inset-0 opacity-20">
@@ -2545,12 +2519,12 @@
                             style="animation-delay: 0.5s;"></div>
                     </div>
 
-                    <!-- Icono de éxito animado -->
+                    
                     <div class="relative inline-block mb-4">
                         <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center animate-bounce">
                             <i class='bx bx-check-circle text-6xl text-green-500'></i>
                         </div>
-                        <!-- Anillo de pulso -->
+                        
                         <div class="absolute inset-0 w-24 h-24 bg-white rounded-full animate-ping opacity-30"></div>
                     </div>
 
@@ -2558,20 +2532,20 @@
                     <p class="text-white/90 text-lg">Tus módulos han sido activados</p>
                 </div>
 
-                <!-- Cuerpo del modal -->
+                
                 <div class="p-8">
-                    <!-- Lista de módulos comprados -->
+                    
                     <div class="bg-white rounded-xl p-6 mb-6 shadow-inner">
                         <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
                             <i class='bx bx-package text-2xl text-blue-600'></i>
                             Módulos Activados
                         </h3>
                         <div id="purchase-modules-list" class="space-y-2">
-                            <!-- Los módulos se agregarán dinámicamente aquí -->
+                            
                         </div>
                     </div>
 
-                    <!-- Resumen del pago -->
+                    
                     <div
                         class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mb-6 border-2 border-green-200">
                         <div class="flex items-center justify-between mb-3">
@@ -2584,7 +2558,7 @@
                         </div>
                     </div>
 
-                    <!-- Botón de cerrar -->
+                    
                     <button onclick="closePurchaseModal()"
                         class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 active:scale-95 shadow-lg">
                         <i class='bx bx-rocket mr-2'></i>
@@ -2625,19 +2599,19 @@
             animation: modalSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
     </style>
-    <!-- Toast Container -->
+    
     <div id="toast-container" class="fixed top-4 right-4 z-[100] flex flex-col gap-3"></div>
 
-    <!-- Modal de Simulación de Pago con Carrusel -->
+    
     <div id="payment-simulation-modal"
         class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[998] hidden items-center justify-center p-4">
         <div class="relative max-w-4xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden">
-            <!-- Progress Bar -->
+            
             <div class="h-2 bg-gray-200">
                 <div id="payment-progress-bar" class="h-full transition-all duration-500"
                     style="width: 20%; background: linear-gradient(90deg, #276CE4 0%, #3869F4 100%);"></div>
             </div>
-            <!-- Header -->
+            
             <div class="p-6 border-b border-gray-200">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-3">
@@ -2657,10 +2631,10 @@
                     </button>
                 </div>
             </div>
-            <!-- Carousel Container -->
+            
             <div class="relative overflow-hidden" style="min-height: 500px;">
                 <div id="payment-carousel" class="flex transition-transform duration-500 ease-out">
-                    <!-- Slide 1: Revisión -->
+                    
                     <div class="w-full flex-shrink-0 p-8">
                         <div class="text-center mb-6">
                             <div class="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4"
@@ -2682,7 +2656,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Slide 2: Método de Pago -->
+                    
                     <div class="w-full flex-shrink-0 p-8">
                         <div class="text-center mb-6">
                             <div class="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4"
@@ -2729,7 +2703,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Slide 3: Datos de Pago -->
+                    
                     <div class="w-full flex-shrink-0 p-8">
                         <div class="text-center mb-6">
                             <div class="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4"
@@ -2819,7 +2793,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Navigation -->
+            
             <div class="border-t border-gray-200 p-6 flex items-center justify-between">
                 <button id="payment-prev-btn" onclick="prevPaymentStep()"
                     class="px-6 py-3 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed text-gray-700 hover:bg-gray-100"><i
@@ -2838,7 +2812,7 @@
         </div>
     </div>
 
-    <!-- Scripts externos -->
+    
     <script src="js/utils.js?v=20260120"></script>
     <script src="js/calculator.js?v=20260120"></script>
     <script src="js/modules.js?v=20260120"></script>

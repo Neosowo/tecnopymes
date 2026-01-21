@@ -1,7 +1,8 @@
+/* Dev Neos */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-    /* Paleta Principal */
+    
     --color-primary: #3869F4;
     --color-primary-light: #5A85F6;
     --color-primary-dark: #2A52C7;
@@ -11,23 +12,23 @@
     --color-dark-light: #1A2332;
     --color-accent: #3869F4;
 
-    /* Fondos */
+    
     --bg-primary: #FFFFFF;
     --bg-secondary: #FAFAFA;
     --bg-card: #FFFFFF;
     --bg-hover: #F5F7FA;
     --bg-sidebar: #FFFFFF;
 
-    /* Textos */
+    
     --text-primary: #0D131A;
     --text-secondary: #3D4756;
     --text-muted: #6B7280;
 
-    /* Bordes */
+    
     --border-color: #E0E0E0;
     --border-light: #EEEEEE;
 
-    /* Acentos */
+    
     --accent-primary: #3869F4;
     --accent-secondary: #5A85F6;
     --accent-dark: #2A52C7;
@@ -36,13 +37,13 @@
     --accent-yellow: #EAB308;
     --accent-green: #22C55E;
 
-    /* Sombras */
+    
     --shadow-sm: 0 1px 2px rgba(13, 19, 26, 0.04);
     --shadow-md: 0 4px 6px rgba(13, 19, 26, 0.06);
     --shadow-lg: 0 10px 20px rgba(13, 19, 26, 0.08);
     --shadow-xl: 0 20px 30px rgba(13, 19, 26, 0.1);
 
-    /* Radios */
+    
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
@@ -106,7 +107,6 @@ body {
     font-size: 0.75rem;
     font-weight: 600;
 }
-
 
 input {
     border: none;
@@ -252,7 +252,6 @@ header {
     animation: slideIn 0.4s ease-out forwards;
 }
 
-
 .chart-bar {
     background: var(--accent-primary);
     border-radius: 4px 4px 0 0;
@@ -299,7 +298,6 @@ textarea::placeholder {
     box-shadow: var(--shadow-xl);
 }
 
-/* Scrollbar for main content */
 main::-webkit-scrollbar {
     width: 8px;
 }
@@ -317,7 +315,6 @@ main::-webkit-scrollbar-thumb:hover {
     background: var(--text-muted);
 }
 
-/* Sidebar Icon Styles */
 .sidebar-icon {
     cursor: pointer;
 }
@@ -333,7 +330,6 @@ main::-webkit-scrollbar-thumb:hover {
     box-shadow: var(--shadow-md);
 }
 
-/* Card hover effect */
 .card-hover {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -343,7 +339,6 @@ main::-webkit-scrollbar-thumb:hover {
     box-shadow: var(--shadow-xl);
 }
 
-/* Gradient backgrounds for special cards */
 .gradient-blue {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
 }
@@ -356,7 +351,6 @@ main::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
 }
 
-/* Glass effect for chat */
 .glass-effect {
     background: var(--bg-card);
     backdrop-filter: blur(10px);
@@ -364,7 +358,6 @@ main::-webkit-scrollbar-thumb:hover {
     border: 1px solid var(--border-color);
 }
 
-/* Hide scrollbar */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
@@ -374,12 +367,10 @@ main::-webkit-scrollbar-thumb:hover {
     scrollbar-width: none;
 }
 
-/* Estilos para secciones destacadas */
 .section-header-light {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
 }
 
-/* Estilos para cards especiales */
 .feature-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);

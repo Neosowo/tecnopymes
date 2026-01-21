@@ -1,15 +1,10 @@
-// ===============================
-// MAIN.JS - FUNCIONALIDAD PRINCIPAL
-// ===============================
-
-// VERIFICACIÓN DE SESIÓN
+// Dev Neos
 (function () {
     if (localStorage.getItem('isLoggedIn') !== 'true') {
         window.location.href = 'login.html';
     }
 })();
 
-// NAVEGACIÓN ENTRE VISTAS
 function showView(viewName) {
     checkMobileAndCloseSidebar();
     const dashboard = document.getElementById('dashboard-view');
@@ -32,12 +27,12 @@ function showView(viewName) {
         el.classList.add('animate-fade-in-up');
     };
 
-    // Scroll to top
+    
     if (mainScrollArea) {
         mainScrollArea.scrollTop = 0;
     }
 
-    // Update sidebar active state
+    
     document.querySelectorAll('.sidebar-link').forEach(link => {
         link.classList.remove('active');
         link.style.background = 'transparent';
@@ -63,11 +58,11 @@ function showView(viewName) {
 
     let activeId = linkMap[viewName];
 
-    // Si no está en el mapa, podría ser un módulo dinámico
+    
     if (!activeId && viewName.startsWith('module-')) {
-        // El ID en el sidebar de módulos dinámicos se genera como `sidebar-link-${id}`
-        // Pero necesitamos buscarlo por su atributo onclick o por una clase
-        // Vamos a intentar buscar el enlace que coincida con el showView actual
+        
+        
+        
         document.querySelectorAll('.sidebar-link').forEach(link => {
             if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(`'${viewName}'`)) {
                 activeId = link.id;
@@ -84,7 +79,7 @@ function showView(viewName) {
         }
     }
 
-    // Hide all views
+    
     dashboard.classList.add('hidden');
     catalog.classList.add('hidden');
     calculator.classList.add('hidden');
@@ -96,7 +91,7 @@ function showView(viewName) {
     if (crmComisiones) crmComisiones.classList.add('hidden');
     if (crmLineas) crmLineas.classList.add('hidden');
 
-    // Ocultar vistas de módulos
+    
     const moduleViews = [
         'module-crm-pro-view',
         'module-recursos-humanos-view',
@@ -112,12 +107,12 @@ function showView(viewName) {
         if (view) view.classList.add('hidden');
     });
 
-    // Ocultar plan summary por defecto
+    
     if (planSummary) {
         planSummary.classList.add('hidden');
     }
 
-    // Show selected view
+    
     if (viewName === 'dashboard-view' || viewName === 'dashboard') {
         dashboard.classList.remove('hidden');
         resetAnim(dashboard);
@@ -157,13 +152,13 @@ function showView(viewName) {
         crmLineas.classList.remove('hidden');
         resetAnim(crmLineas);
     } else {
-        // Intentar buscar por ID directamente (para vistas de módulos)
+        
         const moduleView = document.getElementById(viewName);
         if (moduleView) {
             moduleView.classList.remove('hidden');
             resetAnim(moduleView);
         } else {
-            // Si no existe, mostrar catálogo por defecto
+            
             catalog.classList.remove('hidden');
             resetAnim(catalog);
             planSummary.classList.remove('hidden');
@@ -172,14 +167,12 @@ function showView(viewName) {
     }
 }
 
-// INICIALIZACIÓN AL CARGAR EL DOM
 document.addEventListener('DOMContentLoaded', () => {
-    showView('catalog'); // Catálogo como página de inicio
-    // Inicializar módulos activos
+    showView('catalog'); 
+    
     initializeModules();
 });
 
-// Configurar evento del primer link de navegación
 document.querySelectorAll('nav a')[0]?.addEventListener('click', () => {
     showView('catalog');
     checkMobileAndCloseSidebar();
