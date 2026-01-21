@@ -96,33 +96,9 @@ function confirmPurchase() {
     }
 
     const total = shoppingCart.reduce((sum, m) => sum + m.price, 0);
-    const moduleNames = shoppingCart.map(m => m.name).join(', ');
 
-    showToast('Procesando compra...', 'info');
-
-    setTimeout(() => {
-        // Activar módulos
-        shoppingCart.forEach(item => {
-            const module = modules.find(m => m.id === item.id);
-            if (module) {
-                module.active = true;
-                addModuleToSidebar(module);
-            }
-        });
-
-        // Preparar datos para el modal
-        const purchasedModules = [...shoppingCart];
-        const purchaseTotal = total;
-
-        // Limpiar carrito
-        shoppingCart = [];
-        updateShoppingCartUI();
-        renderModules();
-        updateContractedModulesUI();
-
-        // Mostrar modal de compra exitosa (estilo Roblox)
-        showPurchaseSuccessModal(purchasedModules, purchaseTotal);
-    }, 1500);
+    // Abrir el carrusel de simulación de pago
+    openPaymentSimulation([...shoppingCart], total);
 }
 
 // RENDERIZAR MÓDULOS DISPONIBLES
@@ -195,9 +171,14 @@ function updateContractedModulesUI() {
     const contractedItemsContainer = document.getElementById('contracted-modules-items');
     const contractedCount = document.getElementById('contracted-count');
 
-    if (!contractedSection || !contractedItemsContainer) return;
+    if (!contractedSection || !contractedItemsContainer) {
+        console.log('updateContractedModulesUI: Elementos no encontrados');
+        return;
+    }
 
-    const activeModules = modules.filter(m => m.active);
+    // Filtrar módulos activos que NO tengan hideFromCatalog: true
+    // Los módulos con hideFromCatalog vienen incluidos en el paquete base y no deben mostrarse como "contratados"
+    const activeModules = modules.filter(m => m.active && !m.hideFromCatalog);
 
     if (activeModules.length === 0) {
         contractedSection.classList.add('hidden');
@@ -207,11 +188,13 @@ function updateContractedModulesUI() {
     contractedSection.classList.remove('hidden');
     contractedCount.textContent = activeModules.length;
 
+    // Limpiar contenedor
     contractedItemsContainer.innerHTML = '';
 
     activeModules.forEach(module => {
         const card = document.createElement('div');
-        card.className = 'bg-gradient-to-br from-green-50 to-lime-50 p-4 rounded-xl border-2 border-green-200 hover:shadow-md transition-all';
+        card.className = 'contracted-module-card bg-gradient-to-br from-green-50 to-lime-50 p-4 rounded-xl border-2 border-green-200 hover:shadow-md transition-all';
+        card.setAttribute('data-module-id', module.id);
         card.innerHTML = `
             <div class="flex items-start justify-between mb-3">
                 <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
@@ -225,8 +208,12 @@ function updateContractedModulesUI() {
             <p class="text-xs text-gray-600 mb-3">${module.desc}</p>
             <div class="flex items-center justify-between">
                 <span class="text-sm font-bold text-green-700">$${module.price}/mes</span>
-                <button onclick="returnContractedModule(${module.id})" 
-                    class="text-xs text-red-600 hover:text-red-700 font-medium hover:underline">
+                <button type="button" 
+                    class="btn-devolver-module px-3 py-1.5 text-xs bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 font-semibold rounded-lg transition-all duration-200 flex items-center gap-1"
+                    onclick="returnContractedModule(${module.id})"
+                    data-module-id="${module.id}"
+                    data-module-name="${module.name}">
+                    <i class='bx bx-undo'></i>
                     Devolver
                 </button>
             </div>
@@ -234,6 +221,55 @@ function updateContractedModulesUI() {
         contractedItemsContainer.appendChild(card);
     });
 }
+
+// Event Delegation para los botones de Devolver - MÁS ROBUSTO
+// Event Delegation removido a favor de onclick directo para mejor compatibilidad
+// document.addEventListener('click', function (e) { ... });
+
+// Función separada para manejar la devolución
+function handleModuleReturn(moduleId, moduleName) {
+    console.log('handleModuleReturn llamada:', moduleId, moduleName);
+
+    const module = modules.find(m => m.id === moduleId);
+
+    if (!module) {
+        console.error('Módulo no encontrado:', moduleId);
+        showToast('Error: Módulo no encontrado', 'error');
+        return;
+    }
+
+    if (!module.active) {
+        console.error('Módulo no está activo:', moduleId);
+        showToast('Este módulo ya no está activo', 'warning');
+        return;
+    }
+
+    // Confirmar devolución
+    // const confirmMessage = `¿Estás seguro de que deseas devolver "${module.name}"?\n\nSe procesará un reembolso según tu período de uso.`;
+    // if (!confirm(confirmMessage)) return;
+
+    // Procesar devolución
+    console.log('Procesando devolución de:', module.name);
+    showToast('Procesando devolución...', 'info');
+
+    // Desactivar módulo inmediatamente
+    module.active = false;
+
+    // Breve delay para la animación
+    setTimeout(() => {
+        // Quitar del sidebar
+        removeModuleFromSidebar(moduleId);
+
+        // Actualizar todas las vistas
+        updateContractedModulesUI();
+        renderModules();
+        updatePlanSummary();
+
+        showToast(`"${module.name}" ha sido devuelto exitosamente.`, 'success');
+        console.log('Devolución completada');
+    }, 500);
+}
+
 
 function toggleContractedModules() {
     const content = document.getElementById('contracted-modules-content');
@@ -251,19 +287,31 @@ function toggleContractedModules() {
 }
 
 function returnContractedModule(moduleId) {
+    console.log('returnContractedModule llamada con ID:', moduleId);
+
     const module = modules.find(m => m.id === moduleId);
-    if (!module || !module.active) return;
+    console.log('Módulo encontrado:', module);
 
-    // Confirmar devolución
-    const confirmed = confirm(`¿Estás seguro de que deseas devolver "${module.name}"?\n\nSe procesará un reembolso según tu período de uso.`);
+    if (!module || !module.active) {
+        console.log('Módulo no encontrado o no activo, saliendo...');
+        return;
+    }
 
-    if (!confirmed) return;
+    // Confirmar devolución (Custom implementation or direct)
+    // const confirmed = confirm(...); 
+    // if (!confirmed) return;
 
+    // Instead of native confirm which is failing for the user, we'll proceed and allow Undo via Toast if needed (advanced)
+    // For now, let's just proceed to unblock the user.
+    console.log('Procesando devolución (confirmación omitida por error en navegador)...');
+
+    console.log('Procesando devolución...');
     showToast('Procesando devolución...', 'info');
 
     setTimeout(() => {
         // Desactivar módulo
         module.active = false;
+        console.log('Módulo desactivado:', module);
 
         // Quitar del sidebar
         removeModuleFromSidebar(moduleId);
@@ -274,8 +322,12 @@ function returnContractedModule(moduleId) {
         updatePlanSummary();
 
         showToast(`"${module.name}" ha sido devuelto exitosamente. Se procesará el reembolso correspondiente.`, 'success');
+        console.log('Devolución completada exitosamente');
     }, 1000);
 }
+
+// Exponer la función globalmente para que funcione con onclick en HTML dinámico
+window.returnContractedModule = returnContractedModule;
 
 // SIDEBAR - AGREGAR Y REMOVER MÓDULOS
 function addModuleToSidebar(module) {
@@ -572,11 +624,16 @@ function confirmRefunds() {
 
 // ACTUALIZAR RESUMEN DEL PLAN
 function updatePlanSummary() {
-    const activeModules = modules.filter(m => m.active);
-    const total = activeModules.reduce((sum, m) => sum + m.price, 0);
+    // Solo contar módulos activos que NO vienen incluidos por defecto (hideFromCatalog)
+    const purchasedModules = modules.filter(m => m.active && !m.hideFromCatalog);
+    const total = purchasedModules.reduce((sum, m) => sum + m.price, 0);
 
-    document.getElementById('total-modules').textContent = activeModules.length;
-    document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+    // También contar los del carrito de compras
+    const cartTotal = shoppingCart.reduce((sum, m) => sum + m.price, 0);
+    const cartCount = shoppingCart.length;
+
+    document.getElementById('total-modules').textContent = cartCount;
+    document.getElementById('total-price').textContent = `$${cartTotal.toFixed(2)}`;
 }
 
 // BUSCAR MÓDULOS
