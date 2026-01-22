@@ -3,11 +3,11 @@ const modules = [
     { id: 1, name: 'CRM', desc: 'Gestión avanzada de clientes, pipelines y analítica de ventas.', price: 39.99, active: true, icon: 'bx-briefcase', hideFromCatalog: true },
     { id: 2, name: 'Recursos Humanos', desc: 'Gestión de nóminas, asistencia y portal del empleado.', price: 34.99, active: true, icon: 'bx-group', hideFromCatalog: true },
     { id: 3, name: 'Módulo de Contabilidad', desc: 'Facturación electrónica, registro de gastos e informes financieros.', price: 29.99, active: false, icon: 'bx-calculator' },
-    { id: 4, name: 'Inventario Inteligente', desc: 'Control de stock con IA y gestión de múltiples almacenes.', price: 19.99, active: false, icon: 'bx-box' },
-    { id: 5, name: 'Marketing Hub', desc: 'Automatización de emails y gestión de redes sociales.', price: 24.99, active: false, icon: 'bx-megaphone' },
-    { id: 6, name: 'Gestor de Proyectos', desc: 'Tableros Kanban, Gantt y seguimiento de tiempos.', price: 14.99, active: false, icon: 'bx-task' },
-    { id: 7, name: 'Soporte Ticket System', desc: 'Mesa de ayuda para atención al cliente integrada.', price: 12.50, active: false, icon: 'bx-support' },
-    { id: 8, name: 'Conector E-commerce', desc: 'Sincronización con Shopify, WooCommerce y más.', price: 35.00, active: false, icon: 'bx-cart' },
+    { id: 4, name: 'Control de Inventario', desc: 'Administración de stock con alertas automáticas y soporte para varios almacenes', price: 19.99, active: false, icon: 'bx-box' },
+    { id: 5, name: 'Herramientas de Marketing', desc: 'Envío de correos automatizados y gestión de redes sociales', price: 24.99, active: false, icon: 'bx-megaphone' },
+    { id: 6, name: 'Gestor de proyectos y tareas', desc: 'Organiza tus proyectos, asigna tareas y lleva el control del tiempo de tu equipo', price: 14.99, active: false, icon: 'bx-task' },
+    { id: 7, name: 'Sistema de Soporte al Cliente', desc: 'Mesa de ayuda para gestionar consultas y tickets de clientes', price: 12.50, active: false, icon: 'bx-support' },
+    { id: 8, name: 'Ventas Unificadas', desc: 'Reúne en un solo panel todas tus ventas de internet, físicas y redes sociales.', price: 35.00, active: false, icon: 'bx-cart' },
 ];
 
 let shoppingCart = [];
@@ -15,13 +15,13 @@ let shoppingCart = [];
 function toggleModule(id) {
     const module = modules.find(m => m.id === id);
     if (module && !module.active) {
-        
+
         if (shoppingCart.find(item => item.id === id)) {
             showToast(`${module.name} ya está en el carrito`, 'warning');
             return;
         }
 
-        
+
         addToShoppingCart(module);
         showToast(`${module.name} agregado al carrito`, 'success');
     }
@@ -31,7 +31,7 @@ function addToShoppingCart(module) {
     shoppingCart.push(module);
     updateShoppingCartUI();
 
-    
+
     const cartSection = document.getElementById('shopping-cart-section');
     if (cartSection) {
         cartSection.classList.remove('hidden');
@@ -92,7 +92,7 @@ function confirmPurchase() {
 
     const total = shoppingCart.reduce((sum, m) => sum + m.price, 0);
 
-    
+
     openPaymentSimulation([...shoppingCart], total);
 }
 
@@ -101,11 +101,11 @@ function renderModules(filterText = "") {
     if (!grid) return;
 
     grid.innerHTML = "";
-    
+
     const filtered = modules.filter(m => !m.active && !m.hideFromCatalog && m.name.toLowerCase().includes(filterText.toLowerCase()));
 
     if (filtered.length === 0) {
-        
+
         if (filterText === "") {
             grid.innerHTML = `
                 <div class="col-span-full text-center py-16 bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl border-2 border-green-200">
@@ -169,8 +169,8 @@ function updateContractedModulesUI() {
         return;
     }
 
-    
-    
+
+
     const activeModules = modules.filter(m => m.active && !m.hideFromCatalog);
 
     if (activeModules.length === 0) {
@@ -181,7 +181,7 @@ function updateContractedModulesUI() {
     contractedSection.classList.remove('hidden');
     contractedCount.textContent = activeModules.length;
 
-    
+
     contractedItemsContainer.innerHTML = '';
 
     activeModules.forEach(module => {
@@ -232,23 +232,23 @@ function handleModuleReturn(moduleId, moduleName) {
         return;
     }
 
-    
-    
-    
 
-    
+
+
+
+
     console.log('Procesando devolución de:', module.name);
     showToast('Procesando devolución...', 'info');
 
-    
+
     module.active = false;
 
-    
+
     setTimeout(() => {
-        
+
         removeModuleFromSidebar(moduleId);
 
-        
+
         updateContractedModulesUI();
         renderModules();
         updatePlanSummary();
@@ -284,26 +284,26 @@ function returnContractedModule(moduleId) {
         return;
     }
 
-    
-    
-    
 
-    
-    
+
+
+
+
+
     console.log('Procesando devolución (confirmación omitida por error en navegador)...');
 
     console.log('Procesando devolución...');
     showToast('Procesando devolución...', 'info');
 
     setTimeout(() => {
-        
+
         module.active = false;
         console.log('Módulo desactivado:', module);
 
-        
+
         removeModuleFromSidebar(moduleId);
 
-        
+
         updateContractedModulesUI();
         renderModules();
         updatePlanSummary();
@@ -319,15 +319,15 @@ function addModuleToSidebar(module) {
     const dynamicMenu = document.getElementById('dynamic-modules-menu');
     if (!dynamicMenu) return;
 
-    
+
     if (document.getElementById(`sidebar-module-${module.id}`)) {
         return;
     }
 
-    
+
     const placeholderMessage = dynamicMenu.querySelector('p.italic');
     if (placeholderMessage) {
-        dynamicMenu.innerHTML = ''; 
+        dynamicMenu.innerHTML = '';
     }
 
     const menuItem = document.createElement('li');
@@ -347,7 +347,7 @@ function addModuleToSidebar(module) {
 
     dynamicMenu.appendChild(menuItem);
 
-    
+
     setTimeout(() => {
         const badge = menuItem.querySelector('span.bg-green-100');
         if (badge) {
@@ -363,9 +363,9 @@ function showModuleView(moduleId) {
 
     checkMobileAndCloseSidebar();
 
-    
+
     const moduleViewMap = {
-        1: 'module-crm-pro-view',        
+        1: 'module-crm-pro-view',
         2: 'module-recursos-humanos-view',
         3: 'module-contabilidad-view',
         4: 'module-inventario-view',
@@ -379,10 +379,10 @@ function showModuleView(moduleId) {
     if (viewName) {
         showView(viewName);
 
-        
+
         const dynamicLink = document.getElementById(`sidebar-link-${moduleId}`);
         if (dynamicLink) {
-            
+
             document.querySelectorAll('.sidebar-link').forEach(l => {
                 l.classList.remove('active');
                 l.style.background = 'transparent';
@@ -404,14 +404,14 @@ function showModuleView(moduleId) {
 function removeModuleFromSidebar(moduleId) {
     const menuItem = document.getElementById(`sidebar-module-${moduleId}`);
     if (menuItem) {
-        
+
         menuItem.style.opacity = '0';
         menuItem.style.transform = 'translateX(-20px)';
 
         setTimeout(() => {
             menuItem.remove();
 
-            
+
             const dynamicMenu = document.getElementById('dynamic-modules-menu');
             if (dynamicMenu && dynamicMenu.children.length === 0) {
                 const placeholderLi = document.createElement('li');
@@ -430,26 +430,26 @@ function removeModuleFromSidebar(moduleId) {
 let refundCart = [];
 
 const modulePrices = {
-    1: 39.99,  
-    2: 34.99,  
-    3: 29.99,  
-    4: 19.99,  
-    5: 24.99,  
-    6: 14.99,  
-    7: 12.50,  
-    8: 35.00   
+    1: 39.99,
+    2: 34.99,
+    3: 29.99,
+    4: 19.99,
+    5: 24.99,
+    6: 14.99,
+    7: 12.50,
+    8: 35.00
 };
 
 function removeModule(id) {
     const module = modules.find(m => m.id === id);
     if (module && module.active) {
-        
+
         addToRefundCart(module);
     }
 }
 
 function addToRefundCart(module) {
-    
+
     if (refundCart.find(item => item.id === module.id)) {
         showToast(`"${module.name}" ya está en el carrito de reembolsos`, 'warning');
         return;
@@ -556,16 +556,16 @@ function confirmRefunds() {
     const eligibleItems = refundCart.filter(item => item.isEligible);
     const totalRefund = eligibleItems.reduce((sum, item) => sum + item.refundAmount, 0);
 
-    
+
     refundCart.forEach(item => {
         const module = modules.find(m => m.id === item.id);
         if (module) {
             module.active = false;
 
-            
+
             removeModuleFromSidebar(item.id);
 
-            
+
             const card = document.getElementById(`module-card-${item.id}`);
             if (card) {
                 const iconDiv = card.querySelector('.flex.items-start.justify-between.mb-4');
@@ -575,7 +575,7 @@ function confirmRefunds() {
                 const badge = iconDiv.querySelector('span');
                 if (badge) badge.remove();
 
-                
+
                 const priceSection = card.querySelector('.pt-4.border-t.border-gray-50');
                 if (priceSection) {
                     priceSection.innerHTML = `
@@ -593,7 +593,7 @@ function confirmRefunds() {
         }
     });
 
-    
+
     refundCart = [];
     updateRefundCartUI();
     updatePlanSummary();
@@ -606,11 +606,11 @@ function confirmRefunds() {
 }
 
 function updatePlanSummary() {
-    
+
     const purchasedModules = modules.filter(m => m.active && !m.hideFromCatalog);
     const total = purchasedModules.reduce((sum, m) => sum + m.price, 0);
 
-    
+
     const cartTotal = shoppingCart.reduce((sum, m) => sum + m.price, 0);
     const cartCount = shoppingCart.length;
 
@@ -635,16 +635,16 @@ document.getElementById('module-search')?.addEventListener('input', (e) => {
 });
 
 function initializeModules() {
-    
+
     modules.forEach(module => {
         if (module.active) {
             addModuleToSidebar(module);
         }
     });
 
-    
+
     updateContractedModulesUI();
 
-    
+
     renderModules();
 }
